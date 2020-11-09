@@ -7,4 +7,5 @@ The prototype is node.js & heroku-based, its easiest to use npm as the package m
 -body-parser
 
 To run:
+`cd [working_directory]/FYDP/prototype`and
 `npm start`

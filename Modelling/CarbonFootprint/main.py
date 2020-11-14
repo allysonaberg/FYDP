@@ -1,7 +1,8 @@
 import os
 from dotenv import load_dotenv
 from model import getCarbonFootprint
-from shopify import getOrders
+from shopify import getOrders, getFulfillment
+from typing import Tuple
 
 
 
@@ -17,5 +18,5 @@ if __name__ == "__main__":
 	# Get the orders from the shop
     orders = getOrders(DOMAIN, API_KEY, API_PASSWORD)
     for order in orders:
-        print(order)
         carbon_footprint = getCarbonFootprint(order)
+        print(carbon_footprint)

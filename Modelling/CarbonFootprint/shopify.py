@@ -212,7 +212,6 @@ def getOrders(domain, api_key, api_password):
 
 	# Parse the response
 	json_result: Dict[str, str] = json.loads(r.text)
-	print(json_result)
 	orders: List[Order] = []
 	for order_dict in json_result["orders"]:
 		# Unpack into object
@@ -221,3 +220,16 @@ def getOrders(domain, api_key, api_password):
 		orders.append(order)
 
 	return orders
+
+
+def getFulfillment(domain, api_key, api_password, order_id):
+	"""
+	GET /admin/api/2020-10/orders/{order_id}/fulfillments.json
+	Retrieves fulfillments associated with an order
+	"""
+
+	url = f"https://{domain}/admin/api/2020-10/orders/{order_id}/fulfillments.json"
+	auth = HTTPBasicAuth(api_key, api_password)
+	r = requests.get(url, auth=auth)
+	json_result: Dict[str, str] = json.loads(r.text)
+	print(json_result)

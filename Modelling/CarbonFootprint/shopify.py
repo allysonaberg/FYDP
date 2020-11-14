@@ -1,23 +1,17 @@
 import json
-import os
 import requests
 from dataclasses import dataclass
-from dotenv import load_dotenv
 from requests.auth import HTTPBasicAuth
 from typing import Any, Dict, List, Optional
 
 
-DOMAIN = "fydp.myshopify.com"
-
-
-load_dotenv()
-
-
-API_KEY = os.getenv("API_KEY")
-API_PASSWORD = os.getenv("API_PASSWORD")
 
 @dataclass(frozen=True)
 class LineItem:
+	"""
+	API ressource id.
+	"""
+	id: int
 	"""
 	The service provider that's fulfilling the item. Valid values: manual, or the name of the provider, such as amazon or shipwire.
 	"""
@@ -57,6 +51,10 @@ See https://shopify.dev/docs/admin-api/rest/reference/orders/order#open-2020-10 
 """
 @dataclass(frozen=True)
 class Order:
+	"""
+	API ressource id.
+	"""
+	id: int
 	"""
 	The date and time (ISO 8601 format) when the order was closed.
 	E.g: "closed_at": "2008-01-10T11:00:00-05:00"
@@ -181,34 +179,45 @@ class Order:
 	customer: Optional[Dict[str, Any]] = None
 
 
-if __name__ == "__main__":
-	# Get the orders from the shop
-	url = f"https://{DOMAIN}/admin/api/2020-10/orders.json"    
-	auth = HTTPBasicAuth(API_KEY, API_PASSWORD)
+def extractLineItemFieldsOfInterest(line_item_dict):
+	final_dict = {}
+	for field_of_interest in LineItem.__dataclass_fields__.keys():
+		if field_of_interest in line_item_dict:
+			final_dict[field_of_interest] = line_item_dict[field_of_interest]
+	
+	return final_dict
+
+
+def extractOrderFieldsOfInterest(order_dict):
+	final_dict = {}
+	for field_name, _ in Order.__dataclass_fields__.items():
+		if field_name in order_dict: # Some values can be null, and thus would not be sent back in the response.
+			if field_name == "line_items":
+				line_items = []
+				for line_item_dict in order_dict["line_items"]:
+					clean_line_item_dict = extractLineItemFieldsOfInterest(line_item_dict)
+					line_items.append(LineItem(**clean_line_item_dict))
+				
+				final_dict["line_items"] = line_items
+			else:
+				final_dict[field_name] = order_dict[field_name]
+
+	return final_dict
+
+
+def getOrders(domain, api_key, api_password):
+	url = f"https://{domain}/admin/api/2020-10/orders.json"    
+	auth = HTTPBasicAuth(api_key, api_password)
 	r = requests.get(url, auth=auth)
 
 	# Parse the response
 	json_result: Dict[str, str] = json.loads(r.text)
+	print(json_result)
 	orders: List[Order] = []
 	for order_dict in json_result["orders"]:
 		# Unpack into object
-		clean_dict = {}
-		for field_name, _ in Order.__dataclass_fields__.items():
-			if field_name in order_dict: # Some values can be null, and thus would not be sent back in the response.
-				if field_name == "line_items":
-					line_items = []
-					for line_item_dict in order_dict["line_items"]:
-						clean_line_item_dict = {}
-						for line_item_field_name, _ in LineItem.__dataclass_fields__.items():
-							if line_item_field_name in line_item_dict:
-								clean_line_item_dict[line_item_field_name] = line_item_dict[line_item_field_name]
-						line_items.append(LineItem(**clean_line_item_dict))
-					
-					clean_dict["line_items"] = line_items
-				else:
-					clean_dict[field_name] = order_dict[field_name]
-
-		
+		clean_dict = extractOrderFieldsOfInterest(order_dict)
 		order = Order(**clean_dict)
-		print(order)
 		orders.append(order)
+
+	return orders

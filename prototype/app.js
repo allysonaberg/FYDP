@@ -1,36 +1,37 @@
 const express = require('express')
+const {spawn} = require('child_process')
 const bodyParser = require('body-parser')
-const Shopify = require('shopify-api-node')
 const dotenv = require('dotenv')
 dotenv.config();
 
-
 const app = express()
-const port = 3000;
+const port = 5000;
 const apiKey = process.env.API_KEY;
 const apiPassword = process.env.API_PASSWORD;
 
-//ROUTING
-const shopifyRoute = require('./routes/shopify')
 
-//MIDDLEWARE
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
-// app.use('/', shopifyRoute) //use this later
+app.get('/', (req, res) => {
+	var dataToSend;
+	// spawn new child process to call the python script
+	const python = spawn('python', ['python_test.py']);
+	python.stdout.on('data', function (data) {
+	 console.log('grabbing data from script ...');
+	 dataToSend = data.toString();
+	});
+	// in close event we are sure that stream from child process is closed
+	python.on('close', (code) => {
+	// send data to browser
+	res.send(dataToSend)
+	console.log(dataToSend)
+	});
+	
+})
 
-
+app.get('/index', (req, res) => {
+	res.sendFile('./index.html', {root: __dirname});
+});
 //START
 app.listen(port, () => {
 	console.log("listening at port" + port)
 })
 
-const shopify = new Shopify({
-	shopName: 'fydp',
-	apiKey: apiKey,
-	password: apiPassword
-});
-
-shopify.product
-  .list({ limit: 5 })
-  .then((orders) => console.log(orders))
-  .catch((err) => console.error(err));

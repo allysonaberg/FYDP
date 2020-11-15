@@ -129,27 +129,6 @@ class Order:
 	"""
 	location_id: int
 	"""
-	The mailing address to where the order will be shipped. This address is optional and will not be available on orders that do not require shipping
-	"shipping_address": {
-		"address1": "123 Amoebobacterieae St",
-		"address2": "",
-		"city": "Ottawa",
-		"company": null,
-		"country": "Canada",
-		"first_name": "Bob",
-		"last_name": "Bobsen",
-		"latitude": "45.41634",
-		"longitude": "-75.6868",
-		"phone": "555-625-1199",
-		"province": "Ontario",
-		"zip": "K2P0V6",
-		"name": "Bob Bobsen",
-		"country_code": "CA",
-		"province_code": "ON"
-	}
-	"""
-	shipping_address: str
-	"""
 	An array of objects, each of which details a shipping method used. Each object has the following properties:
 		code: A reference to the shipping method.
 		discounted_price: The price of the shipping method after line-level discounts have been applied. Doesn't reflect cart-level or order-level discounts.
@@ -177,6 +156,27 @@ class Order:
 	"""
 	cancelled_at: Optional[str] = None
 	customer: Optional[Dict[str, Any]] = None
+	"""
+	The mailing address to where the order will be shipped. This address is optional and will not be available on orders that do not require shipping
+	"shipping_address": {
+		"address1": "123 Amoebobacterieae St",
+		"address2": "",
+		"city": "Ottawa",
+		"company": null,
+		"country": "Canada",
+		"first_name": "Bob",
+		"last_name": "Bobsen",
+		"latitude": "45.41634",
+		"longitude": "-75.6868",
+		"phone": "555-625-1199",
+		"province": "Ontario",
+		"zip": "K2P0V6",
+		"name": "Bob Bobsen",
+		"country_code": "CA",
+		"province_code": "ON"
+	}
+	"""
+	shipping_address: Optional[str] = None
 
 
 def extractLineItemFieldsOfInterest(line_item_dict):

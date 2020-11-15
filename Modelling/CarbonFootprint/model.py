@@ -38,6 +38,9 @@ def getCarbonFootprintTruck(weight, distance):
 def getCarbonFootprint(order):
     total_weight_grams = order.total_weight
     total_distance_miles = 0.0 # distance in miles
+    if order.shipping_address is None:
+        return 0.0
+
     for line_item in order.line_items:
         if line_item.requires_shipping:
             if line_item.origin_location is not None:
@@ -55,5 +58,5 @@ def getCarbonFootprint(order):
         grams_CO2 = getCarbonFootprintTruck(total_weight_grams, total_distance_miles)
         return grams_CO2
 
-    return None
+    return 0.0
                 

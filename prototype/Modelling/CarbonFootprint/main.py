@@ -1,3 +1,4 @@
+print("TEST")
 
 import argparse
 import os
@@ -11,9 +12,6 @@ from dotenv import load_dotenv
 from model import getCarbonFootprint
 from shopify import getOrders, getFulfillment
 from typing import Tuple
-
-
-print("TEST")
 
 
 

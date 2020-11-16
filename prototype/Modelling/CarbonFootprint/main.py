@@ -56,6 +56,8 @@ if __name__ == "__main__":
 	# args = parser.parse_args()
 
 	# Get the orders from the shop
+
+	print("STARTING THE SCRIPT")
 	orders = getOrders(DOMAIN, API_KEY, API_PASSWORD)
 
 	date_range = pd.date_range(end=datetime.utcnow(), periods=100)

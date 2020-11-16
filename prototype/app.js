@@ -1,7 +1,7 @@
 const express = require('express')
 const {spawn} = require('child_process')
 const bodyParser = require('body-parser')
-var mongoose = require('mongoose');
+const sqlite3 = require('sqlite3').verbose();
 
 require('dotenv/config')
 
@@ -11,22 +11,31 @@ const port = 5000;
 const apiKey = process.env.API_KEY;
 const apiPassword = process.env.API_PASSWORD;
 
-mongoose.Promise = global.Promise;
+/* Database object */
+let db = new sqlite3.Database('./db/pickled_herring.db', (err) => {
+	if (err) {
+	  return console.error(err.message);
+	}
+	console.log('Connected to the in-memory SQlite database.');
+  });
 
-var OrderSchema = new mongoose.Schema({
-    date: String,
-    footprint: String
-})
 
-var Order = mongoose.model("Order", OrderSchema)
+let sql = `SELECT * FROM footprints`;
 
-//NAME: FYDP, PW: password1
+/* First returned row only */
+db.get(sql, (err, row) => {
+	if (err) {
+		return console.error(err.message);
+	}
+		return row ? console.log(row.client_id, row.date, row.grams_carbon) : console.log(`No data found.`);
+
+	});
 
 
 app.get('/', (req, res) => {
 	var dataToSend;
 	// spawn new child process to call the python script
-	const python = spawn('python', ['../Modelling/CarbonFootprint/main.py']);
+	const python = spawn('python', ['python_test.py']);
 	python.stdout.on('data', function (data) {
 	 console.log('grabbing data from script ...');
 	 dataToSend = data.toString();
@@ -42,7 +51,6 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
 	console.log(req.body)
-	console.log(mongoose.connection.readyState)
 	var order = new Order({
 		date: req.body.order_date,
 		footprint: req.body.footprint
@@ -62,7 +70,7 @@ app.get('/index', (req, res) => {
 });
 
 
-mongoose.connect(process.env.DB_CONNECTION, {useNewUrlParser: true});
+
 
 
 //START
@@ -70,4 +78,11 @@ app.listen(port, () => {
 	console.log("listening at port" + port)
 })
 
-module.exports = mongoose.model('Orders', OrderSchema);
+
+/* Close the database connection */
+db.close((err) => {
+	if (err) {
+	  return console.error(err.message);
+	}
+	console.log('Close the database connection.');
+  });

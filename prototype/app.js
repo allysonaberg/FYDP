@@ -24,11 +24,12 @@ app.get('/', (req, res) => {
 	const python = spawn('python', [__dirname+'/Modelling/CarbonFootprint/main.py']);
 
 	python.stdout.on('data', function (data) {
-	 console.log('grabbing data from script ...');
+	 console.log("grabbing data from script ...");
 	 retrievedData = data.toString();
 	});
 	// in close event we are sure that stream from child process is closed
 	python.on('close', (code) => {
+		console.log("running close...")
 		
 		var dataArray = retrievedData.split(',')
 

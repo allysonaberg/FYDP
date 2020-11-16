@@ -26,9 +26,11 @@ app.get('/', (req, res) => {
 	python.stdout.on('data', function (data) {
 	 console.log('grabbing data from script ...');
 	 retrievedData = data.toString();
-	});
+	 console.log(retrievedData)
 
-	res.render(__dirname+'/views/index.html', {data: retrievedData});
+	 res.render(__dirname+'/views/index.html', {data: retrievedData});
+
+	});
 
 
 	// python.stdout.on('data', function (data) {

@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 	var retrievedData;
 	var processedDataArray = []
 	// spawn new child process to call the python script
-	const python = spawn('python', ['../Modelling/CarbonFootprint/main.py']);
+	const python = spawn('python', ['/Modelling/CarbonFootprint/main.py']);
 
 	python.stdout.on('data', function (data) {
 		console.log('grabbing data from script ...');

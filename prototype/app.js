@@ -18,6 +18,7 @@ const apiPassword = process.env.API_PASSWORD;
 
 	
 app.get('/', (req, res) => {
+	//add buildpack
 	var retrievedData;
 	var processedDataArray = []
 	// spawn new child process to call the python script

@@ -26,7 +26,7 @@ var Order = mongoose.model("Order", OrderSchema)
 app.get('/', (req, res) => {
 	var dataToSend;
 	// spawn new child process to call the python script
-	const python = spawn('python', ['python_test.py']);
+	const python = spawn('python', ['../Modelling/CarbonFootprint/main.py']);
 	python.stdout.on('data', function (data) {
 	 console.log('grabbing data from script ...');
 	 dataToSend = data.toString();

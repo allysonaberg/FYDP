@@ -21,7 +21,6 @@ app.get('/', (req, res) => {
 	var retrievedData;
 	var processedDataArray = []
 	// spawn new child process to call the python script
-	console.log(__dirname)
 	const python = spawn('python', [__dirname+'/Modelling/CarbonFootprint/main.py']);
 
 	python.stdout.on('data', function (data) {
@@ -52,4 +51,5 @@ app.post('/', (req, res) => {
 //START
 app.listen(port, () => {
 	console.log("listening at port " + port)
+	console.log("dirname: " + __dirname)
 })

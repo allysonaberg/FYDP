@@ -20,7 +20,7 @@ const apiPassword = process.env.API_PASSWORD;
 	
 app.get('/', (req, res) => {
 
-	res.render(__dirname+'/views/index.html', {data: retrievedData});
+	res.render(__dirname+'/views/index.html', {data: "TEST"});
 	parse_python()
 	// var retrievedData;
 	// var processedDataArray = []

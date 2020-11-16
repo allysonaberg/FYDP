@@ -18,7 +18,7 @@ const apiPassword = process.env.API_PASSWORD;
 
 app.get('/', (req, res) => {
 	const python = spawn('python', [__dirname+'/test_script.py'])
-	res.render('./index.html', {data: "agg"})
+	res.render('/index.html', {data: "agg"})
 })
 	
 // app.get('/', (req, res) => {

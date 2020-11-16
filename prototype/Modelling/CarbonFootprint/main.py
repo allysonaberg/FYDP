@@ -1,19 +1,19 @@
+
+import argparse
+import os
+import csv
+import matplotlib.pyplot as plt
+import pandas as pd
+from matplotlib.dates import DateFormatter, DayLocator, date2num
+from datetime import datetime, date
+
+from dotenv import load_dotenv
+from model import getCarbonFootprint
+from shopify import getOrders, getFulfillment
+from typing import Tuple
+
+
 print("TEST")
-
-# import argparse
-# import os
-# import csv
-# import matplotlib.pyplot as plt
-# import pandas as pd
-# from matplotlib.dates import DateFormatter, DayLocator, date2num
-# from datetime import datetime, date
-
-# from dotenv import load_dotenv
-# from model import getCarbonFootprint
-# from shopify import getOrders, getFulfillment
-# from typing import Tuple
-
-
 
 
 

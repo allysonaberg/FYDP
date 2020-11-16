@@ -1,4 +1,3 @@
-print("TEST")
 
 import argparse
 import os
@@ -7,6 +6,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from matplotlib.dates import DateFormatter, DayLocator, date2num
 from datetime import datetime, date
+
+print("TEST")
 
 from dotenv import load_dotenv
 from model import getCarbonFootprint

@@ -36,9 +36,9 @@ def writeToCSV(csv_filename, data):
 
 if __name__ == "__main__":
 	# Parse command line arguments
-	parser = argparse.ArgumentParser("Calculate Carbon Footprint")
-	parser.add_argument("csv_filename", type=str, help="Absolute path to the csv file to write data to.")
-	args = parser.parse_args()
+	# parser = argparse.ArgumentParser("Calculate Carbon Footprint")
+	# parser.add_argument("csv_filename", type=str, help="Absolute path to the csv file to write data to.")
+	# args = parser.parse_args()
 
 	# Get the orders from the shop
 	orders = getOrders(DOMAIN, API_KEY, API_PASSWORD)
@@ -55,7 +55,9 @@ if __name__ == "__main__":
 		
 		carbon_footprints[day] += carbon_footprint
 
-	writeToCSV(args.csv_filename, carbon_footprints)
+	# writeToCSV(args.csv_filename, carbon_footprints)
+	for date, grams_carbon in carbon_footprints.items():
+		print(f"{date} {grams_carbon}")
 
 	x, y = zip(*carbon_footprints.items())
 	fig = plt.figure()

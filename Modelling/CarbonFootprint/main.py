@@ -1,7 +1,7 @@
 import os
 import matplotlib.pyplot as plt
 import pandas as pd
-from matplotlib.dates import DateFormatter, DayLocator
+from matplotlib.dates import DateFormatter, DayLocator, datestr2num
 from datetime import datetime, date
 
 from dotenv import load_dotenv
@@ -24,27 +24,29 @@ if __name__ == "__main__":
 	orders = getOrders(DOMAIN, API_KEY, API_PASSWORD)
 
 	date_range = pd.date_range(end=datetime.utcnow(), periods=100)
-	carbon_footprints = {date(_date.year, _date.month, _date.day).strftime("%Y-%m-%d"): 0.0 for _date in date_range}
+	carbon_footprints = {datestr2num(_date.strftime("%Y-%m-%d")): 0.0 for _date in date_range}
 	
 	
 	for order in orders:
 		carbon_footprint = getCarbonFootprint(order)
 		_date = datetime.fromisoformat(order.created_at)
 		utc_date = _date - _date.utcoffset()
-		day = date(utc_date.year, utc_date.month, utc_date.day).strftime("%Y-%m-%d")
+		day = datestr2num(utc_date.strftime("%Y-%m-%d"))
 		
 		carbon_footprints[day] += carbon_footprint
 
-	print(carbon_footprints)
-
-	fig, ax = plt.subplots()
-	ax.plot(*carbon_footprints.items())
-	
-	# Setup formatting of dates
-
-
+	x, y = zip(*carbon_footprints.items())
+	fig = plt.figure()
 	fig.suptitle("Carbon Footprint Over Time")
+
+	# Setup formatting of dates
+	plt.plot_date(x, y, fmt="bo", tz=None, xdate=True)	
+	
 	plt.xlabel("Date")
 	plt.ylabel("CO2 [g]")
-	#fig.savefig('plot.png')
-	plt.show()
+	plt.xticks(rotation=45)
+	plt.tight_layout()
+	
+	fig.savefig('plot.png')
+	
+	#plt.show()

@@ -52,5 +52,5 @@ app.post('/', (req, res) => {
 
 //START
 app.listen(port, () => {
-	console.log("listening at port " + port
+	console.log("listening at port " + port)
 })

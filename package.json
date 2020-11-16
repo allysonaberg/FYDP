@@ -18,6 +18,7 @@
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
+    "mongoose": "^5.10.14",
     "nodemon": "^2.0.6",
     "shopify-api-node": "^3.5.2",
     "sqlite3": "^5.0.0"

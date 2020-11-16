@@ -22,44 +22,6 @@ app.get('/', (req, res) => {
 
 	res.render(__dirname+'/views/index.html', {data: "TEST"});
 	parse_python()
-	// var retrievedData;
-	// var processedDataArray = []
-	// // spawn new child process to call the python script
-	// const python = spawn('python', [__dirname+'/Modelling/CarbonFootprint/main.py']);
-
-	// python.stdout.on('data', function (data) {
-	//  console.log('grabbing data from script ...');
-	//  retrievedData = data.toString();
-	//  console.log(retrievedData)
-
-	// });
-
-
-	// python.stdout.on('data', function (data) {
-	//  console.log('grabbing data from script ...');
-	//  retrievedData = data.toString();
-	// });
-	// // in close event we are sure that stream from child process is closed
-	// python.on('close', (code) => {
-		
-	// 	var dataArray = retrievedData.split(',')
-
-	// 	//THIS IS A HACK, FIX L8R
-	// 	for (var i = 0; i < dataArray.length; i+=2) {
-	// 		processedDataArray.push([dataArray[i].replace('\r', '').replace('\n', ''), dataArray[i+1]])
-	// 	}
-
-	// 	DB.writeToDB(processedDataArray)
-	// 	DB.readFromDB()	
-	// 	// res.render('./index.html', {data: processedDataArray});
-	// });
-
-
-})
-
-function parse_python() {
-	console.log("parsing python....")
-
 	var retrievedData;
 	var processedDataArray = []
 	// spawn new child process to call the python script
@@ -71,7 +33,30 @@ function parse_python() {
 	 console.log(retrievedData)
 
 	});
-}
+
+
+	python.stdout.on('data', function (data) {
+	 console.log('grabbing data from script ...');
+	 retrievedData = data.toString();
+	});
+	// in close event we are sure that stream from child process is closed
+	python.on('close', (code) => {
+		
+		var dataArray = retrievedData.split(',')
+
+		//THIS IS A HACK, FIX L8R
+		for (var i = 0; i < dataArray.length; i+=2) {
+			processedDataArray.push([dataArray[i].replace('\r', '').replace('\n', ''), dataArray[i+1]])
+		}
+
+		DB.writeToDB(processedDataArray)
+		DB.readFromDB()	
+		// res.render('./index.html', {data: processedDataArray});
+	});
+
+
+})
+
 
 app.post('/', (req, res) => {
 	console.log(req.body)

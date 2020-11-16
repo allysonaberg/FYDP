@@ -33,6 +33,21 @@ def writeToCSV(csv_filename, data):
 		for _date, grams_carbon in data.items():
 			writer.writerow([_date, grams_carbon])
 
+def plotToPNG(carbon_footprints):
+	x, y = zip(*carbon_footprints.items())
+	fig = plt.figure()
+	fig.suptitle("Carbon Footprint Over Time")
+
+	# Setup formatting of dates
+	plt.plot_date(date2num(x), y, fmt="bo", tz=None, xdate=True)	
+	
+	plt.xlabel("Date")
+	plt.ylabel("CO2 [g]")
+	plt.xticks(rotation=45)
+	plt.tight_layout()
+	
+	fig.savefig('plot.png')
+
 
 if __name__ == "__main__":
 	# Parse command line arguments
@@ -56,21 +71,7 @@ if __name__ == "__main__":
 		carbon_footprints[day] += carbon_footprint
 
 	# writeToCSV(args.csv_filename, carbon_footprints)
+	# plotToPNG(carbon_footprints)
 	for date, grams_carbon in carbon_footprints.items():
 		print(f"{date} {grams_carbon}")
 
-	x, y = zip(*carbon_footprints.items())
-	fig = plt.figure()
-	fig.suptitle("Carbon Footprint Over Time")
-
-	# Setup formatting of dates
-	plt.plot_date(date2num(x), y, fmt="bo", tz=None, xdate=True)	
-	
-	plt.xlabel("Date")
-	plt.ylabel("CO2 [g]")
-	plt.xticks(rotation=45)
-	plt.tight_layout()
-	
-	fig.savefig('plot.png')
-	
-	#plt.show()

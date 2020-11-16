@@ -25,9 +25,9 @@ let sql = `SELECT * FROM footprints`;
 /* First returned row only */
 db.get(sql, (err, row) => {
 	if (err) {
-		return console.error(err.message);
+		console.error(err.message);
 	}
-		return row ? console.log(row.client_id, row.date, row.grams_carbon) : console.log(`No data found.`);
+		row ? console.log(row.client_id, row.date, row.grams_carbon) : console.log(`No data found.`);
 
 	});
 
@@ -51,18 +51,18 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
 	console.log(req.body)
-	var order = new Order({
-		date: req.body.order_date,
-		footprint: req.body.footprint
-	});
+	// var order = new Order({
+	// 	date: req.body.order_date,
+	// 	footprint: req.body.footprint
+	// });
 
-	order.save()
-		.then(item => {
-			res.send("SAVED")
-		})
-		.catch(err => {
-			console.log("ERRPR")
-		})
+	// order.save()
+	// 	.then(item => {
+	// 		res.send("SAVED")
+	// 	})
+	// 	.catch(err => {
+	// 		console.log("ERRPR")
+	// 	})
 });
 
 app.get('/index', (req, res) => {
@@ -85,4 +85,4 @@ db.close((err) => {
 	  return console.error(err.message);
 	}
 	console.log('Close the database connection.');
-  });
+});

@@ -35,6 +35,7 @@ def writeToCSV(csv_filename, data):
 
 
 if __name__ == "__main__":
+	print("IN SCRIPT")
 	# Parse command line arguments
 	parser = argparse.ArgumentParser("Calculate Carbon Footprint")
 	parser.add_argument("csv_filename", type=str, help="Absolute path to the csv file to write data to.")

@@ -31,6 +31,18 @@ function readFromDB() {
 
 }
 
+function writeToDB() {
+	/* Database object */
+	let db = new sqlite3.Database('./db/pickled_herring.db', (err) => {
+		if (err) {
+		return console.error(err.message);
+		}
+		console.log('Connected to the in-memory SQlite database.');
+	});
+
+	
+}
 
 
-module.exports = { readFromDB }
+
+module.exports = { readFromDB, writeToDB }

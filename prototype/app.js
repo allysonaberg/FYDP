@@ -5,6 +5,7 @@ const sqlite3 = require('sqlite3').verbose();
 require('dotenv/config')
 var DB = require('./db/db_methods');
 const { db } = require('./models/orders');
+const { parse } = require('path');
 
 const app = express()
 app.set('view engine', 'html');
@@ -18,18 +19,20 @@ const apiPassword = process.env.API_PASSWORD;
 
 	
 app.get('/', (req, res) => {
-	var retrievedData;
-	var processedDataArray = []
-	// spawn new child process to call the python script
-	const python = spawn('python', [__dirname+'/Modelling/CarbonFootprint/test_script.py']);
 
-	python.stdout.on('data', function (data) {
-	 console.log('grabbing data from script ...');
-	 retrievedData = data.toString();
-	 console.log(retrievedData)
+	res.render(__dirname+'/views/index.html', {data: retrievedData});
+	parse_python()
+	// var retrievedData;
+	// var processedDataArray = []
+	// // spawn new child process to call the python script
+	// const python = spawn('python', [__dirname+'/Modelling/CarbonFootprint/main.py']);
 
-	 res.render(__dirname+'/views/index.html', {data: retrievedData});
-	});
+	// python.stdout.on('data', function (data) {
+	//  console.log('grabbing data from script ...');
+	//  retrievedData = data.toString();
+	//  console.log(retrievedData)
+
+	// });
 
 
 	// python.stdout.on('data', function (data) {
@@ -53,6 +56,22 @@ app.get('/', (req, res) => {
 
 
 })
+
+function parse_python() {
+	console.log("parsing python....")
+
+	var retrievedData;
+	var processedDataArray = []
+	// spawn new child process to call the python script
+	const python = spawn('python', [__dirname+'/Modelling/CarbonFootprint/main.py']);
+
+	python.stdout.on('data', function (data) {
+	 console.log('grabbing data from script ...');
+	 retrievedData = data.toString();
+	 console.log(retrievedData)
+
+	});
+}
 
 app.post('/', (req, res) => {
 	console.log(req.body)

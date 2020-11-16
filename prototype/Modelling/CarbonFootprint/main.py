@@ -23,6 +23,7 @@ API_KEY = os.getenv("API_KEY")
 API_PASSWORD = os.getenv("API_PASSWORD")
 DOMAIN = os.getenv("DOMAIN")
 
+print("PYTHON TESTTTYYYY")
 
 def writeToCSV(csv_filename, data):
 	with open(csv_filename, 'w') as f:

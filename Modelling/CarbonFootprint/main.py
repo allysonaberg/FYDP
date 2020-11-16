@@ -35,7 +35,6 @@ def writeToCSV(csv_filename, data):
 
 
 if __name__ == "__main__":
-	print("IN SCRIPT")
 	# Parse command line arguments
 	# parser = argparse.ArgumentParser("Calculate Carbon Footprint")
 	# parser.add_argument("csv_filename", type=str, help="Absolute path to the csv file to write data to.")
@@ -57,8 +56,9 @@ if __name__ == "__main__":
 		carbon_footprints[day] += carbon_footprint
 
 	# writeToCSV(args.csv_filename, carbon_footprints)
+	
 	for date, grams_carbon in carbon_footprints.items():
-		print(f"{date} {grams_carbon}")
+		print(f"{date},{grams_carbon},")
 
 	x, y = zip(*carbon_footprints.items())
 	fig = plt.figure()

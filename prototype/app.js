@@ -18,11 +18,18 @@ const apiPassword = process.env.API_PASSWORD;
 
 	
 app.get('/', (req, res) => {
-	res.render(__dirname+'/views/index.html', {data: "hiii"});
 	var retrievedData;
 	var processedDataArray = []
 	// spawn new child process to call the python script
-	const python = spawn('python', [__dirname+'/Modelling/CarbonFootprint/main.py']);
+	const python = spawn('python', [__dirname+'/test_script.py']);
+
+	python.stdout.on('data', function (data) {
+	 console.log('grabbing data from script ...');
+	 retrievedData = data.toString();
+	});
+
+	res.render(__dirname+'/views/index.html', {data: retrievedData});
+
 
 	// python.stdout.on('data', function (data) {
 	//  console.log('grabbing data from script ...');

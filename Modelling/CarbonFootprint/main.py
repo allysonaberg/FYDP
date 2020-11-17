@@ -2,9 +2,7 @@
 import argparse
 import os
 import csv
-import matplotlib.pyplot as plt
 import pandas as pd
-from matplotlib.dates import DateFormatter, DayLocator, date2num
 from datetime import datetime, date
 
 from dotenv import load_dotenv
@@ -29,20 +27,20 @@ def writeToCSV(csv_filename, data):
 		for _date, grams_carbon in data.items():
 			writer.writerow([_date, grams_carbon])
 
-def plotToPNG(carbon_footprints):
-	x, y = zip(*carbon_footprints.items())
-	fig = plt.figure()
-	fig.suptitle("Carbon Footprint Over Time")
+# def plotToPNG(carbon_footprints):
+# 	x, y = zip(*carbon_footprints.items())
+# 	fig = plt.figure()
+# 	fig.suptitle("Carbon Footprint Over Time")
 
-	# Setup formatting of dates
-	plt.plot_date(date2num(x), y, fmt="bo", tz=None, xdate=True)	
+# 	# Setup formatting of dates
+# 	plt.plot_date(date2num(x), y, fmt="bo", tz=None, xdate=True)	
 	
-	plt.xlabel("Date")
-	plt.ylabel("CO2 [g]")
-	plt.xticks(rotation=45)
-	plt.tight_layout()
+# 	plt.xlabel("Date")
+# 	plt.ylabel("CO2 [g]")
+# 	plt.xticks(rotation=45)
+# 	plt.tight_layout()
 	
-	fig.savefig('plot.png')
+# 	fig.savefig('plot.png')
 
 
 if __name__ == "__main__":

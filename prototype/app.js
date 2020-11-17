@@ -22,21 +22,19 @@ app.get('/', (req, res) => {
 	var retrievedData;
 	var processedDataArray = []
 	// spawn new child process to call the python script
-	const python = spawn('python3', [__dirname+'/../Modelling/CarbonFootprint/main.py']);
-	console.log(python);
 
-	python.stdout.on('data', function (data) {
-	 console.log('grabbing data from script ...');
-	 retrievedData = data.toString();
-	 console.log(retrievedData)
+	const exec = require("child_process").execSync;
 
-	});
-
-	python.stdout.on('end', function(){
-		console.log('Done');
-	  });
+	var result = exec("python3 "+ __dirname +"'/../Modelling/CarbonFootprint/main.py'");
+	result = result.toString();
+	var output = [];
+	var lines = result.split("\n");
+	 for(var i = 0; i < lines.length; ++i){
+		 var split = lines[i].split(",");
+		output.push({date: split[0], grams_carbon: split[1]});
+	}
 	
-	res.render(__dirname+'/views/index.html', {data: "TEST"});
+	res.render(__dirname+'/views/index.html', {data: JSON.stringify(output)});
 	// python.on('close', (code) => {
 		
 	// 	var dataArray = retrievedData.split(',')

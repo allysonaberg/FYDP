@@ -45,7 +45,7 @@ def plotToPNG(carbon_footprints):
 	fig.savefig('plot.png')
 
 
-# if __name__ == "__main__":
+if __name__ == "__main__":
 # 	# Parse command line arguments
 # 	# parser = argparse.ArgumentParser("Calculate Carbon Footprint")
 # 	# parser.add_argument("csv_filename", type=str, help="Absolute path to the csv file to write data to.")

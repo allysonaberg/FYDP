@@ -18,13 +18,12 @@ const apiPassword = process.env.API_PASSWORD;
 
 	
 app.get('/', (req, res) => {
-
-	res.render(__dirname+'/views/index.html', {data: "TEST"});
-	parse_python()
+	//parse_python()
 	var retrievedData;
 	var processedDataArray = []
 	// spawn new child process to call the python script
-	const python = spawn('python', [__dirname+'../Modelling/CarbonFootprint/main.py']);
+	const python = spawn('python3', [__dirname+'/../Modelling/CarbonFootprint/main.py']);
+	console.log(python);
 
 	python.stdout.on('data', function (data) {
 	 console.log('grabbing data from script ...');
@@ -33,25 +32,24 @@ app.get('/', (req, res) => {
 
 	});
 
-
-	python.stdout.on('data', function (data) {
-	 console.log('grabbing data from script ...');
-	 retrievedData = data.toString();
-	});
-	// in close event we are sure that stream from child process is closed
-	python.on('close', (code) => {
+	python.stdout.on('end', function(){
+		console.log('Done');
+	  });
+	
+	res.render(__dirname+'/views/index.html', {data: "TEST"});
+	// python.on('close', (code) => {
 		
-		var dataArray = retrievedData.split(',')
+	// 	var dataArray = retrievedData.split(',')
 
-		//THIS IS A HACK, FIX L8R
-		for (var i = 0; i < dataArray.length; i+=2) {
-			processedDataArray.push([dataArray[i].replace('\r', '').replace('\n', ''), dataArray[i+1]])
-		}
+	// 	//THIS IS A HACK, FIX L8R
+	// 	for (var i = 0; i < dataArray.length; i+=2) {
+	// 		processedDataArray.push([dataArray[i].replace('\r', '').replace('\n', ''), dataArray[i+1]])
+	// 	}
 
-		DB.writeToDB(processedDataArray)
-		DB.readFromDB()	
-		// res.render('./index.html', {data: processedDataArray});
-	});
+	// 	DB.writeToDB(processedDataArray)
+	// 	DB.readFromDB()	
+	// 	// res.render('./index.html', {data: processedDataArray});
+	// });
 
 
 })

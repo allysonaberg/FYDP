@@ -18,11 +18,6 @@ const apiPassword = process.env.API_PASSWORD;
 
 	
 app.get('/', (req, res) => {
-	//parse_python()
-	var retrievedData;
-	var processedDataArray = []
-	// spawn new child process to call the python script
-
 	const exec = require("child_process").execSync;
 
 	var result = exec("python3 "+ __dirname +"'/../Modelling/CarbonFootprint/main.py'");
@@ -35,21 +30,6 @@ app.get('/', (req, res) => {
 	}
 	
 	res.render(__dirname+'/views/index.html', {data: JSON.stringify(output)});
-	// python.on('close', (code) => {
-		
-	// 	var dataArray = retrievedData.split(',')
-
-	// 	//THIS IS A HACK, FIX L8R
-	// 	for (var i = 0; i < dataArray.length; i+=2) {
-	// 		processedDataArray.push([dataArray[i].replace('\r', '').replace('\n', ''), dataArray[i+1]])
-	// 	}
-
-	// 	DB.writeToDB(processedDataArray)
-	// 	DB.readFromDB()	
-	// 	// res.render('./index.html', {data: processedDataArray});
-	// });
-
-
 })
 
 

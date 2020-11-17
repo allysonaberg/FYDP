@@ -71,5 +71,5 @@ def plotToPNG(carbon_footprints):
 
 	# plotToPNG(carbon_footprints)
 	for date, grams_carbon in carbon_footprints.items():
-		print(f"{date},{grams_carbon},")
+		print(f"{date},{grams_carbon}")
 

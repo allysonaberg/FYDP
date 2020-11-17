@@ -1,5 +1,3 @@
-const { db } = require('../models/orders');
-
 const sqlite3 = require('sqlite3').verbose();
 
 function readFromDB() {

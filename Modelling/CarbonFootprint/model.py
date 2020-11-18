@@ -1,10 +1,10 @@
 from geopy.distance import geodesic
 from geopy.geocoders import Nominatim
-from typing import Tuple
+from typing import Dict, Tuple
 
-def getCoordinates(address: str):
+def getCoordinates(address_dict: Dict):
     geolocator = Nominatim(user_agent="FYDP")
-    location = geolocator.geocode(address)
+    location = geolocator.geocode(address_dict)
 
     return location.latitude, location.longitude
 
@@ -45,8 +45,13 @@ def getCarbonFootprint(order):
         if line_item.requires_shipping:
             if line_item.origin_location is not None:
                 # Get source coordinates
-                address = line_item.origin_location["address1"] + " " + line_item.origin_location["city"]
-                source_coordinates: Tuple[float, float] = getCoordinates(address)
+                address_dict = {
+                    "country": line_item.origin_location["country_code"], 
+                    "street": line_item.origin_location["address1"],
+                    "city": line_item.origin_location["city"],
+                    "postal_code":line_item.origin_location["zip"],
+                }
+                source_coordinates: Tuple[float, float] = getCoordinates(address_dict)
                 
                 # Get distance to destination
                 dest_coordinates = (order.shipping_address["latitude"], order.shipping_address["longitude"])

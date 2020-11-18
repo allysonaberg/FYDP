@@ -17,15 +17,10 @@ class LineItem:
 	"""
 	fulfillment_service: str
 	grams: int
-	quantity: int
 	"""
 	Whether the item requires shipping.
 	"""
 	requires_shipping: bool
-	"""
-	The name of the item's supplier.
-	"""
-	vendor: str
 	"""
 	The location of the line item’s fulfillment origin.
 		id: The location ID of the line item’s fulfillment origin. Used by Shopify to calculate applicable taxes. This is not the ID of the location where the order was placed. You can use the FulfillmentOrder resource to determine the location an item will be sourced from.
@@ -60,21 +55,6 @@ class Order:
 	E.g: "closed_at": "2008-01-10T11:00:00-05:00"
 	"""
 	created_at: str
-	currency: str
-	"""
-	The status of payments associated with the order. Can only be set when the order is created
-	"financial_status": "authorized"
-	"""    
-	financial_status: str
-	"""
-	The order's status in terms of fulfilled line items. Valid values:
-		fulfilled: Every line item in the order has been fulfilled.
-		null: None of the line items in the order have been fulfilled.
-		partial: At least one line item in the order has been fulfilled.
-		restocked: Every line item in the order has been restocked and the order canceled.
-	e.g. "fulfillment_status": "partial"
-	"""
-	fulfillment_status: str
 	"""
 	A list of line item objects, each containing information about an item in the order. Each object has the following properties:
 		fulfillable_quantity: The amount available to fulfill, calculated as follows:
@@ -123,12 +103,6 @@ class Order:
 	"""
 	line_items: List[LineItem]
 	"""
-	The ID of the physical location where the order was processed. This property refers to the POS location. location_id will always be set to null for online orders. 
-	If you need to reference the location against an order, then use the FulfillmentOrder resource.
-	e.g: "location_id": 49202758
-	"""
-	location_id: int
-	"""
 	An array of objects, each of which details a shipping method used. Each object has the following properties:
 		code: A reference to the shipping method.
 		discounted_price: The price of the shipping method after line-level discounts have been applied. Doesn't reflect cart-level or order-level discounts.
@@ -140,6 +114,22 @@ class Order:
 		tax_lines: A list of tax line objects, each of which details a tax applicable to this shipping line.
 		carrier_identifier: A reference to the carrier service that provided the rate. Present when the rate was computed by a third-party carrier service.
 		requested_fulfillment_service_id: A reference to the fulfillment service that is being requested for the shipping method. Present if the shipping method requires processing by a third party fulfillment service; null otherwise.
+
+		Eg:
+		"shipping_lines": [
+			{
+				"code": "INT.TP",
+				"price": "4.00",
+				"discounted_price": "4.00",
+				"price_set": {...},
+				"discounted_price_set": {...},
+				"source": "canada_post",
+				"title": "Small Packet International Air",
+				"tax_lines": [],
+				"carrier_identifier": "third_party_carrier_identifier",
+				"requested_fulfillment_service_id": "third_party_fulfillment_service_id"
+			}
+		]
 	"""
 	shipping_lines: List[Dict[str, Any]]
 	"""
@@ -179,7 +169,7 @@ class Order:
 	shipping_address: Optional[str] = None
 
 
-def extractLineItemFieldsOfInterest(line_item_dict):
+def createLineItemObject(line_item_dict):
 	final_dict = {}
 	for field_of_interest in LineItem.__dataclass_fields__.keys():
 		if field_of_interest in line_item_dict:
@@ -188,21 +178,20 @@ def extractLineItemFieldsOfInterest(line_item_dict):
 	return final_dict
 
 
-def extractOrderFieldsOfInterest(order_dict):
+def createOrderObject(order_dict):
 	final_dict = {}
 	for field_name, _ in Order.__dataclass_fields__.items():
 		if field_name in order_dict: # Some values can be null, and thus would not be sent back in the response.
 			if field_name == "line_items":
 				line_items = []
 				for line_item_dict in order_dict["line_items"]:
-					clean_line_item_dict = extractLineItemFieldsOfInterest(line_item_dict)
-					line_items.append(LineItem(**clean_line_item_dict))
+					line_items.append(LineItem(**createLineItemObject(line_item_dict)))
 				
 				final_dict["line_items"] = line_items
 			else:
 				final_dict[field_name] = order_dict[field_name]
 
-	return final_dict
+	return Order(**final_dict)
 
 
 def getOrders(domain, api_key, api_password):
@@ -214,10 +203,7 @@ def getOrders(domain, api_key, api_password):
 	json_result: Dict[str, str] = json.loads(r.text)
 	orders: List[Order] = []
 	for order_dict in json_result["orders"]:
-		# Unpack into object
-		clean_dict = extractOrderFieldsOfInterest(order_dict)
-		order = Order(**clean_dict)
-		orders.append(order)
+		orders.append(createOrderObject(order_dict))
 
 	return orders
 

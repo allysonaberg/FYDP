@@ -7,7 +7,7 @@ from datetime import datetime, date
 
 from dotenv import load_dotenv
 from model import getCarbonFootprint
-from shopify import getOrders, getFulfillment
+from APIs.shopify import getOrders, getFulfillment
 from typing import Tuple
 
 

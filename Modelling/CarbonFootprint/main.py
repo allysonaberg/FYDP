@@ -1,15 +1,20 @@
 
 import argparse
+from pathlib import Path
 import os
 import csv
 import pandas as pd
 from datetime import datetime, date
+# import matplotlib.pyplot as plt
+# from matplotlib.dates import date2num
 
 from dotenv import load_dotenv
 from model import getCarbonFootprint
 from APIs.shopify import getOrders, getFulfillment
 from typing import Tuple
 
+
+FIGURENAME = Path(__file__).parent / "plot.png"
 
 load_dotenv()
 
@@ -40,7 +45,7 @@ def writeToCSV(csv_filename, data):
 # 	plt.xticks(rotation=45)
 # 	plt.tight_layout()
 	
-# 	fig.savefig('plot.png')
+# 	fig.savefig(FIGURENAME)
 
 
 if __name__ == "__main__":

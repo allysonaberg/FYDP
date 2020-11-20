@@ -22,4 +22,4 @@ jobs:
         pip install -r requirements.txt
     - name: Run the tests
       run: |
-        python unittest Modelling/CarbonFootprint/tests/test_shopify
+        python -m unittest Modelling/CarbonFootprint/tests/test_shopify

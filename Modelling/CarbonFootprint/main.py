@@ -5,8 +5,8 @@ import os
 import csv
 import pandas as pd
 from datetime import datetime, date
-# import matplotlib.pyplot as plt
-# from matplotlib.dates import date2num
+import matplotlib.pyplot as plt
+from matplotlib.dates import date2num
 
 from dotenv import load_dotenv
 from model import getCarbonFootprint
@@ -32,20 +32,20 @@ def writeToCSV(csv_filename, data):
 		for _date, grams_carbon in data.items():
 			writer.writerow([_date, grams_carbon])
 
-# def plotToPNG(carbon_footprints):
-# 	x, y = zip(*carbon_footprints.items())
-# 	fig = plt.figure()
-# 	fig.suptitle("Carbon Footprint Over Time")
+def plotToPNG(carbon_footprints):
+	x, y = zip(*carbon_footprints.items())
+	fig = plt.figure()
+	fig.suptitle("Carbon Footprint Over Time")
 
-# 	# Setup formatting of dates
-# 	plt.plot_date(date2num(x), y, fmt="bo", tz=None, xdate=True)	
+	# Setup formatting of dates
+	plt.plot_date(date2num(x), y, fmt="bo", tz=None, xdate=True)	
 	
-# 	plt.xlabel("Date")
-# 	plt.ylabel("CO2 [g]")
-# 	plt.xticks(rotation=45)
-# 	plt.tight_layout()
+	plt.xlabel("Date")
+	plt.ylabel("CO2 [g]")
+	plt.xticks(rotation=45)
+	plt.tight_layout()
 	
-# 	fig.savefig(FIGURENAME)
+	fig.savefig(FIGURENAME)
 
 
 if __name__ == "__main__":
@@ -72,7 +72,7 @@ if __name__ == "__main__":
 
 	# writeToCSV(args.csv_filename, carbon_footprints)
 
-	# plotToPNG(carbon_footprints)
+	plotToPNG(carbon_footprints)
 	for date, grams_carbon in carbon_footprints.items():
 		print(f"{date},{grams_carbon}")
 

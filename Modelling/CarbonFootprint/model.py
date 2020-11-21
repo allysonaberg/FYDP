@@ -2,6 +2,8 @@ from geopy.distance import geodesic
 from geopy.geocoders import Nominatim
 from typing import Dict, Tuple
 
+delivery_truck_weight = 8000 / 2000 # in tons
+
 def getCoordinates(address_dict: Dict):
     geolocator = Nominatim(user_agent="FYDP")
     location = geolocator.geocode(address_dict)
@@ -28,10 +30,11 @@ def getCarbonFootprintTruck(weight, distance):
     "average freight truck in the U.S. emits 161.8 grams of CO2 per ton-mile"
     - where "ton" is 2000 lbs
     """
-    tons = gramsToLbs(weight) / 2000.0
+    tons_package = gramsToLbs(weight) / 2000.0
+    total_weight = tons_package + delivery_truck_weight
     
-    ton_mile = tons * distance
-    grams_CO2 = 161.8 / ton_mile
+    ton_mile = total_weight * distance
+    grams_CO2 = 161.8 * ton_mile
     return grams_CO2
 
 

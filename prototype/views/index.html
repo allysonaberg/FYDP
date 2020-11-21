@@ -1,7 +1,61 @@
 <html>
-    <title>HTML PAGE</title>
+    <head>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+    </head>
+    <title>FYDP</title>
     <body>
-        <h1>This is a title</h1>
-        <h2><%= data %></h2>
+        <h1>Welcome</h1>
+        <h2>Your Carbon Footprint</h2>
+
+        <canvas id="chart" width="600" height="400">Your browser does not support the canvas feature.</canvas>
+        <script type="text/javascript">
+            window.onload = function() {
+                /* Tell the server to fetch the carbon footprint data */
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var lines = this.responseText.split("\n");
+                        var dates = [];
+                        var footprints = [];
+                        for(var i = 0; i < lines.length; ++i){
+                            var split = lines[i].split(",");
+                            console.log(split);
+                            dates.push(split[0])
+                            footprints.push(split[1]);
+                        }
+                        var canvas = document.getElementById("chart");
+                        var ctx = canvas.getContext("2d");
+                        
+                        var myChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: dates,
+                                datasets: [{
+                                    label: 'Grams Carbon Dioxide',
+                                    data: footprints,
+                                    backgroundColor: "rgb(100, 100, 100)"
+                                }]
+                            },
+                            options: {
+                                responsive: false,
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            min: 0,
+                                            stepSize: 100000
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    }
+                };
+                xhttp.open("GET", "/getFootprint", true);
+                xhttp.send();
+                
+                
+            }
+            
+        </script>
     </body>
 </html>

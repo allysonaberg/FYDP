@@ -17,19 +17,17 @@ const apiKey = process.env.API_KEY;
 const apiPassword = process.env.API_PASSWORD;
 
 	
-app.get('/', (req, res) => {
+app.get('/', (req, res) => {	
+	res.render(__dirname+'/views/index.html');
+})
+
+app.get('/getFootprint', (req, res) => {
+	res.set('Cache-Control', 'private, max-age=43200'); // Cache for half a day
 	const exec = require("child_process").execSync;
 
 	var result = exec("python3 "+ __dirname +"'/../Modelling/CarbonFootprint/main.py'");
 	result = result.toString();
-	var output = [];
-	var lines = result.split("\n");
-	 for(var i = 0; i < lines.length; ++i){
-		 var split = lines[i].split(",");
-		output.push({date: split[0], grams_carbon: split[1]});
-	}
-	
-	res.render(__dirname+'/views/index.html', {data: JSON.stringify(output)});
+	res.send(result);
 })
 
 

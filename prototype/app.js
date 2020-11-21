@@ -1,10 +1,6 @@
 const express = require('express')
-const {spawn} = require('child_process')
 const bodyParser = require('body-parser')
-const sqlite3 = require('sqlite3').verbose();
 require('dotenv/config')
-var DB = require('./db/db_methods');
-const { parse } = require('path');
 
 const app = express()
 app.set('view engine', 'html');
@@ -13,8 +9,6 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json())
 
 const port = process.env.PORT || 5000;
-const apiKey = process.env.API_KEY;
-const apiPassword = process.env.API_PASSWORD;
 
 	
 app.get('/', (req, res) => {	

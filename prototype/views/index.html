@@ -7,8 +7,11 @@
     <body>
         <h1>Welcome</h1>
         <h2>Your Store's Carbon Footprint</h2>
-
-        <canvas id="footprint-chart" padding-top=75%>Your browser does not support the canvas feature.</canvas>
+        <div id="canvas-container">
+            <canvas id="footprint-chart" padding-top=75%>Your browser does not support the canvas feature.</canvas>
+        </div>
+            
+        
         <script type="text/javascript">
             window.onload = function() {
                 /* Tell the server to fetch the carbon footprint data */
@@ -48,7 +51,7 @@
                                             stepSize: 100000
                                         }
                                     }]
-                                }
+                                },
                             }
                         });
                     }

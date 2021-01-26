@@ -29,17 +29,11 @@ function getNonce(store_name) {
 			return console.error(err.message);
 		}
 	});
-	let sql = `SELECT nonce_key, expiry FROM nonce WHERE store_name=?`;
+	let sql = `SELECT nonce_key, expiry FROM nonce WHERE store_name=? AND expiry<=?`;
 
-	db.get(sql, [store_name], (err, row) => {
+	db.get(sql, [store_name, Date.now()], (err, row) => {
 		if (err) {
 		  return console.error(err.message);
-		}
-		if (row != null) {
-			let current = Date.now();
-			if (row.expiry < current) {
-				return null;
-			}
 		}
 		return row; // Will return NULL if not found.	  
 	});

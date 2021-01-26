@@ -19,9 +19,9 @@ FIGURENAME = Path(__file__).parent / "plot.png"
 load_dotenv()
 
 
-API_KEY = os.getenv("API_KEY")
-API_PASSWORD = os.getenv("API_PASSWORD")
-DOMAIN = os.getenv("DOMAIN")
+API_KEY = os.getenv("SHOP_API_KEY")
+API_PASSWORD = os.getenv("SHOP_API_PASSWORD")
+SHOP_DOMAIN = os.getenv("DOMAIN")
 
 def writeToCSV(csv_filename, data):
 	with open(csv_filename, 'w') as f:

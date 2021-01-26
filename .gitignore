@@ -6,3 +6,4 @@ node_modules/
 __pycache__
 server.key
 server.pass.key
+commands.sql

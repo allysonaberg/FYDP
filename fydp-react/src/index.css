@@ -6,22 +6,21 @@
   padding: 0;
 }
 
-body {
-  font-family: 'Poppins', sans-serif;
+:root {
+  --blue: #292B56;
+  --white: #ffffff;
+  --grey: #E5E5E5;
 }
 
-.container {
-  max-width: 500px;
-  margin: 10px auto;
-  overflow: auto;
-  border: 1px solid steelblue;
-  padding: 30px;
-  border-radius: 5px;
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--grey);
 }
 
 .header {
   overflow: hidden;
   padding: 20px 10px;
+  background-color: white;
 }
 
 .header a {
@@ -58,11 +57,10 @@ body {
   float: right;
   height: auto;
   margin: 0 auto;
-  padding: 10px;
 }
 
 .header-search {
-  width: 400px;
+  width: 30%;
   height: auto;
   margin: 0 auto;
   padding: 10px;
@@ -72,6 +70,30 @@ body {
 }
 
 
+.container {
+  overflow: auto;
+  padding: 30px;
+}
+
+.container-right {
+  float: right;
+  height: auto;
+  margin: 0 auto;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.container-center {
+  width: 30%;
+  height: auto;
+  margin: 0 auto;
+  padding: 10px;
+  position: relative;
+  border: 1px solid black;
+  border-radius: 4px;
+  text-align: center;
+}
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
 @media screen and (max-width: 500px) {
   .header a {
@@ -87,10 +109,12 @@ body {
 .btn {
   display: inline-block;
   background: white;
-  color: black;
+  border: none;
   border-radius: 5px;
   cursor: pointer;
   margin-right: 20px;
+  padding: 10px;
+  margin-top: 0px;
   text-decoration: none;
   font-size: 18px;
   font-family: inherit;

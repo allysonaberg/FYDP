@@ -1,5 +1,7 @@
 import Header from './Components/Header'
 import Button from './Components/Button'
+import Products from './Components/Products'
+import SidePanel from './Components/SidePanel'
 
 function App() {
   return (
@@ -14,8 +16,12 @@ function App() {
 	    </div>
 
 	    <div class="container">
-	    	<div class="container-right">RIGHT</div>
-	    	<div class="container-center">CENTER</div>
+	    	<div class="container-right">
+	    		<SidePanel />
+	    	</div>
+	    	<div class="container-center">
+	    		<Products text={"Store products"}/>
+	    	</div>
 	    </div>
     </div>
   );

@@ -1,15 +1,24 @@
 import React from 'react';
 
 const Button = (props) => {
+
+	const rankingColors = {"A":"var(--rankGreen)", "B":"var(--rankYellow)", "C":"var(--rankGrey)", "D":"var(--rankRed)"}
+
+	console.log(rankingColors[props.text])
+	const text = props.rankButton ? "RANK " + props.text : props.text
+	const color = props.rankButton ? rankingColors[props.text] : props.color
+	const textColor = props.rankButton ? "var(--white)" : props.textColor
+
 	return (
-		<button onClick={props.onClick} style={{backgroundColor: props.color, color: props.textColor}} className='btn'>{props.text}</button>
+		<button onClick={props.onClick} style={{backgroundColor: color, color: textColor}} className='btn'>{text}</button>
 	)
 }
 
 Button.defaultProps = {
 	color: 'White',
 	textColor: 'Black',
-	text: 'Default'
+	text: 'Default',
+	rankButton: false
 }
 
 export default Button

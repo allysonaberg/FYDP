@@ -16,6 +16,9 @@
   --rankRed: #BD2A2A;
   --factColor: #373B93;
   --textGrey: #828282;
+  --backgroundGrey: #FAFAFA;
+  --borderGrey: #DDDDE3;
+  --buttonGrey: #BBBCC3;
 }
 
 body {
@@ -74,17 +77,36 @@ body {
   box-sizing: border-box;
 }
 
-#searchBar {
-  height: 45px;
-  width: 70%;
-  box-sizing: border-box;
-  margin-top: 0px
+
+form.searchBar input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid var(--borderGrey);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  float: left;
+  width: 80%;
+  background: var(--backgroundGrey);
 }
-/*
-#searchButton {
-  float: right;
+
+form.searchBar button {
+  float: left;
   width: 20%;
-}*/
+  padding: 10px;
+  background: var(--buttonGrey);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  color: white;
+  font-size: 17px;
+  border: 1px solid var(--borderGrey);
+  border-left: none;
+}
+
+form.searchBar::after {
+  content: "";
+  clear: both;
+  display: table;
+}
 
 #infoText {
   font-size: 0.8em;

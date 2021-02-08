@@ -9,7 +9,7 @@ const ProductInfoPanel = (props) => {
 	return (
 		<div className='container' style={{backgroundColor: props.background}}>
 			<p style={{color: "var(--textGrey)", "font-weight": "Bold"}}>{props.title}</p>
-			<p style={{color: "var(--textGrey)", "margin-bottom": "20px"}}>{props.text}</p>
+			<p id="infoText" style={{"margin-bottom": "20px", "margin-top": "10px"}}>{props.text}</p>
 			<img style={{"margin-bottom": "10px", "max-width": "100%"}} src={img1}/>
 			<p id="infoText"><span style={{"color":"var(--rankGreen)", "font-weight": "Bold", "padding-right": "10px"}}>RANK A</span>emits -10% or less than avg</p>
 			<p id="infoText"><span style={{"color":"var(--rankYellow)", "font-weight": "Bold", "padding-right": "10px"}}>RANK B</span>emits between -10% and +5% of the avg</p>

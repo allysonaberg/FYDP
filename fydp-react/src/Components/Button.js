@@ -10,7 +10,7 @@ const Button = (props) => {
 	const textColor = props.rankButton ? "var(--white)" : props.textColor
 
 	return (
-		<button onClick={props.onClick} style={{backgroundColor: color, color: textColor}} className='btn'>{text}</button>
+		<button onClick={props.onClick} style={{backgroundColor: color, color: textColor, border: "1px solid var(--grey)"}} className='btn'>{text}</button>
 	)
 }
 
@@ -18,7 +18,8 @@ Button.defaultProps = {
 	color: 'White',
 	textColor: 'Black',
 	text: 'Default',
-	rankButton: false
+	rankButton: false,
+	outline: false
 }
 
 export default Button

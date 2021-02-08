@@ -69,12 +69,26 @@ body {
   width: 40%;
   height: auto;
   margin: 0 auto;
-  padding: 10px;
   position: relative;
-  border: 1px solid black;
   border-radius: 4px;
+  box-sizing: border-box;
 }
 
+#searchBar {
+  height: 45px;
+  width: 70%;
+  box-sizing: border-box;
+  margin-top: 0px
+}
+/*
+#searchButton {
+  float: right;
+  width: 20%;
+}*/
+
+#infoText {
+  font-size: 0.8em;
+}
 
 .container {
   max-width: 100%;
@@ -149,7 +163,7 @@ body {
   display: inline-block;
   background: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
   margin-right: 20px;
   padding: 10px;
@@ -157,6 +171,8 @@ body {
   text-decoration: none;
   font-size: 18px;
   font-family: inherit;
+  font-weight: bold;
+  height: 45px;
 }
 
 .btn:focus {
@@ -170,6 +186,40 @@ body {
 .btn-block {
   display: block;
   width: 100%;
+}
+
+/* Style the search field */
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+/* Style the submit button */
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none; /* Prevent double borders */
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+/* Clear floats */
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
 }
 
 .task {

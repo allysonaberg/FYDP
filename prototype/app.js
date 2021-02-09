@@ -1,20 +1,96 @@
-const axios = require('axios').default;
-const express = require('express')
-const bodyParser = require('body-parser')
-const passport = require('passport')
-const { v4: uuidv4 } = require('uuid');
-require('dotenv/config');
-const dbMethods = require('./db/db_methods')
+/* IMPORTS */
+require('isomorphic-fetch');
 
-const app = express()
-app.set('view engine', 'html')
-app.engine('html', require('ejs').renderFile)
-app.use(bodyParser.urlencoded({extended:true}))
-app.use(bodyParser.json())
+//const axios = require('axios').default;
+//const express = require('express');
+//const bodyParser = require('body-parser');
+//const passport = require('passport');
+//const { v4: uuidv4 } = require('uuid');
+const dotenv = require('dotenv');
+const dbMethods = require('./db/db_methods');
+const Koa = require('koa');
+const koaRouter = require("koa-router");
+const { default: createShopifyAuth } = require('@shopify/koa-shopify-auth');
+const { verifyRequest } = require('@shopify/koa-shopify-auth');
+const session = require('koa-session');
 
+/****************************************************************************************/
+
+/* CONSTANTS */
+
+//const dev = process.env.NODE_ENV !== 'production';
+const app = new Koa();
+const router = new koaRouter();
+dotenv.config();
+const SHOPIFY_API_SECRET_KEY = process.env.SHOPIFY_API_SECRET_KEY;
+const SHOPIFY_API_KEY = process.env.SHOPIFY_API_KEY;
 const port = process.env.PORT || 5000;
-const SCOPES = 'read_orders' // Comma-separated list of permission scopes to request to Shopify
+const SCOPES = ['read_orders, read_products'] // Comma-separated list of permission scopes to request to Shopify
 const ACCESS_MODE = 'per-user' // Value for Shopify token online-access mode 
+
+
+/****************************************************************************************/
+
+
+/* APP SETTUP */
+app.keys = [SHOPIFY_API_SECRET_KEY];
+//app.set('view engine', 'html');
+//app.engine('html', require('ejs').renderFile);
+// app.use(bodyParser.urlencoded({extended:true}));
+// app.use(bodyParser.json());
+
+app
+  // sets up secure session data on each request
+  .use(session({secure: true, sameSite: 'none'}, app))
+
+  // sets up shopify auth
+  .use(
+    createShopifyAuth({
+      	apiKey: SHOPIFY_API_KEY,
+      	secret: SHOPIFY_API_SECRET_KEY,
+		scopes: SCOPES,
+      	afterAuth(ctx) {
+        	const {shop, accessToken} = ctx.session;
+
+        	console.log('We did it!', accessToken);
+
+        	ctx.redirect('/');
+      	},
+    }),
+  )
+
+  // everything after this point will require authentication
+  .use(
+	  verifyRequest()
+	)
+
+  // application code
+  .use(ctx => {
+    //await handle(ctx.req, ctx.res);
+    ctx.body = 'Hello World!';
+	ctx.res.statusCode = 200;
+	//ctx.redirect('/');
+  });
+
+router.get("/book",async (ctx,next)=>{
+	const books = ["Speaking javascript", "Fluent Python", "Pro Python", "The Go programming language"];
+	ctx.status = HttpStatus.OK;
+	ctx.body = books;
+	await next();
+  });
+app.use(router.routes()).use(router.allowedMethods());
+
+
+/*
+app.get('/', (req, res) => {
+	res.redirect('/home');
+});
+
+
+app.get('/home', (req, res) => {
+	res.render(__dirname+'/views/index.html');
+});
+
 
 app.post('/login',
   passport.authenticate('local', { successRedirect: '/',
@@ -80,8 +156,8 @@ app.get('/authenticate', (req, res) => {
 			let url = `https://${store_name}.myshopify.com/admin/oauth/access_token`
 
 			axios.post(url, {
-				client_id: process.env.API_KEY,
-				client_secret: process.env.API_SECRET_KEY,
+				client_id: SHOPIFY_API_KEY,
+				client_secret: SHOPIFY_API_SECRET_KEY,
 				code: code
 			  })
 			  .then(function (response) {
@@ -99,14 +175,6 @@ app.get('/authenticate', (req, res) => {
 
 })
 
-app.get('/', (req, res) => {
-	res.redirect('/home');
-})
-
-app.get('/home', (req, res) => {
-	res.render(__dirname+'/views/index.html');
-})
-
 
 app.get('/getFootprint', (req, res) => {
 	res.set('Cache-Control', 'private, max-age=43200'); // Cache for half a day
@@ -116,6 +184,8 @@ app.get('/getFootprint', (req, res) => {
 	result = result.toString();
 	res.send(result);
 })
+
+*/
 
 
 //START

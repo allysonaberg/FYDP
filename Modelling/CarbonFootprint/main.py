@@ -21,7 +21,7 @@ load_dotenv()
 
 API_KEY = os.getenv("SHOP_API_KEY")
 API_PASSWORD = os.getenv("SHOP_API_PASSWORD")
-SHOP_DOMAIN = os.getenv("DOMAIN")
+SHOP_DOMAIN = os.getenv("SHOP_DOMAIN")
 
 def writeToCSV(csv_filename, data):
 	with open(csv_filename, 'w') as f:
@@ -56,7 +56,7 @@ if __name__ == "__main__":
 
 # 	# Get the orders from the shop
 
-	orders = getOrders(DOMAIN, API_KEY, API_PASSWORD)
+	orders = getOrders(SHOP_DOMAIN, API_KEY, API_PASSWORD)
 
 	date_range = pd.date_range(end=datetime.utcnow(), periods=100)
 	carbon_footprints = {_date.date(): 0.0 for _date in date_range}

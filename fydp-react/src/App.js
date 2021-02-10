@@ -70,11 +70,36 @@ function App() {
       suggestion: 'Consider swapping linen for cotton to reduce this item’s carbon footprint by 8.1 CO2'
   })
 
+
+  const [showInfoPanel, setShowInfoPanel] = useState(true)
+
   //FUNCTIONS
   const updateSpotlightProduct = (id) => {
    const newProduct = productList.filter((product) => product.id == id)
    console.log(newProduct[0])
    setProduct(newProduct[0])
+
+   var collapsableContainer = document.getElementById("collapsableContainer")
+   collapsableContainer.style.height="100%"
+   setShowInfoPanel(true)
+
+   var factPanel = document.getElementById("factPanel")
+   factPanel.style.height = "0px"
+   factPanel.style.visibility = "hidden"
+   factPanel.style.padding="0px"
+
+  }
+
+  const removeInfoPanel = () => {
+    setShowInfoPanel(false)
+    var collapsableContainer = document.getElementById("collapsableContainer")
+    collapsableContainer.style.height="0px";
+    collapsableContainer.style.padding="0px";
+
+    var factPanel = document.getElementById("factPanel")
+    factPanel.style.height = "100%"
+    factPanel.style.visibility = "visible"
+    factPanel.style.padding="10px"
   }
 
 
@@ -95,7 +120,7 @@ function App() {
 			</div>
 	    	<div class="container">
 	    		<div class="container-right">
-	    			<SidePanel product={product}/>
+	    			<SidePanel product={product} showInfoPanel={showInfoPanel} removePanel={removeInfoPanel}/>
 	    		</div>
 	    		<div class="container-center">
 	    			<Products products={productList} onToggle={updateSpotlightProduct} text={"Store products"}/>

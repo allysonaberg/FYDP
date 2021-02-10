@@ -4,6 +4,9 @@ import Button from './Button'
 const ProductInfoPanel = (props) => {
 	return (
 		<div className='container' style={{backgroundColor: props.background}}>
+			<div className='container-right' style={{"margin-top": "0px", "padding-top": "0px"}}>
+				<button onClick={() => props.removePanel()} style={{"background-color": "var(--white)", "border": "none"}}>X</button>
+			</div>
 			<h3 style={{"font-weight": "bold"}}>{props.product.name}</h3>
 
 			<div className='container' style={{"padding-left": "0px"}}>

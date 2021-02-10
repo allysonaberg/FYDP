@@ -6,9 +6,19 @@ import FactPanel from './FactPanel'
 
 
 const SidePanel = (props) => {
+	console.log(props.showInfoPanel)
+	const visibility = props.showInfoPanel ? "visible" : "hidden"
+	console.log(visibility)
+	const productInfoHeight = props.showInfoPanel ? "0%" : "100%"
 	return (
 		<div className='container' id="SidePanel" style={{backgroundColor: props.background}}>
-			<ProductInfoPanel product={props.product}/>
+			<div className="container" id="collapsableContainer">
+				<ProductInfoPanel product={props.product} removePanel={props.removePanel}/>
+			</div>
+			<div className="container" style={{"visible": "{!props.showInfoPanel}"}}>
+				<FactPanel />
+				<RatingPanel />
+			</div>
 		</div>
 	)
 }

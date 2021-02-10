@@ -5,7 +5,7 @@ import shirt from '../Assets/shirt.png'
 
 const Product = (props) => {
 	return (
-		<div className='container-list-item' style={{backgroundColor: props.background}}>
+		<button onClick={() => props.onToggle(props.id)} className='container-list-item' style={{backgroundColor: props.background}}>
 
 			<div className="container-left">
 				<img src={props.image}/>
@@ -18,7 +18,7 @@ const Product = (props) => {
 				<Button text={props.rank} rankButton={true}/>
 			</div>
 
-		</div>
+		</button>
 	)
 }
 

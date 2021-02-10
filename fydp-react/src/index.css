@@ -112,12 +112,33 @@ form.searchBar::after {
   font-size: 0.8em;
 }
 
+#filterText {
+  font-size: 1em;
+  font-weight: bold;
+}
+
+#filterContainer {
+  padding-top: 0px;
+  margin-top: 0px;
+  position: relative;
+}
+
+#sidePanel {
+  min-width: 50%;
+  text-align: left;
+}
+
+#productInfoText {
+  margin-top: 10px;
+}
+
 .container {
   max-width: 100%;
   overflow: auto;
   padding: 10px;
   position: relative;
   text-align: left;
+  border-radius: 8px;
 }
 
 
@@ -126,6 +147,7 @@ form.searchBar::after {
   margin-bottom: 10px;
   position: relative;
   border-radius: 8px;
+  width: 100%;
 }
 
 .container-list-item-border {

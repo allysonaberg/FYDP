@@ -1,5 +1,8 @@
 import React from 'react';
 import Button from './Button'
+import TestPanel from './TestPanel'
+import Dropdown from 'react-bootstrap/Dropdown'
+
 
 const Header = (props) => {
 	return (
@@ -7,7 +10,8 @@ const Header = (props) => {
 			<div class="header-left">FYDP</div>
 	      	<div class="header-right">
 	      		<Button text={"Download Report"} color={"var(--white)"} textColor={"var(--blue)"} outline={true}/>
-	      		<Button text={"Test Product"} color={"var(--blue)"} textColor={"White"}/>
+	      		<Button onClick={() => props.showPanel(true)} text={"Test Product"} color={"var(--blue)"} textColor={"White"}/>
+	      		<TestPanel isPanelOpen={props.isPanelOpen} showPanel={props.showPanel} />
 	     	 </div>
 
 	     	 <div class="header-search">

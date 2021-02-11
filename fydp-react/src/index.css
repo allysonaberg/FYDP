@@ -322,3 +322,104 @@ footer {
   margin-top: 30px;
   text-align: center;
 }
+
+
+/* MODAL STUFF */
+
+.modal {
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: auto;
+  padding-top: 80px;
+}
+
+.modalContent {
+  z-index: 1000;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 90%;
+  overflow: auto;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  border-radius: 4px;
+  width: calc(100% - 120px); /* This just a default width */
+  max-width: 580px;
+}
+
+.modalClose {
+  float: right;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.modalClose:hover,
+.modalClose:focus {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modalOverlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 995;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+
+/* DROPDOWN BUTTON */
+.dropbtn {
+  background-color: var(--white);
+  color: var(--textGrey);
+  padding: 16px;
+  font-size: 16px;
+  border: 1px solid var(--textGrey);
+  cursor: pointer;
+  border-radius: 8px;
+  width: 100%;
+  text-align: left;
+}
+
+.dropdown {
+  position: relative;
+  padding-top: 10px;
+}
+
+.dropdown-content {
+  display: none;
+  width: 100%;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  text-align: left;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+}
+
+.dropdown-content a:hover {background-color: var(--textGrey)}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+}
+

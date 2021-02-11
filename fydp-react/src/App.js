@@ -72,6 +72,7 @@ function App() {
 
 
   const [showInfoPanel, setShowInfoPanel] = useState(true)
+  const [isShowingTestPanel, setIsShowingTestPanel] = useState(false)
 
   //FUNCTIONS
   const updateSpotlightProduct = (id) => {
@@ -105,7 +106,7 @@ function App() {
 
   return (
   	<div className="root">
-	    <Header />
+	    <Header showPanel={setIsShowingTestPanel} isPanelOpen={isShowingTestPanel} />
 	    <div class="container">
 	    	<div className="container-center" id="filterContainer" style={{"padding-bottom": "0px", "padding-top": "10px"}}>
 				<div className="container-left">

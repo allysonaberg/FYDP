@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from './Button'
 import TestPanel from './TestPanel'
+import TestResultsPanel from './TestResultsPanel'
 import Dropdown from 'react-bootstrap/Dropdown'
 
 
@@ -11,7 +12,8 @@ const Header = (props) => {
 	      	<div class="header-right">
 	      		<Button text={"Download Report"} color={"var(--white)"} textColor={"var(--blue)"} outline={true}/>
 	      		<Button onClick={() => props.showPanel(true)} text={"Test Product"} color={"var(--blue)"} textColor={"White"}/>
-	      		<TestPanel isPanelOpen={props.isPanelOpen} showPanel={props.showPanel} />
+	      		<TestPanel isPanelOpen={props.isPanelOpen} showPanel={props.showPanel} showResults={props.showResultsPanel} />
+	      		<TestResultsPanel isPanelOpen={props.isResultsPanelOpen} showPanel={props.showResultsPanel} />
 	     	 </div>
 
 	     	 <div class="header-search">

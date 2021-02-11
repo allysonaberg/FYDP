@@ -49,7 +49,7 @@ const TestPanel = (props) => {
 
 					<Button text=" + Add Fibre" textColor="var(--blue)" outline={false} />
 					<div style={{"margin-top": "100px"}}>
-						<Button text="Analyze Product" color="var(--blue)" textColor="var(--white)" center={true}/>
+						<Button onClick={() => props.showResults(true)} text="Analyze Product" color="var(--blue)" textColor="var(--white)" center={true}/>
 					</div>
 				</div>
 			</Modal>

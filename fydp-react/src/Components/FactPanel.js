@@ -4,7 +4,7 @@ import Button from './Button'
 
 const FactPanel = (props) => {
 	return (
-		<div className='container-list-item-border' id="factPanel" style={{backgroundColor: props.background, color: props.textColor, "text-align": "center", "visibility": "hidden", "padding": "0px", "height": "0px"}}>
+		<div className='container-list-item-border' id="factPanel" style={{backgroundColor: props.background, color: props.textColor}}>
 			<h3 style={{"padding-bottom": "20px"}}>{props.title}</h3>
 			<p style={{"padding-bottom": "20px"}}>{props.factText}</p>
 			<p style={{"text-decoration": "underline"}}>{props.sourceLink}</p>

@@ -159,6 +159,10 @@ footer {
   margin-top: 10px;
 }
 
+#containerMain {
+  padding-top: 0px;
+}
+
 
 /* BASIC BUTTON STUFF */
 
@@ -356,8 +360,16 @@ form.example::after {
 
 
 /*OTHER STUFF */
+
+#infoHeading {
+  font-size: 1em;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
 #infoText {
   font-size: 0.8em;
+  font-weight: bold;
+  padding-right: 10px;
 }
 
 #filterText {
@@ -378,6 +390,13 @@ form.example::after {
 
 #productInfoText {
   margin-top: 10px;
+}
+
+#factPanel {
+  text-align: center;
+  visibility: hidden;
+  padding: 0px;
+  height: 0px;
 }
 
 .product {

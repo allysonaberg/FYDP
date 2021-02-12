@@ -1,7 +1,5 @@
 import React from 'react';
 import Product from './Product'
-import { faHome } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Products = (props) => {
 	return (

@@ -1,5 +1,46 @@
 const sqlite3 = require('sqlite3').verbose();
 
+
+
+function storeNonce(store_name, nonce) {
+	let db = new sqlite3.Database('./db/pickled_herring.db', (err) => {
+		if (err) {
+			return console.error(err.message);
+		}
+	});
+	// Set expiry to 24 hours from now.
+	let expiry = Date.now() + 60 * 60 * 24;
+
+	let sql = `REPLACE INTO nonce (store_name, nonce_key, expiry) VALUES(?, ?, ?);`
+
+	db.run(sql, [store_name, nonce, expiry], function(err) {
+		if (err) {
+			// TODO: Log to logs?
+			console.log(err);
+		}
+	});
+
+	db.close();	
+}
+
+function getNonce(store_name) {
+	let db = new sqlite3.Database('./db/pickled_herring.db', (err) => {
+		if (err) {
+			return console.error(err.message);
+		}
+	});
+	let sql = `SELECT nonce_key, expiry FROM nonce WHERE store_name=? AND expiry<=?`;
+
+	db.get(sql, [store_name, Date.now()], (err, row) => {
+		if (err) {
+		  return console.error(err.message);
+		}
+		return row; // Will return NULL if not found.	  
+	});
+
+	db.close();
+}
+
 function readFromDB() {
 	/* Database object */
 	let db = new sqlite3.Database('./db/pickled_herring.db', (err) => {
@@ -66,4 +107,4 @@ function writeToDB(dataArray) {
 }
 
 
-module.exports = { readFromDB, writeToDB }
+module.exports = { readFromDB, writeToDB, getNonce, storeNonce }

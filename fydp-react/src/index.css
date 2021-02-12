@@ -27,6 +27,13 @@ body {
   background-color: var(--grey);
 }
 
+
+footer {
+  margin-top: 30px;
+  text-align: center;
+}
+
+/* HEADER STUFF */
 .header {
   overflow: hidden;
   padding: 20px 10px;
@@ -78,61 +85,20 @@ body {
   box-sizing: border-box;
 }
 
-
-form.searchBar input[type=text] {
-  padding: 10px;
-  font-size: 17px;
-  border: 1px solid var(--borderGrey);
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  float: left;
-  width: 80%;
-  background: var(--backgroundGrey);
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .header-right {
+    float: none;
+  }
 }
 
-form.searchBar button {
-  float: left;
-  width: 20%;
-  padding: 10px;
-  background: var(--buttonGrey);
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  color: white;
-  font-size: 17px;
-  border: 1px solid var(--borderGrey);
-  border-left: none;
-}
 
-form.searchBar::after {
-  content: "";
-  clear: both;
-  display: table;
-}
 
-#infoText {
-  font-size: 0.8em;
-}
-
-#filterText {
-  font-size: 1em;
-  font-weight: bold;
-}
-
-#filterContainer {
-  padding-top: 0px;
-  margin-top: 0px;
-  position: relative;
-}
-
-#sidePanel {
-  min-width: 50%;
-  text-align: left;
-}
-
-#productInfoText {
-  margin-top: 10px;
-}
-
+/* CONTAINER STUFF */
 .container {
   max-width: 100%;
   overflow: auto;
@@ -193,22 +159,8 @@ form.searchBar::after {
   margin-top: 10px;
 }
 
-.product {
-  width: 100%;
-  background-color: red;
-}
 
-/* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
-@media screen and (max-width: 500px) {
-  .header a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
-  .header-right {
-    float: none;
-  }
-}
+/* BASIC BUTTON STUFF */
 
 .btn {
   display: inline-block;
@@ -239,7 +191,84 @@ form.searchBar::after {
   width: 100%;
 }
 
-/* Style the search field */
+/* DROPDOWN BUTTON */
+.dropbtn {
+  background-color: var(--white);
+  color: var(--textGrey);
+  padding: 16px;
+  font-size: 16px;
+  border: 1px solid var(--textGrey);
+  cursor: pointer;
+  border-radius: 8px;
+  width: 100%;
+  text-align: left;
+}
+
+.dropdown {
+  position: relative;
+  padding-top: 10px;
+}
+
+.dropdown-content {
+  display: none;
+  width: 100%;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  text-align: left;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+}
+
+.dropdown-content a:hover {background-color: var(--textGrey)}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+}
+
+
+
+/* SEARCH BAR STUFF */
+form.searchBar input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid var(--borderGrey);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  float: left;
+  width: 80%;
+  background: var(--backgroundGrey);
+}
+
+form.searchBar button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: var(--buttonGrey);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  color: white;
+  font-size: 17px;
+  border: 1px solid var(--borderGrey);
+  border-left: none;
+}
+
+form.searchBar::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
 form.example input[type=text] {
   padding: 10px;
   font-size: 17px;
@@ -249,7 +278,6 @@ form.example input[type=text] {
   background: #f1f1f1;
 }
 
-/* Style the submit button */
 form.example button {
   float: left;
   width: 20%;
@@ -258,7 +286,7 @@ form.example button {
   color: white;
   font-size: 17px;
   border: 1px solid grey;
-  border-left: none; /* Prevent double borders */
+  border-left: none; 
   cursor: pointer;
 }
 
@@ -266,68 +294,10 @@ form.example button:hover {
   background: #0b7dda;
 }
 
-/* Clear floats */
 form.example::after {
   content: "";
   clear: both;
   display: table;
-}
-
-.task {
-  background: #f4f4f4;
-  margin: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
-}
-
-.task.reminder {
-  border-left: 5px solid green;
-}
-
-.task h3 {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.add-form {
-  margin-bottom: 40px;
-}
-
-.form-control {
-  margin: 20px 0;
-}
-
-.form-control label {
-  display: block;
-}
-
-.form-control input {
-  width: 100%;
-  height: 40px;
-  margin: 5px;
-  padding: 3px 7px;
-  font-size: 17px;
-}
-
-.form-control-check {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.form-control-check label {
-  flex: 1;
-}
-
-.form-control-check input {
-  flex: 2;
-  height: 20px;
-}
-
-footer {
-  margin-top: 30px;
-  text-align: center;
 }
 
 
@@ -385,48 +355,33 @@ footer {
 }
 
 
-/* DROPDOWN BUTTON */
-.dropbtn {
-  background-color: var(--white);
-  color: var(--textGrey);
-  padding: 16px;
-  font-size: 16px;
-  border: 1px solid var(--textGrey);
-  cursor: pointer;
-  border-radius: 8px;
-  width: 100%;
-  text-align: left;
+/*OTHER STUFF */
+#infoText {
+  font-size: 0.8em;
 }
 
-.dropdown {
+#filterText {
+  font-size: 1em;
+  font-weight: bold;
+}
+
+#filterContainer {
+  padding-top: 0px;
+  margin-top: 0px;
   position: relative;
-  padding-top: 10px;
 }
 
-.dropdown-content {
-  display: none;
-  width: 100%;
-  position: absolute;
-  background-color: #f9f9f9;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+#sidePanel {
+  min-width: 50%;
   text-align: left;
 }
 
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
+#productInfoText {
+  margin-top: 10px;
+}
+
+.product {
   width: 100%;
-}
-
-.dropdown-content a:hover {background-color: var(--textGrey)}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-.dropdown:hover .dropbtn {
+  background-color: red;
 }
 

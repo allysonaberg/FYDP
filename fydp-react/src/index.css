@@ -1,0 +1,406 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --blue: #292B56;
+  --white: #ffffff;
+  --grey: #E5E5E5;
+  --rankGreen: #47C03F;
+  --rankYellow: #FFA620;
+  --rankGrey: #677BB0;
+  --rankRed: #BD2A2A;
+  --factColor: #373B93;
+  --textGrey: #828282;
+  --backgroundGrey: #FAFAFA;
+  --borderGrey: #DDDDE3;
+  --buttonGrey: #BBBCC3;
+  --greyLight: #FAFAFB;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--grey);
+}
+
+
+footer {
+  margin-top: 30px;
+  text-align: center;
+}
+
+/* HEADER STUFF */
+.header {
+  overflow: hidden;
+  padding: 20px 10px;
+  background-color: white;
+}
+
+.header a {
+  float: left;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 4px;
+  margin-left: 10px auto;
+}
+
+.header a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.header a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+.header-left {
+  float: left;
+  height: auto;
+  margin: 0 auto;
+  padding-left: 10px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.header-right {
+  float: right;
+  height: auto;
+  margin: 0 auto;
+}
+
+.header-search {
+  width: 40%;
+  height: auto;
+  margin: 0 auto;
+  position: relative;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .header-right {
+    float: none;
+  }
+}
+
+
+
+/* CONTAINER STUFF */
+.container {
+  max-width: 100%;
+  overflow: auto;
+  padding: 10px;
+  position: relative;
+  text-align: left;
+  border-radius: 8px;
+}
+
+
+.container-list-item {
+  overflow: auto;
+  margin-bottom: 10px;
+  position: relative;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.container-list-item-border {
+  overflow: auto;
+  margin-bottom: 10px;
+  position: relative;
+  border-radius: 8px;
+  maxWidth: 50%;
+}
+
+.container-right {
+  max-width: 30%;
+  float: right;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.container-center {
+  max-width: 42%;
+  height: auto;
+  margin: 0 auto;
+  padding: 10px;
+  position: relative;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.container-left {
+  max-width: 80%;
+  float: left;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+#containerDark {
+  background-color: var(--greyLight);
+  border: 1px solid var(--borderGrey);
+  margin-top: 10px;
+}
+
+#containerMain {
+  padding-top: 0px;
+}
+
+
+/* BASIC BUTTON STUFF */
+
+.btn {
+  display: inline-block;
+  background: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-right: 20px;
+  padding: 10px;
+  margin-top: 0px;
+  text-decoration: none;
+  font-size: 18px;
+  font-family: inherit;
+  font-weight: bold;
+  height: 45px;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+/* DROPDOWN BUTTON */
+.dropbtn {
+  background-color: var(--white);
+  color: var(--textGrey);
+  padding: 16px;
+  font-size: 16px;
+  border: 1px solid var(--textGrey);
+  cursor: pointer;
+  border-radius: 8px;
+  width: 100%;
+  text-align: left;
+}
+
+.dropdown {
+  position: relative;
+  padding-top: 10px;
+}
+
+.dropdown-content {
+  display: none;
+  width: 100%;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  text-align: left;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+}
+
+.dropdown-content a:hover {background-color: var(--textGrey)}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+}
+
+
+
+/* SEARCH BAR STUFF */
+form.searchBar input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid var(--borderGrey);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  float: left;
+  width: 80%;
+  background: var(--backgroundGrey);
+}
+
+form.searchBar button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: var(--buttonGrey);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  color: white;
+  font-size: 17px;
+  border: 1px solid var(--borderGrey);
+  border-left: none;
+}
+
+form.searchBar::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none; 
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+
+/* MODAL STUFF */
+
+.modal {
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: auto;
+  padding-top: 80px;
+}
+
+.modalContent {
+  z-index: 1000;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 90%;
+  overflow: auto;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  border-radius: 4px;
+  width: calc(100% - 120px); /* This just a default width */
+  max-width: 580px;
+}
+
+.modalClose {
+  float: right;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.modalClose:hover,
+.modalClose:focus {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modalOverlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 995;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+
+/*OTHER STUFF */
+
+#infoHeading {
+  font-size: 1em;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+#infoText {
+  font-size: 0.8em;
+  font-weight: bold;
+  padding-right: 10px;
+}
+
+#filterText {
+  font-size: 1em;
+  font-weight: bold;
+}
+
+#filterContainer {
+  padding-top: 0px;
+  margin-top: 0px;
+  position: relative;
+}
+
+#sidePanel {
+  min-width: 50%;
+  text-align: left;
+}
+
+#productInfoText {
+  margin-top: 10px;
+}
+
+#factPanel {
+  text-align: center;
+  visibility: hidden;
+  padding: 0px;
+  height: 0px;
+}
+
+.product {
+  width: 100%;
+  background-color: red;
+}
+

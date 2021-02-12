@@ -1,7 +1,6 @@
 import Header from './Components/Header'
+import Content from './Components/Content'
 import Button from './Components/Button'
-import Products from './Components/Products'
-import SidePanel from './Components/SidePanel'
 import React, {useState } from 'react'
 
 import shirt from './Assets/shirt.png'
@@ -104,6 +103,10 @@ function App() {
     factPanel.style.padding="10px"
   }
 
+  const showTest = (showPanel) => {
+    setIsShowingTestResultsPanel(false)
+    setIsShowingTestPanel(showPanel)
+  }
   const showResults = (showPanel) => {
     setIsShowingTestResultsPanel(showPanel)
     setIsShowingTestPanel(false)
@@ -112,28 +115,8 @@ function App() {
 
   return (
   	<div className="root">
-	    <Header showPanel={setIsShowingTestPanel} isPanelOpen={isShowingTestPanel} showResultsPanel={showResults} isResultsPanelOpen={isShowingTestResultsPanel} />
-	    <div class="container">
-	    	<div className="container-center" id="filterContainer" style={{"padding-bottom": "0px", "padding-top": "10px"}}>
-				<div className="container-left">
-					<p id="filterText">All Products</p>
-				</div>
-				<div className="container-right">
-					<p id="filterText">Sales</p>
-				</div>
-				<div className='container' style={{"padding-top": "10px", "margin": "0px", "width": "100%"}}>
-				<hr />
-			</div>
-			</div>
-	    	<div class="container">
-	    		<div class="container-right">
-	    			<SidePanel product={product} showInfoPanel={showInfoPanel} removePanel={removeInfoPanel}/>
-	    		</div>
-	    		<div class="container-center">
-	    			<Products products={productList} onToggle={updateSpotlightProduct} text={"Store products"}/>
-	    		</div>
-	   		</div>
-	   	</div>
+	    <Header showPanel={showTest} isPanelOpen={isShowingTestPanel} showResultsPanel={showResults} isResultsPanelOpen={isShowingTestResultsPanel} />
+      <Content products={productList} product={product} showInfoPanel={showInfoPanel} removePanel={removeInfoPanel} onToggle={updateSpotlightProduct} />
     </div>
   );
 }

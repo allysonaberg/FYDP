@@ -19,6 +19,7 @@
   --backgroundGrey: #FAFAFA;
   --borderGrey: #DDDDE3;
   --buttonGrey: #BBBCC3;
+  --greyLight: #FAFAFB;
 }
 
 body {
@@ -184,6 +185,12 @@ form.searchBar::after {
   margin: 0 auto;
   border-radius: 4px;
   padding: 10px;
+}
+
+#containerDark {
+  background-color: var(--greyLight);
+  border: 1px solid var(--borderGrey);
+  margin-top: 10px;
 }
 
 .product {

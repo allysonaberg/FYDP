@@ -13,7 +13,7 @@ const Header = (props) => {
 	      		<Button text={"Download Report"} color={"var(--white)"} textColor={"var(--blue)"} outline={true}/>
 	      		<Button onClick={() => props.showPanel(true)} text={"Test Product"} color={"var(--blue)"} textColor={"White"}/>
 	      		<TestPanel isPanelOpen={props.isPanelOpen} showPanel={props.showPanel} showResults={props.showResultsPanel} />
-	      		<TestResultsPanel isPanelOpen={props.isResultsPanelOpen} showPanel={props.showResultsPanel} />
+	      		<TestResultsPanel isPanelOpen={props.isResultsPanelOpen} showPanel={props.showResultsPanel} showTest={props.showPanel} />
 	     	 </div>
 
 	     	 <div class="header-search">
@@ -32,8 +32,3 @@ Header.defaultProps = {
 }
 
 export default Header
-
-	      	// <form class="header-search">
-	      	// 	<input type="text" id="searchBar" name="search" value="Search item"></input>
-	      	// 	<Button text={"search"}type="submit" style={{"float": "right"}} >SEARCH</Button>
-	      	// </form>

@@ -24,9 +24,12 @@ const router = new koaRouter();
 dotenv.config();
 const SHOPIFY_API_SECRET_KEY = process.env.SHOPIFY_API_SECRET_KEY;
 const SHOPIFY_API_KEY = process.env.SHOPIFY_API_KEY;
+const debug = process.env.DEBUG == "true" ? true : false;
 const port = process.env.PORT || 5000;
 const SCOPES = ['read_orders, read_products'] // Comma-separated list of permission scopes to request to Shopify
 const ACCESS_MODE = 'per-user' // Value for Shopify token online-access mode 
+const serve = require("koa-static"); // to serve static pages
+const mount = require("koa-mount"); // to mount the front-end
 
 
 /****************************************************************************************/
@@ -34,52 +37,49 @@ const ACCESS_MODE = 'per-user' // Value for Shopify token online-access mode
 
 /* APP SETTUP */
 app.keys = [SHOPIFY_API_SECRET_KEY];
-//app.set('view engine', 'html');
-//app.engine('html', require('ejs').renderFile);
-// app.use(bodyParser.urlencoded({extended:true}));
-// app.use(bodyParser.json());
+
+/* Get the front-end client */
+const static_pages = new Koa();
+static_pages.use(serve(__dirname + "../client/build")); //serve the build directory
+app.use(mount("/", static_pages));
 
 app
   // sets up secure session data on each request
   .use(session({secure: true, sameSite: 'none'}, app))
 
-  // sets up shopify auth
-  .use(
-    createShopifyAuth({
-      	apiKey: SHOPIFY_API_KEY,
-      	secret: SHOPIFY_API_SECRET_KEY,
-		scopes: SCOPES,
-      	afterAuth(ctx) {
-        	const {shop, accessToken} = ctx.session;
+if (!debug) {
+	// sets up shopify auth
+	console.log("SHOULD BE HERE!");
+	app.use(createShopifyAuth({
+		apiKey: SHOPIFY_API_KEY,
+		secret: SHOPIFY_API_SECRET_KEY,
+	scopes: SCOPES,
+		afterAuth(ctx) {
+		const {shop, accessToken} = ctx.session;
 
-        	console.log('We did it!', accessToken);
+		console.log('We did it!', accessToken);
 
-        	ctx.redirect('/');
-      	},
-    }),
-  )
-
-  // everything after this point will require authentication
-  .use(
-	  verifyRequest()
+		ctx.redirect('/');
+		},
+	}),
 	)
+	.use(
+	verifyRequest()
+	)  
+}
 
-  // application code
-  .use(ctx => {
-    //await handle(ctx.req, ctx.res);
-    ctx.body = 'Hello World!';
+  router.get("/", (ctx, next) => {
+	ctx.body = 'Hello World!';
 	ctx.res.statusCode = 200;
-	//ctx.redirect('/');
-  });
+  })
 
 router.get("/book",async (ctx,next)=>{
 	const books = ["Speaking javascript", "Fluent Python", "Pro Python", "The Go programming language"];
-	ctx.status = HttpStatus.OK;
+	ctx.res.statusCode = 200;
 	ctx.body = books;
 	await next();
   });
 app.use(router.routes()).use(router.allowedMethods());
-
 
 /*
 app.get('/', (req, res) => {
@@ -94,7 +94,7 @@ app.get('/home', (req, res) => {
 
 app.post('/login',
   passport.authenticate('local', { successRedirect: '/',
-                                   failureRedirect: '/login' }));
+								   failureRedirect: '/login' }));
 
 	
 app.get('/shopify', (req, res) => {

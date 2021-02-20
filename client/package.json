@@ -1,5 +1,5 @@
 {
-  "name": "fydp-react",
+  "name": "client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -16,7 +16,7 @@
     "react-bootstrap": "^1.4.3",
     "react-dom": "^17.0.1",
     "react-modal-overlay": "^1.0.3",
-    "react-scripts": "4.0.2",
+    "react-scripts": "^4.0.2",
     "web-vitals": "^1.1.0"
   },
   "scripts": {

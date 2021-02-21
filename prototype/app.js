@@ -30,6 +30,8 @@ const SCOPES = ['read_orders, read_products'] // Comma-separated list of permiss
 const ACCESS_MODE = 'per-user' // Value for Shopify token online-access mode 
 const serve = require("koa-static"); // to serve static pages
 const mount = require("koa-mount"); // to mount the front-end
+const cors = require('koa-cors');
+
 
 
 /****************************************************************************************/
@@ -46,6 +48,7 @@ app.use(mount("/", static_pages));
 app
   // sets up secure session data on each request
   .use(session({secure: true, sameSite: 'none'}, app))
+  .use(cors())
 
 if (!debug) {
 	// sets up shopify auth
@@ -53,13 +56,13 @@ if (!debug) {
 	app.use(createShopifyAuth({
 		apiKey: SHOPIFY_API_KEY,
 		secret: SHOPIFY_API_SECRET_KEY,
-	scopes: SCOPES,
+		scopes: SCOPES,
 		afterAuth(ctx) {
-		const {shop, accessToken} = ctx.session;
+		const {shop, accessToken} = ctx.session
 
 		console.log('We did it!', accessToken);
 
-		ctx.redirect('/');
+		ctx.redirect(`/?shop= ${shop}`);
 		},
 	}),
 	)
@@ -68,10 +71,22 @@ if (!debug) {
 	)  
 }
 
-  router.get("/", (ctx, next) => {
+router.get("/", (ctx, next) => {
 	ctx.body = 'Hello World!';
 	ctx.res.statusCode = 200;
-  })
+})
+
+router.get("/product", async (ctx, next) => {
+	if (debug) {
+		console.log("GETTING PRODUCTS");
+		var products = require('./content/products');
+	}
+	else {
+		// Send API request
+	}
+	ctx.res.statusCode = 200;
+	ctx.body = products;
+})
 
 router.get("/book",async (ctx,next)=>{
 	const books = ["Speaking javascript", "Fluent Python", "Pro Python", "The Go programming language"];

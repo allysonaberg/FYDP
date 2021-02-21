@@ -6,6 +6,8 @@ import Dropdown from 'react-bootstrap/Dropdown'
 
 
 const Header = (props) => {
+	console.log("PROPS HEADER");
+	console.log(props);
 	return (
 		<header className='header'>
 			<div class="header-left">FYDP</div>

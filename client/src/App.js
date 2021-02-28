@@ -87,8 +87,8 @@ import axios from "axios";
  
    showTest(showPanel) {
      this.setState({
-       isShowingTestPanel: false,
        isShowingTestPanel: showPanel,
+       isShowingTestResultsPanel: false
       })
    }
    showResults(showPanel) {

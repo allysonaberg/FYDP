@@ -231,14 +231,14 @@ footer {
   width: 100%;
 }
 
-.dropdown-content a:hover {background-color: var(--textGrey)}
+/*.dropdown-content a:hover {background-color: var(--textGrey)}
 
 .dropdown:hover .dropdown-content {
   display: block;
 }
 
 .dropdown:hover .dropbtn {
-}
+}*/
 
 
 

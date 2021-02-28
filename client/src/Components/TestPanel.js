@@ -27,9 +27,10 @@ const TestPanel = (props) => {
 					<div class="dropdown">
 		 			 	<button class="dropbtn">Select Fibre</button>
 		  				<div class="dropdown-content">
-		  					<a href="#">Link 1</a>
-		  					<a href="#">Link 2</a>
-		  					<a href="#">Link 3</a>
+		  					<a href="#">Nylon</a>
+		  					<a href="#">Viscose</a>
+		  					<a href="#">Wool</a>
+		  					<a href="#">Linen</a>
 		  				</div>
 		  			</div>
 		  			</div>

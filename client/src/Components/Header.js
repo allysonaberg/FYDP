@@ -3,11 +3,9 @@ import Button from './Button'
 import TestPanel from './TestPanel'
 import TestResultsPanel from './TestResultsPanel'
 import Dropdown from 'react-bootstrap/Dropdown'
-
+import SearchBar from './SearchBar'
 
 const Header = (props) => {
-	console.log("PROPS HEADER");
-	console.log(props);
 	return (
 		<header className='header'>
 			<div class="header-left">FYDP</div>
@@ -18,12 +16,7 @@ const Header = (props) => {
 	      		<TestResultsPanel isPanelOpen={props.isResultsPanelOpen} showPanel={props.showResultsPanel} showTest={props.showPanel} />
 	     	 </div>
 
-	     	 <div class="header-search">
-	     	 	<form class="searchBar">
-	     	 		<input type="text" placeholder="Search item" />
-	     	 		<button type="submit">Search</button>
-	     		 </form>
-	     	 </div>
+	     	 <SearchBar input={props.input} onChange={props.onChange}/>
 
 		</header>
 	)

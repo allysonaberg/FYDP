@@ -89,8 +89,8 @@ class TestPanel extends React.Component {
 				</div>
 				<form style={{"margin-top": "0px"}}>
           			{this.createUI()}        
-          			<Button text=" + Add Fibre" textColor="var(--blue)" outline={false} onClick={this.addClick.bind(this)} />
      			 </form>
+          		<Button text=" + Add Fibre" textColor="var(--blue)" outline={false} onClick={this.addClick.bind(this)} />
 
 				<div style={{"margin-top": "100px"}}>
 					<Button onClick={this.handleSubmit} text="Analyze Product" color="var(--blue)" textColor="var(--white)" center={true}/>

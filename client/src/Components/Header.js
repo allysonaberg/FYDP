@@ -2,6 +2,7 @@ import React from 'react';
 import Button from './Button'
 import TestPanel from './TestPanel'
 import TestResultsPanel from './TestResultsPanel'
+import TestProductPanel from './TestProductPanel'
 import Dropdown from 'react-bootstrap/Dropdown'
 import SearchBar from './SearchBar'
 
@@ -12,7 +13,7 @@ const Header = (props) => {
 	      	<div class="header-right">
 	      		<Button text={"Download Report"} color={"var(--white)"} textColor={"var(--blue)"} outline={true}/>
 	      		<Button onClick={() => props.showPanel(true)} text={"Test Product"} color={"var(--blue)"} textColor={"White"}/>
-	      		<TestPanel isPanelOpen={props.isPanelOpen} showPanel={props.showPanel} showResults={props.showResultsPanel} />
+	      		<TestProductPanel isPanelOpen={props.isPanelOpen} showPanel={props.showPanel} showResults={props.showResultsPanel} />
 	      		<TestResultsPanel isPanelOpen={props.isResultsPanelOpen} showPanel={props.showResultsPanel} showTest={props.showPanel} />
 	     	 </div>
 

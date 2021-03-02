@@ -82,7 +82,7 @@ class TestPanel extends React.Component {
 					<p style={{"font-weight": "bold", "margin-top": "10px"}}>Fibre</p>
 		  		</div>
 
-		  		<div class="container" style={{"padding-left": "20px", "padding-top": "0px"}}>
+		  		<div class="container-right" style={{"padding-left": "20px", "padding-top": "0px"}}>
 	  				<div class="container-left" style={{"max-width": "70%"}}>
 						<p style={{"font-weight": "bold", "margin-top": "10px"}}>Percentage</p>
 					</div>

@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fontsource/rubik": "^4.2.2",
     "@shopify/app-bridge-react": "^1.29.0",
     "@shopify/koa-shopify-auth": "^3.2.0",
     "axios": "^0.21.1",
@@ -34,6 +35,7 @@
     "ngrok": "^3.4.0",
     "nodemon": "^2.0.6",
     "passport": "^0.4.1",
+    "rubik-font": "0.0.3",
     "shopify-api-node": "^3.5.2",
     "sinon": "^9.2.1",
     "sqlite3": "^5.0.0",

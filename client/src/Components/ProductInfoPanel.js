@@ -7,16 +7,17 @@ const ProductInfoPanel = (props) => {
 			<div className='container-right' style={{"margin-top": "0px", "padding-top": "0px"}}>
 				<button onClick={() => props.removePanel()} style={{"background-color": "var(--white)", "border": "none"}}>X</button>
 			</div>
-			<h3 style={{"font-weight": "bold"}}>{props.product.name}</h3>
 
-			<div className='container' style={{"padding-left": "0px"}}>
+			<h3>{props.product.name}</h3>
+
+			<div className='container' style={{"padding-left": "0px", "padding-top": "2em", "padding-bottom": "2em"}}>
 				<p style={{"color": "var(--textGrey)", "font-weight": "bold"}}>MATERIAL BREAKDOWN</p>
 				<hr style={{"color": "var(--textGrey)"}}/>
 				<p id = "productInfoText">{props.product.material1}</p>
 				<p id="productInfoText">{props.product.material2}</p>
 			</div>
 
-			<div className='container' style={{"padding-left": "0px"}}>
+			<div className='container' style={{"padding-left": "0px", "padding-bottom": "2em"}}>
 				<p style={{"color": "var(--textGrey)", "font-weight": "bold"}}>ANALYSIS</p>
 				<hr style={{"color": "var(--textGrey)"}}/>
 				<p id="productInfoText">{props.product.analysis}</p>

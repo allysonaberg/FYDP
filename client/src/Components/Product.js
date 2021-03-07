@@ -7,7 +7,7 @@ const Product = (props) => {
 	return (
 		<button onClick={() => props.onToggle(props.id)} className='container-list-item' style={{backgroundColor: props.background, "border": "none", "box-shadow": "0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 10px 0 rgba(0, 0, 0, 0.19)"}}>
 
-			<div className="container-left" style={{"padding-top": "0px", "padding-bottom": "0px", "padding-left": "0px"}}>
+			<div className="container-left">
 				<img src={shirt}/>
 			</div>
  

@@ -92,6 +92,7 @@ import axios from "axios";
       })
    }
    showResults(showPanel) {
+    console.log("SHOWING RESULTS")
      this.setState({
        isShowingTestResultsPanel: showPanel,
        isShowingTestPanel: false

@@ -29,16 +29,16 @@ To open the db:
 
 To see all tables
 ```
-.tables
-```.
+sqlite> .tables
+```
 
 To describe a table
 
 ```
-.schema ?TABLE?
+sqlite> .schema ?TABLE?
 ```
 
 To see all current materials and their statistics
 ```
-SELECT * FROM materials;
+sqlite> SELECT * FROM materials;
 ```

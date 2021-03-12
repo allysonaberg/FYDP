@@ -2,7 +2,7 @@ import React from 'react';
 
 const Button = (props) => {
 
-	const rankingColors = {"A":"var(--rankGreen)", "B":"var(--rankYellow)", "C":"var(--rankGrey)", "D":"var(--rankRed)"}
+	const rankingColors = {0:"var(--rankGreen)", 1:"var(--rankYellow)", 2:"var(--rankGrey)", 3:"var(--rankRed)"}
 	const text = props.rankButton ? "RANK " + props.text : props.text
 	const color = props.rankButton ? rankingColors[props.text] : props.color
 	const textColor = props.rankButton ? "var(--white)" : props.textColor

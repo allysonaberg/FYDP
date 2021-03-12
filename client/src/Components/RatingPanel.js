@@ -3,11 +3,11 @@ import Button from './Button'
 import img1 from '../Assets/ranking_1.png'
 import img2 from '../Assets/ranking_2.png'
 
-const rankingColors = {"A":"var(--rankGreen)", "B":"var(--rankYellow)", "C":"var(--rankGrey)", "D":"var(--rankRed)"}
+const rankingColors = {0:"var(--rankGreen)", 1:"var(--rankYellow)", 2:"var(--rankGrey)", 3:"var(--rankRed)"}
 
 const RatingPanel = (props) => {
 	return (
-		<div className='container' style={{backgroundColor: props.background}}>
+		<div className='container' style={{backgroundColor: props.background, "box-shadow": "rgba(0, 0, 0, 0.2) 0px 2px 4px 0px"}}>
 			<p style={{color: "var(--textGrey)", "font-weight": "Bold"}}>{props.title}</p>
 			<p id="infoHeading">{props.text}</p>
 			<img style={{"marginBottom": "10px", "maxWidth": "100%"}} src={img1}/>

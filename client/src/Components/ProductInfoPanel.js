@@ -2,7 +2,7 @@ import React from 'react';
 import Button from './Button'
 
 const ProductInfoPanel = (props) => {
-	
+	console.log(props)
 	return (
 		<div className='container' style={{backgroundColor: props.background}}>
 			<div className='container-right' style={{"margin-top": "0px", "paddingTop": "0px"}}>

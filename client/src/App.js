@@ -124,6 +124,8 @@ import axios from "axios";
       this.setState({productList: productList, filteredProductList: productList});
       const firstProduct = this.state.productList[0];
       this.setProduct(firstProduct);
+      console.log("STATE: ")
+      console.log(this.state)
     }
     return []
   }

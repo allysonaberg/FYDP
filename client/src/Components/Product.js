@@ -4,11 +4,13 @@ import shirt from '../Assets/shirt.png'
 
 
 const Product = (props) => {
+	console.log("RANK")
+	console.log(props.rank)
 	const image = "data:image/png;base64, " + props.image;
 	return (
 		<button onClick={() => props.onToggle(props.id)} className='container-list-item' style={{backgroundColor: props.background, "border": "none", "box-shadow": "0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 10px 0 rgba(0, 0, 0, 0.19)"}}>
 
-			<div className="container-left">
+			<div className="fill" style={{"float": "left", "margin": "auto", "padding-right": "10px"}}>
 				<img src={image}/>
 			</div>
  

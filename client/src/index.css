@@ -479,6 +479,32 @@ input {
     max-height: 80%;
     vertical-align: middle;
   }
+
+}
+
+@media (max-width: 680px) {
+  .header-search {
+    margin-left: 10px;
+    margin-top: 20px;
+    width: 50%;
+  }
+
+  .searchBar {
+    padding-left: 0px;
+    padding-top: 40px;
+  }
+
+  .container-center {
+    margin-left: 0px;
+  }
+
+  #headerButtons {
+    display: block;
+  }
+
+  .button {
+    display: block;
+  }
 }
 
 

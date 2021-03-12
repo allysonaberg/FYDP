@@ -25,6 +25,7 @@
     "express": "^4.17.1",
     "faker": "^5.1.0",
     "isomorphic-fetch": "^3.0.0",
+    "jsdom": "^16.5.0",
     "koa": "^2.13.1",
     "koa-cors": "0.0.16",
     "koa-mount": "^4.0.0",

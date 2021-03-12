@@ -7,7 +7,6 @@ require('isomorphic-fetch');
 //const passport = require('passport');
 //const { v4: uuidv4 } = require('uuid');
 const dotenv = require('dotenv');
-const dbMethods = require('./db/db_methods');
 const Koa = require('koa');
 const koaRouter = require("koa-router");
 const { default: createShopifyAuth } = require('@shopify/koa-shopify-auth');
@@ -31,6 +30,7 @@ const ACCESS_MODE = 'per-user' // Value for Shopify token online-access mode
 const serve = require("koa-static"); // to serve static pages
 const mount = require("koa-mount"); // to mount the front-end
 const cors = require('koa-cors');
+const { raw } = require('body-parser');
 
 
 
@@ -52,7 +52,6 @@ app
 
 if (!debug) {
 	// sets up shopify auth
-	console.log("SHOULD BE HERE!");
 	app.use(createShopifyAuth({
 		apiKey: SHOPIFY_API_KEY,
 		secret: SHOPIFY_API_SECRET_KEY,
@@ -77,23 +76,28 @@ router.get("/", (ctx, next) => {
 })
 
 router.get("/product", async (ctx, next) => {
+	parsed_products = []
+	const product_parser = require("./product/product");
+	
 	if (debug) {
-		console.log("GETTING PRODUCTS");
-		var products = require('./content/products');
+		/* Get dummy raw products */
+		var raw_products = require('./content/products');
+
+		/* Parse each product's material breakdown and calculate score */
+		await Promise.all(raw_products.map(async (raw_product) => {
+			var parsed_product = await product_parser(raw_product);
+
+			parsed_products.push(parsed_product);
+		}));
 	}
 	else {
-		// Send API request
+		// Send API request to get products from shop.
 	}
 	ctx.res.statusCode = 200;
-	ctx.body = products;
+	ctx.body = parsed_products;
 })
 
-router.get("/book",async (ctx,next)=>{
-	const books = ["Speaking javascript", "Fluent Python", "Pro Python", "The Go programming language"];
-	ctx.res.statusCode = 200;
-	ctx.body = books;
-	await next();
-  });
+
 app.use(router.routes()).use(router.allowedMethods());
 
 /*

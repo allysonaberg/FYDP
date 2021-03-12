@@ -125,7 +125,7 @@ class TestProductPanel extends React.Component {
         let { fibreList } = this.state
         return (
             <>
-		<Modal style={{"background-color" : "black !important"}} show={this.props.isPanelOpen} close={() => this.props.showPanel(false)}>
+		<Modal style={{"backgroundColor" : "black !important"}} show={this.props.isPanelOpen} close={() => this.props.showPanel(false)}>
                 <div className="content">
                     <h3>Test Product</h3>
 					<p style={{"margin-top": "10px"}}>Enter the material breakdown of the product to compute its carbon performance</p>
@@ -140,7 +140,7 @@ class TestProductPanel extends React.Component {
 					</div>
                     <form onChange={this.handleFibreChange}>
                         <table className="table" style={{"width": "100%"}}>
-    						<div class="container-left" style={{"width": "70%", "padding-left": "0px", "padding-right": "0px"}}>
+    						<div class="container-left" style={{"width": "70%", "padding-left": "0px", "paddingRight": "0px"}}>
     							<p style={{"font-weight": "bold", "margin-top": "10px"}}>Fibre</p>
     			  			</div>
 

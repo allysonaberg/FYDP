@@ -6,14 +6,14 @@ const Content = (props) => {
   return (
     <>
       <div class="container">
-        <div className="container-center" id="filterContainer" style={{"padding-bottom": "0px", "padding-top": "10px"}}>
+        <div className="container-center" id="filterContainer" style={{"paddingBottom": "0px", "paddingTop": "10px"}}>
           <div className="container-left">
             <p id="filterText">All Products</p>
           </div>
           <div className="container-right">
             <p id="filterText">Sales</p>
           </div>
-          <div className='container' style={{"padding-top": "10px", "margin": "0px", "width": "100%"}}>
+          <div className='container' style={{"paddingTop": "10px", "margin": "0px", "width": "100%"}}>
             <hr />
           </div>
         </div>

@@ -16,19 +16,19 @@ class TestPanel extends React.Component {
 		console.log(this.state.values)
 		return this.state.values.map((value, i) => 
 			<div key={i} style={{"margin": "0px"}}>
-				<div class="container-left" style={{"width": "60%", "padding-left": "0px", "padding-right": "0px", "margin": "0px", "padding-top": "0px"}}>
+				<div class="container-left" style={{"width": "60%", "padding-left": "0px", "paddingRight": "0px", "margin": "0px", "paddingTop": "0px"}}>
 					<div class="dropdown">
 		 			 	<input class="dropbtn" type="text" value={value.name} onChange={this.handleChange.bind(this, i)}/>
 		  			</div>
 		  		</div>
 
-		  		<div class="container" style={{"padding-left": "20px", "padding-top": "0px", "margin-top": "0px", "margin-bottom": "0px"}}>
-	  				<div class="container-left" style={{"max-width": "70%"}}>
-						<div class="dropdown" style={{"padding-top": "0px"}}>
+		  		<div class="container" style={{"padding-left": "20px", "paddingTop": "0px", "margin-top": "0px", "marginBottom": "0px"}}>
+	  				<div class="container-left" style={{"maxWidth": "70%"}}>
+						<div class="dropdown" style={{"paddingTop": "0px"}}>
 							<input class="dropbtn" type="text" value={value.percentage} onChange={this.handleChange.bind(this, i)}/>
 						</div>
 					</div>
-					<div class="container-right" style={{"padding-top": "9%", "margin-bottom": "0px"}}>
+					<div class="container-right" style={{"paddingTop": "9%", "marginBottom": "0px"}}>
 						<Button text="X" textColor="var(--blue)" outline={false} onClick={this.removeClick.bind(this, i)} />
 					</div>
 				</div>
@@ -62,7 +62,7 @@ class TestPanel extends React.Component {
   render() {
     return (
 		<div>
-		<Modal style={{"background-color" : "black !important"}} show={this.props.isPanelOpen} close={() => this.props.showPanel(false)}>
+		<Modal style={{"backgroundColor" : "black !important"}} show={this.props.isPanelOpen} close={() => this.props.showPanel(false)}>
 			<div class="container">
 				<h3>Test Product</h3>
 				<p style={{"margin-top": "10px"}}>Enter the material breakdown of the product to compute its carbon performance</p>
@@ -78,12 +78,12 @@ class TestPanel extends React.Component {
 						</div>
 				</div>
 
-				<div class="container-left" style={{"width": "60%", "padding-left": "0px", "padding-right": "0px"}}>
+				<div class="container-left" style={{"width": "60%", "padding-left": "0px", "paddingRight": "0px"}}>
 					<p style={{"font-weight": "bold", "margin-top": "10px"}}>Fibre</p>
 		  		</div>
 
-		  		<div class="container-right" style={{"padding-left": "20px", "padding-top": "0px"}}>
-	  				<div class="container-left" style={{"max-width": "70%"}}>
+		  		<div class="container-right" style={{"padding-left": "20px", "paddingTop": "0px"}}>
+	  				<div class="container-left" style={{"maxWidth": "70%"}}>
 						<p style={{"font-weight": "bold", "margin-top": "10px"}}>Percentage</p>
 					</div>
 				</div>

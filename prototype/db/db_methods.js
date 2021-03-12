@@ -23,6 +23,24 @@ function storeNonce(store_name, nonce) {
 	db.close();	
 }
 
+async function get_CO_kg_per_kg_for_material(material) {
+	// Returns a float
+	const db = new sqlite3.Database('./db/pickled_herring.db');
+	let query = `SELECT embodied_co_kg_per_kg FROM materials WHERE name=?`;
+	
+
+	const row = await new Promise((resolve, reject) => {
+		db.get(query, material, (err, row) => {
+			if (err) {
+				reject(err);
+			}
+			resolve(row);
+		});
+	})
+
+	return row.embodied_co_kg_per_kg
+}
+
 function getNonce(store_name) {
 	let db = new sqlite3.Database('./db/pickled_herring.db', (err) => {
 		if (err) {
@@ -107,4 +125,4 @@ function writeToDB(dataArray) {
 }
 
 
-module.exports = { readFromDB, writeToDB, getNonce, storeNonce }
+module.exports = { readFromDB, writeToDB, getNonce, storeNonce, get_CO_kg_per_kg_for_material}

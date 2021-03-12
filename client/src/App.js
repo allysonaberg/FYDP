@@ -23,25 +23,19 @@ import axios from "axios";
     }
 
     componentWillMount() {
-      this.getProducts();
-      this.setState({
-        product: {
-            id: 1,
-            name: 'Cozy Fleece Perfect 2" Sweatshort',
-            carbon: '42.6',
-            rank: 'A',
-            image: "./Assets/shirt.png",
-            material1: '78% cotton',
-            material2: '22% Polyester',
-            analysis: 'The production of polyester uses harmful chemicals, including carcinogens, and if emitted to water and air untreated, can cause significant environmental damage. Most polyester is produced in countries such as China, Indonesia and Bangladesh',
-            suggestion: 'Consider swapping linen for cotton to reduce this item’s carbon footprint by 8.1 CO2'
-          },
-        showInfoPanel: true,
-        isShowingTestPanel: false,
-        isShowingTestResultsPanel: false,
-        input: "",
-      })
+      this.setState({isLoading: true});
+    }
 
+    componentDidMount() {
+      this.getProducts().then(() => {
+        this.setState({ isLoading: false });
+        
+     }, (error) => {
+        this.setState({ isLoading: false });
+        console.log(error);
+     });
+
+     
     }
 
     //FUNCTIONS
@@ -123,18 +117,24 @@ import axios from "axios";
   {
     const promise = await axios.get("http://localhost:5000/product");
     const status = promise.status;
-    console.log("$$$$here????? \n\n\n\n\n\n");
     if(status===200)
     {
-      const data = promise.data;
-      
-      console.log(data);
-      this.setState({productList: data.productList, filteredProductList: data.productList});
+      const productList = promise.data;
+      console.log(productList);
+      this.setState({productList: productList, filteredProductList: productList});
+      const firstProduct = this.state.productList[0];
+      this.setProduct(firstProduct);
     }
     return []
   }
 
   render() {
+    if (this.state.isLoading) {
+      return (
+        <div>Loading...</div>
+      )
+    }
+    
     return (
       <div className="root">
         <Header showPanel={this.showTest} isPanelOpen={this.state.isShowingTestPanel} showResultsPanel={this.showResults} isResultsPanelOpen={this.state.isShowingTestResultsPanel} input={this.state.input} onChange={this.updateInput} />

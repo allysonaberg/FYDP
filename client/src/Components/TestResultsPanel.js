@@ -5,13 +5,13 @@ import Modal from './Modal'
 const TestResultsPanel = (props) => {
 	return ( 
 		<div>
-			<Modal style={{"background-color" : "black !important"}} show={props.isPanelOpen} close={() => props.showPanel(false)}>
+			<Modal style={{"backgroundColor" : "black !important"}} show={props.isPanelOpen} close={() => props.showPanel(false)}>
 				<div class="container">
 					<h3>Results</h3>
 
 					<div class="container" id="containerDark">
 						<p>Carbon Peformance</p>
-						<p style={{"margin-top": "10px", "margin-bottom": "10px", "font-size": "18px"}}><b>202.8 C02</b> emitted per sweater</p>
+						<p style={{"margin-top": "10px", "marginBottom": "10px", "fontSize": "18px"}}><b>202.8 C02</b> emitted per sweater</p>
 						<Button text={"C"} rankButton={true}/>
 						<p style={{"margin-top": "10px"}}>An average sweater emits 162 gC02</p>
 					</div>
@@ -25,7 +25,7 @@ const TestResultsPanel = (props) => {
 							<p id="productInfoText">38% Wool</p>
 							<p id="productInfoText">20% Linen</p>
 						</div>
-						<div class="container-right" style={{"padding-right":"0px", "text-align": "right"}}>
+						<div class="container-right" style={{"paddingRight":"0px", "text-align": "right"}}>
 							<p id="productInfoText">26.1 gC02</p>
 							<p id="productInfoText">85.0 gC02</p>
 							<p id="productInfoText">28.4 gC02</p>

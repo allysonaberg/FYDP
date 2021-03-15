@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from './Button'
 
-
+//TODO: need actual info + source artical link
 const FactPanel = (props) => {
 	return (
 		<div className='container-list-item-border' id="factPanel" style={{backgroundColor: props.background, color: props.textColor, "box-shadow": "rgba(0, 0, 0, 0.2) 0px 2px 4px 0px"}}>

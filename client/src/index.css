@@ -106,7 +106,7 @@ footer {
 }
 
 h3 {
-  font-size: 16px;
+  font-size: 1.2em;
 }
 
 
@@ -410,9 +410,15 @@ input {
   margin-top: 10px;
 }
 #infoText {
-  font-size: 0.8em;
+  font-size: 1em;
   font-weight: bold;
-  padding-right: 10px;
+  padding-right: 15px;
+  padding-bottom: 10px;
+}
+
+#infoINFO {
+  font-size: 1em;
+  padding-bottom: 10px;
 }
 
 #filterText {
@@ -426,8 +432,8 @@ input {
   position: relative;
 }
 
-#sidePanel {
-  min-width: 50%;
+#SidePanel {
+  max-width: 90%;
   text-align: left;
 }
 

@@ -6,14 +6,17 @@ import TestProductPanel from './TestProductPanel'
 import Dropdown from 'react-bootstrap/Dropdown'
 import SearchBar from './SearchBar'
 
+
 const Header = (props) => {
 	return (
 		<header className='header'>
 			<div class="header-left">FYDP</div>
 	      	<div class="header-right">
 	      		<div id="headerButtons">
-	      			<Button text={"Download Report"} color={"var(--white)"} textColor={"var(--blue)"} outline={true}/>
-	      			<Button onClick={() => props.showPanel(true)} text={"Test Product"} color={"var(--blue)"} textColor={"White"}/>
+	      			<Button text={"Report"} color={"var(--white)"} textColor={"var(--blue)"} outline={true} download={true}/>
+	      			<Button onClick={() => props.showPanel(true)} text={"Test Product"} color={"var(--white)"} textColor={"var(--blue)"}/>
+	      			<Button text={"Publish"} color={"var(--blue)"} textColor={"White"}/>
+
 	      		</div>
 	      		<TestProductPanel isPanelOpen={props.isPanelOpen} showPanel={props.showPanel} showResults={props.showResultsPanel} />
 	      		<TestResultsPanel isPanelOpen={props.isResultsPanelOpen} showPanel={props.showResultsPanel} showTest={props.showPanel} />

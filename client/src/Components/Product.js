@@ -37,7 +37,7 @@ const Product = (props) => {
 					<p class="light" style={{"font-size": "13px"}}>Entire Stock</p>
 				</div>
 				<div className="container-right">
-				<Button text={props.rank} rankButton={true} outline={false} size="15px"/>
+					<Button text={props.rank} rankButton={true} outline={false} size="15px"/>
 				</div>
 			</div>
 

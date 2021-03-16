@@ -11,9 +11,9 @@ const Button = (props) => {
 	const image = props.download ? download : ""
 
 	return (
-		props.center ? <button onClick={props.onClick} style={{backgroundColor: color, color: textColor, border: props.outline ? "1px solid var(--grey)" : "none", "font-size": fontSize, "margin": "0 auto", "display": "block"}} className='btn'>{text}</button> 
+		props.center ? <button onClick={props.onClick} style={{backgroundColor: color, color: textColor, border: props.outline ? "1px solid var(--blue)" : "none", "font-size": fontSize, "margin": "0 auto", "display": "block", "width": "100%"}} className='btn'>{text}</button> 
 		:
-		<button onClick={props.onClick} style={{backgroundColor: color, color: textColor, border: props.outline ? "1px solid var(--grey)" : "none", "font-size": fontSize}} className='btn'><img src={image} style={{"margin-right": "5px"}}/>{text}</button>
+		<button onClick={props.onClick} style={{backgroundColor: color, color: textColor, border: props.outline ? "1px solid var(--grey)" : "none", "font-size": fontSize}} className='btn'>{text}</button>
 	)
 }
 

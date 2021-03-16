@@ -19,6 +19,8 @@ import axios from "axios";
       this.removeInfoPanel = this.removeInfoPanel.bind(this);
       this.showTest = this.showTest.bind(this);
       this.showResults = this.showResults.bind(this);
+      this.showPublish = this.showPublish.bind(this);
+      this.showPublishOptions = this.showPublishOptions.bind(this);
       this.updateInput = this.updateInput.bind(this);
     }
 
@@ -64,7 +66,6 @@ import axios from "axios";
     this.setState({
       product: product
     })
-
    }
 
    removeInfoPanel() {
@@ -86,11 +87,26 @@ import axios from "axios";
       })
    }
    showResults(showPanel) {
-    console.log("SHOWING RESULTS")
      this.setState({
        isShowingTestResultsPanel: showPanel,
        isShowingTestPanel: false
      })
+   }
+
+   showPublish(showPanel) {
+    console.log("SHOW PUBLISH")
+    this.setState({
+      isShowingPublishPanel: showPanel,
+      isShowingPublishOptionsPanel: false
+    })
+   }
+
+  showPublishOptions(showPanel) {
+    console.log("SHOW PUBLISH OPTIONS")
+    this.setState({
+      isShowingPublishOptionsPanel: showPanel,
+      isShowingPublishPanel: false
+    })
    }
 
    updateInput(input) {
@@ -139,7 +155,7 @@ import axios from "axios";
     
     return (
       <div className="root">
-        <Header showPanel={this.showTest} isPanelOpen={this.state.isShowingTestPanel} showResultsPanel={this.showResults} isResultsPanelOpen={this.state.isShowingTestResultsPanel} input={this.state.input} onChange={this.updateInput} />
+        <Header products={this.state.productList} showPanel={this.showTest} isPanelOpen={this.state.isShowingTestPanel} showResultsPanel={this.showResults} isResultsPanelOpen={this.state.isShowingTestResultsPanel} showPublishPanel={this.showPublish} showPublishOptions={this.showPublishOptions} isPublishPanelOpen={this.state.isShowingPublishPanel} isPublishOptionsPanelOpen={this.state.isShowingPublishOptionsPanel} input={this.state.input} onChange={this.updateInput} />
         <Content products={this.state.filteredProductList} product={this.state.product} showInfoPanel={this.state.showInfoPanel} removePanel={this.removeInfoPanel} onToggle={this.updateSpotlightProduct} />
       </div>
     );

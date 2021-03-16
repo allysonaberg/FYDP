@@ -120,10 +120,25 @@ async function ShopifyJSONToProduct(json_in) {
     
 
     /* For now, get a random analysis */
-    var analysis = analyses[Math.floor(Math.random() * analyses.length)];
+    // var analysis = analyses[Math.floor(Math.random() * analyses.length)];
+    var analysis = "";
+    for (i in materials){
+	    material = materials[i]
+	    if (material in analyses){
+		    analysis += '\n\n' + analyses[material];
+	    }
+    }
 
     /* For now, get a random suggestion */
-    var suggestion = suggestions[Math.floor(Math.random() * suggestions.length)];
+    //var suggestion = suggestions[Math.floor(Math.random() * suggestions.length)];
+    var suggestion = "";
+    for (i in materials){
+	    material = materials[i]
+	    if (material in suggestions){
+		    suggestion += '\n\n' + suggestions[material];
+	    }
+    }
+
     let product = new Product(id, name, total_kg_carbon.toFixed(2), rank, image, materials, analysis, suggestion);
 
     return product

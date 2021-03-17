@@ -12,7 +12,7 @@ const TestResultsPanel = (props) => {
 					<div class="container" id="containerDark">
 						<p>Carbon Peformance</p>
 						<p style={{"margin-top": "10px", "marginBottom": "10px", "fontSize": "18px"}}><b>202.8 C02</b> emitted per sweater</p>
-						<Button text={"C"} rankButton={true}/>
+						<Button text={"3"} rankButton={true}/>
 						<p style={{"margin-top": "10px"}}>An average sweater emits 162 gC02</p>
 					</div>
 

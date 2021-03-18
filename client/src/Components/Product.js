@@ -29,7 +29,7 @@ const Product = (props) => {
 			</div>
 				<p class="light" style={{"paddingTop": "10px", "paddingBottom": "1px"}}>CARBON EMISSIONS</p>
 				<div className="container-left" style={{"width": "32%", "padding-left": "0px"}}>
-					<p style={{"paddingBottom": "2px", "fontSize": "20px"}}>{props.kg_carbon * 1000} g C0<sub>2</sub></p>
+					<p style={{"paddingBottom": "2px", "fontSize": "20px"}}>{props.kg_carbon} kg C0<sub>2</sub></p>
 					<p class="light" style={{"fontSize": "13px"}}>Per Item</p>
 				</div>
 				<div className="container-left" style={{"width": "32%"}}>

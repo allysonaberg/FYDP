@@ -27,7 +27,7 @@ const ProductInfoPanel = (props) => {
 							{material.name.charAt(0).toUpperCase() + material.name.slice(1)}
 						</div>
 						<div class="container-right" style={{"paddingTop": "0px", "paddingBottom": "0px"}}>
-							{material.kg_carbon * 1000} g CO<sub>2</sub>
+							{material.kg_carbon} kg CO<sub>2</sub>
 						</div>
 					</div>
 				</p>)}

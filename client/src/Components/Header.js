@@ -3,6 +3,7 @@ import Button from './Button'
 import TestPanel from './TestPanel'
 import TestResultsPanel from './TestResultsPanel'
 import TestProductPanel from './TestProductPanel'
+import DownloadPanel from './DownloadPanel'
 import PublishPanel from './PublishPanel'
 import PublishOptionsPanel from './PublishOptionsPanel'
 import Dropdown from 'react-bootstrap/Dropdown'
@@ -10,16 +11,18 @@ import SearchBar from './SearchBar'
 
 
 const Header = (props) => {
+	console.log(props)
 	return (
 		<header className='header'>
 			<div class="header-left">FYDP</div>
 	      	<div class="header-right">
 	      		<div id="headerButtons">
-	      			<Button text={"Report"} color={"var(--white)"} textColor={"var(--blue)"} outline={true} download={true}/>
+	      			<Button onClick={() => props.showDownloadPanel(true)} text={"Download Report"} color={"var(--white)"} textColor={"var(--blue)"} outline={true} download={true}/>
 	      			<Button onClick={() => props.showPanel(true)} text={"Test Product"} color={"var(--white)"} textColor={"var(--blue)"}/>
 	      			<Button onClick={() => props.showPublishPanel(true)} text={"Publish"} color={"var(--blue)"} textColor={"White"}/>
 
 	      		</div>
+	      		<DownloadPanel isPanelOpen={props.isDownloadPanelOpen} showPanel={props.showDownloadPanel} getReport={props.getReport}/>
 	      		<TestProductPanel isPanelOpen={props.isPanelOpen} showPanel={props.showPanel} showResults={props.showResultsPanel} />
 	      		<TestResultsPanel isPanelOpen={props.isResultsPanelOpen} showPanel={props.showResultsPanel} showTest={props.showPanel} />
 	      		<PublishPanel isPanelOpen={props.isPublishPanelOpen} showPanel={props.showPublishPanel} showPublishOptions={props.showPublishOptions} />

@@ -21,7 +21,9 @@ import axios from "axios";
       this.showResults = this.showResults.bind(this);
       this.showPublish = this.showPublish.bind(this);
       this.showPublishOptions = this.showPublishOptions.bind(this);
+      this.showDownloadPanel = this.showDownloadPanel.bind(this);
       this.updateInput = this.updateInput.bind(this);
+      this.getReport = this.getReport.bind(this);
     }
 
     componentWillMount() {
@@ -37,6 +39,8 @@ import axios from "axios";
         console.log(error);
      });
 
+    console.log("PRODUCTS")
+    console.log()
      
     }
 
@@ -107,6 +111,12 @@ import axios from "axios";
     })
    }
 
+   showDownloadPanel(showPanel) {
+    this.setState({
+      isShowingDownloadPanel: showPanel
+    })
+   }
+
    updateInput(input) {
 
     if (!input || !input.length) {
@@ -141,6 +151,17 @@ import axios from "axios";
     return []
   }
 
+  async getReport() {
+    const promise = await axios.get("http://localhost:500/report");
+    const status = promise.status;
+    if (status===200) {
+      const report = promise.data;
+      return report
+    }
+
+    return []
+  }
+
   render() {
     if (this.state.isLoading) {
       return (
@@ -150,7 +171,7 @@ import axios from "axios";
     
     return (
       <div className="root">
-        <Header products={this.state.productList} showPanel={this.showTest} isPanelOpen={this.state.isShowingTestPanel} showResultsPanel={this.showResults} isResultsPanelOpen={this.state.isShowingTestResultsPanel} showPublishPanel={this.showPublish} showPublishOptions={this.showPublishOptions} isPublishPanelOpen={this.state.isShowingPublishPanel} isPublishOptionsPanelOpen={this.state.isShowingPublishOptionsPanel} input={this.state.input} onChange={this.updateInput} />
+        <Header products={this.state.productList} showPanel={this.showTest} isPanelOpen={this.state.isShowingTestPanel} showResultsPanel={this.showResults} isResultsPanelOpen={this.state.isShowingTestResultsPanel} showPublishPanel={this.showPublish} showPublishOptions={this.showPublishOptions} isPublishPanelOpen={this.state.isShowingPublishPanel} isPublishOptionsPanelOpen={this.state.isShowingPublishOptionsPanel} input={this.state.input} onChange={this.updateInput} showDownloadPanel={this.showDownloadPanel} isDownloadPanelOpen={this.state.isShowingDownloadPanel} getReport={this.getReport} />
         <Content products={this.state.filteredProductList} product={this.state.product} showInfoPanel={this.state.showInfoPanel} removePanel={this.removeInfoPanel} onToggle={this.updateSpotlightProduct} />
       </div>
     );

@@ -19,6 +19,7 @@ import axios from "axios";
       this.removeInfoPanel = this.removeInfoPanel.bind(this);
       this.showTest = this.showTest.bind(this);
       this.showResults = this.showResults.bind(this);
+      this.showReportPanel = this.showReportPanel.bind(this);
       this.showPublish = this.showPublish.bind(this);
       this.showPublishOptions = this.showPublishOptions.bind(this);
       this.showDownloadPanel = this.showDownloadPanel.bind(this);
@@ -102,6 +103,12 @@ import axios from "axios";
       isShowingPublishPanel: showPanel,
       isShowingPublishOptionsPanel: false
     })
+   }
+
+   showReportPanel(showReportPanel) {
+     this.setState({
+       isShowingReportPanel: showReportPanel
+     })
    }
 
   showPublishOptions(showPanel) {

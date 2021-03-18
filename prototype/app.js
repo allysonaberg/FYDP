@@ -75,26 +75,65 @@ router.get("/", (ctx, next) => {
 	ctx.res.statusCode = 200;
 })
 
-router.get("/product", async (ctx, next) => {
-	parsed_products = []
+async function prepareAnalysis(raw_products) {
+	// Returns parsed products and calculated footprints for them
 	const product_parser = require("./product/product");
+	var parsed_products = [];
+
+	/* Parse each product's material breakdown and calculate score */
+	await Promise.all(raw_products.map(async (raw_product) => {
+		var parsed_product = await product_parser(raw_product);
+
+		parsed_products.push(parsed_product);
+	}));
+	return parsed_products;
+}
+
+router.get("/product", async (ctx, next) => {
+	parsed_products = [];
+	raw_products = [];
+	
 	
 	if (debug) {
 		/* Get dummy raw products */
-		var raw_products = require('./content/products');
-
-		/* Parse each product's material breakdown and calculate score */
-		await Promise.all(raw_products.map(async (raw_product) => {
-			var parsed_product = await product_parser(raw_product);
-
-			parsed_products.push(parsed_product);
-		}));
+		raw_products = require('./content/products');
 	}
 	else {
 		// Send API request to get products from shop.
 	}
+	parsed_products = await prepareAnalysis(raw_products);
 	ctx.res.statusCode = 200;
 	ctx.body = parsed_products;
+})
+
+router.get("/report", async (ctx, next) => {
+	// Generate CSV: 5, columns, 1 for the product name, 2: rank, 3 carbon emissions per item, 4: entire stock, 5: breakdown
+	var raw_products = [];
+	if (debug) {
+		raw_products = require("./content/products");
+	}
+	else {
+		// Send API request to get products from shop
+	}
+
+	parsed_products = await prepareAnalysis(raw_products);
+
+	let csv_content = "product_name,materials,stock,rank\r\n";
+
+	parsed_products.forEach(function (product) {
+		materials = "\"[";
+		product.materials.forEach(function (material) {
+			material_string = material.ratio * 100 + "% " + material.name;
+			materials += material_string + ",";
+		});
+		materials = materials.slice(0,-1); // Remove last comma
+		materials += "]\"";
+		const row = [product.name, materials, product.stock, product.rank].join(",");
+		csv_content += row + "\r\n";
+    });
+
+	ctx.res.statusCode = 200;
+	ctx.body = csv_content;
 })
 
 

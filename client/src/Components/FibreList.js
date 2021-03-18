@@ -11,10 +11,11 @@ class FibreList extends React.Component {
         <tr key={val.index}>
         	<div class="container-left" style={{"width": "70%", "padding-left": "0px", "paddingRight": "0px"}}>
 	            <select name="fibreName" id={fibreName} data-id={idx} style={{"width": "100%", "height": "3em"}}>
-	              <option value="Nylon">nylon</option>
-	              <option value="Viscose">viscose</option>
-	              <option value="Wool">Wool</option>
-	              <option value="Linen">Linen</option>
+	              <option value="nylon">Nylon</option>
+	              <option value="viscose">Viscose</option>
+	              <option value="wool">Wool</option>
+	              <option value="linen">Linen</option>
+                <option value="cotton">Cotton</option>
 	            </select>
             </div>
 			    <div class="container" style={{"padding-left": "2em"}}>

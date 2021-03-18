@@ -3,7 +3,6 @@ import Button from './Button'
 import tip from '../Assets/tip.png'
 
 //TODO:
-//need gc02 of each material (in props.product.materials)
 //need tip thingy
 const ProductInfoPanel = (props) => {
 	return (
@@ -18,7 +17,7 @@ const ProductInfoPanel = (props) => {
 				<p style={{"color": "var(--textGrey)", "font-weight": "bold"}}>MATERIAL BREAKDOWN</p>
 				<hr style={{"color": "var(--textGrey)"}}/>
 				{props.product.materials.map(material=><p id = "productInfoText">
-					<div class="container" style={{"padding": "0px", "font-size": "17px"}}>
+					<div class="container" style={{"padding": "0px", "fontSize": "17px"}}>
 						<div class="container-left" style={{"paddingTop": "0px", "padding-left": "0px", "paddingBottom": "0px"}}>
 							{material.ratio * 100 + "%"}
 						</div>

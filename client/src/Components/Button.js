@@ -3,7 +3,7 @@ import download from '../Assets/download.png'
 
 const Button = (props) => {
 
-	const rankingColors = {0:"var(--rankGreen)", 1:"var(--rankYellow)", 2:"var(--rankGrey)", 3:"var(--rankRed)"}
+	const rankingColors = {"A":"var(--rankGreen)", "B":"var(--rankYellow)", "C":"var(--rankGrey)", "D":"var(--rankRed)"}
 	const text = props.rankButton ? "RANK " + props.text : props.text
 	const color = props.rankButton ? rankingColors[props.text] : props.color
 	const textColor = props.rankButton ? "var(--white)" : props.textColor
@@ -11,9 +11,9 @@ const Button = (props) => {
 	const image = props.download ? download : ""
 
 	return (
-		props.center ? <button onClick={props.onClick} style={{backgroundColor: color, color: textColor, border: props.outline ? "1px solid var(--blue)" : "none", "font-size": fontSize, "margin": "0 auto", "display": "block", "width": "100%"}} className='btn'>{text}</button> 
+		props.center ? <button onClick={props.onClick} style={{backgroundColor: color, color: textColor, border: props.outline ? "1px solid var(--blue)" : "none", "fontSize": fontSize, "margin": "0 auto", "display": "block", "width": "100%"}} className='btn'>{text}</button> 
 		:
-		<button onClick={props.onClick} style={{backgroundColor: color, color: textColor, border: props.outline ? "1px solid var(--grey)" : "none", "font-size": fontSize}} className='btn'>{text}</button>
+		<button onClick={props.onClick} style={{backgroundColor: color, color: textColor, border: props.outline ? "1px solid var(--grey)" : "none", "fontSize": fontSize}} className='btn'>{text}</button>
 	)
 }
 

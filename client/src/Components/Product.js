@@ -31,12 +31,12 @@ const Product = (props) => {
 			</div>
 				<p class="light" style={{"paddingTop": "10px", "paddingBottom": "1px"}}>CARBON EMISSIONS</p>
 				<div className="container-left" style={{"width": "32%", "padding-left": "0px"}}>
-					<p style={{"paddingBottom": "2px", "font-size": "20px"}}>{props.kg_carbon * 1000} g C0<sub>2</sub></p>
-					<p class="light" style={{"font-size": "13px"}}>Per Item</p>
+					<p style={{"paddingBottom": "2px", "fontSize": "20px"}}>{props.kg_carbon * 1000} g C0<sub>2</sub></p>
+					<p class="light" style={{"fontSize": "13px"}}>Per Item</p>
 				</div>
 				<div className="container-left" style={{"width": "32%"}}>
-					<p style={{"paddingBottom": "2px", "font-size": "20px"}}>{(props.kg_carbon * props.stock).toFixed(2)} kg CO<sub>2</sub></p>
-					<p class="light" style={{"font-size": "13px"}}>Entire Stock</p>
+					<p style={{"paddingBottom": "2px", "fontSize": "20px"}}>{(props.kg_carbon * props.stock).toFixed(2)} kg CO<sub>2</sub></p>
+					<p class="light" style={{"fontSize": "13px"}}>Entire Stock</p>
 				</div>
 				<div className="container-right">
 					<Button text={props.rank} rankButton={true} outline={false} size="15px"/>

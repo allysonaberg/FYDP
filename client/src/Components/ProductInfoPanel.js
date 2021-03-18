@@ -6,11 +6,10 @@ import tip from '../Assets/tip.png'
 //need gc02 of each material (in props.product.materials)
 //need tip thingy
 const ProductInfoPanel = (props) => {
-	console.log(props)
 	return (
 		<div className='container' style={{backgroundColor: props.background}}>
 			<div className='container-right' style={{"margin-top": "10px", "paddingTop": "0px"}}>
-				<button onClick={() => props.removePanel()} style={{"background-color": "var(--white)", "border": "none", "color": "(--var(grey)"}}>X</button>
+				<button onClick={() => props.removePanel()} style={{"backgroundColor": "var(--white)", "border": "none", "color": "(--var(grey)"}}>X</button>
 			</div>
 
 			<h3 style={{"margin-top": "10px"}}>{props.product.name}</h3>
@@ -20,18 +19,18 @@ const ProductInfoPanel = (props) => {
 				<hr style={{"color": "var(--textGrey)"}}/>
 				{props.product.materials.map(material=><p id = "productInfoText">
 					<div class="container" style={{"padding": "0px", "font-size": "17px"}}>
-						<div class="container-left" style={{"padding-top": "0px", "padding-left": "0px", "padding-bottom": "0px"}}>
-							{material.split("%")[0] + "%"}
+						<div class="container-left" style={{"paddingTop": "0px", "padding-left": "0px", "paddingBottom": "0px"}}>
+							{material.ratio * 100 + "%"}
 						</div>
-						<div class="container-left" style={{"padding-top": "0px", "padding-bottom": "0px"}}>
-							{material.split("%")[1]}
+						<div class="container-left" style={{"paddingTop": "0px", "paddingBottom": "0px"}}>
+							{material.name.charAt(0).toUpperCase() + material.name.slice(1)}
 						</div>
-						<div class="container-right" style={{"padding-top": "0px", "padding-bottom": "0px"}}>
-							30.6 gc0<sub>2</sub>
+						<div class="container-right" style={{"paddingTop": "0px", "paddingBottom": "0px"}}>
+							{material.kg_carbon * 1000} g CO<sub>2</sub>
 						</div>
 					</div>
 				</p>)}
-				<div class="container" style={{"padding-top": "20px"}}>
+				<div class="container" style={{"paddingTop": "20px"}}>
 					<img src={tip}/>
 				</div>
 			</div>

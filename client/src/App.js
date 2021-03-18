@@ -94,7 +94,6 @@ import axios from "axios";
    }
 
    showPublish(showPanel) {
-    console.log("SHOW PUBLISH")
     this.setState({
       isShowingPublishPanel: showPanel,
       isShowingPublishOptionsPanel: false
@@ -102,7 +101,6 @@ import axios from "axios";
    }
 
   showPublishOptions(showPanel) {
-    console.log("SHOW PUBLISH OPTIONS")
     this.setState({
       isShowingPublishOptionsPanel: showPanel,
       isShowingPublishPanel: false
@@ -136,12 +134,9 @@ import axios from "axios";
     if(status===200)
     {
       const productList = promise.data;
-      console.log(productList);
       this.setState({productList: productList, filteredProductList: productList});
       const firstProduct = this.state.productList[0];
       this.setProduct(firstProduct);
-      console.log("STATE: ")
-      console.log(this.state)
     }
     return []
   }

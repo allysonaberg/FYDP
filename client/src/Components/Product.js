@@ -10,9 +10,11 @@ import not_published from '../Assets/not_published.png'
 //RANKINGS (as letters if possible)
 
 const Product = (props) => {
+	console.log("PRODUCT PROPS");
+	console.log(props);
 	const image = "data:image/png;base64, " + props.image;
 	return (
-		<button onClick={() => props.onToggle(props.id)} className='container-list-item' style={{backgroundColor: props.background, "border": "none", "box-shadow": "0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 10px 0 rgba(0, 0, 0, 0.19)"}}>
+		<button onClick={() => props.onToggle(props.id)} className='container-list-item' style={{backgroundColor: props.background, "border": "none", "boxShadow": "0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 10px 0 rgba(0, 0, 0, 0.19)"}}>
 
 			<div className="fill" style={{"float": "left", "margin": "auto", "padding-right": "10px"}}>
 				<img src={image}/>
@@ -20,7 +22,7 @@ const Product = (props) => {
  
 			<div className="container">
 			<div class="container" style={{"padding": "0px", "margin": "0px"}}>
-				<div class="container-left" style={{"padding-left": "0px", "padding-top": "0px"}}>
+				<div class="container-left" style={{"padding-left": "0px", "paddingTop": "0px"}}>
 					<h3 style={{"paddingTop": "10px", "paddingBottom": "10px"}}>{props.name}</h3>
 				</div>
 				<div class="container-right">
@@ -29,11 +31,11 @@ const Product = (props) => {
 			</div>
 				<p class="light" style={{"paddingTop": "10px", "paddingBottom": "1px"}}>CARBON EMISSIONS</p>
 				<div className="container-left" style={{"width": "32%", "padding-left": "0px"}}>
-					<p style={{"paddingBottom": "2px", "font-size": "20px"}}>{props.kg_carbon} gC0<sub>2</sub></p>
+					<p style={{"paddingBottom": "2px", "font-size": "20px"}}>{props.kg_carbon * 1000} g C0<sub>2</sub></p>
 					<p class="light" style={{"font-size": "13px"}}>Per Item</p>
 				</div>
 				<div className="container-left" style={{"width": "32%"}}>
-					<p style={{"paddingBottom": "2px", "font-size": "20px"}}>{props.kg_carbon} gCO<sub>2</sub></p>
+					<p style={{"paddingBottom": "2px", "font-size": "20px"}}>{(props.kg_carbon * props.stock).toFixed(2)} kg CO<sub>2</sub></p>
 					<p class="light" style={{"font-size": "13px"}}>Entire Stock</p>
 				</div>
 				<div className="container-right">
@@ -48,6 +50,7 @@ const Product = (props) => {
 Product.defaultProps = {
 	name: 'Product',
 	kg_carbon: '--',
+	stock: 1,
 	image: shirt,
 	rank: 'RANK --',
 	background: "var(--white)"

@@ -52,7 +52,7 @@ class PublishOptionsPanel extends React.Component {
 			<Modal style={{"backgroundColor" : "black !important"}} show={this.props.isPanelOpen} close={this.handleClose}>
 				<div class="container">
 					<h2 style={{"margin-bottom": "10px"}}>Publish Results</h2>
-					<p style={{"padding-top": "10px"}}>Select the items you would like to publish the results for</p>
+					<p style={{"paddingTop": "10px"}}>Select the items you would like to publish the results for</p>
 				</div>
 
 				<div class="container">

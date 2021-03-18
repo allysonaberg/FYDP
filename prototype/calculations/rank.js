@@ -5,7 +5,7 @@ const item_averages = require('../content/item_averages');
 // RANK C: between +5% and +25% of avg
 // RANK D: +25% or more than avg
 
-function calculate_rank(kg_carbon, item_type) { 
+function calculate_rank(item_type, kg_carbon) { 
     var rank = '';
     var avg = item_averages[item_type];
     var pcdiff = ((avg - kg_carbon)/avg)*100

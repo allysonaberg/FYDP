@@ -19,14 +19,23 @@ const { JSDOM } = jsdom;
     }
 */
 
+class Material {
+    constructor(name, ratio, kg_carbon) {
+        this.name = name;
+        this.ratio = ratio;
+        this.kg_carbon = kg_carbon;
+    }
+}
 class Product {
-    constructor(id, name, kg_carbon, rank, image, materials, analysis, suggestion) {
+    constructor(id, name, product_type, kg_carbon, stock, rank, image, materials, analysis, suggestion) {
         this.id = id;
         this.name = name;
+        this.product_type = product_type;
         this.kg_carbon = kg_carbon;
+        this.stock = stock;
         this.rank = rank;
         this.image = image;
-        this.materials = materials;
+        this.materials = materials; // List of type Material
         this.analysis = analysis;
         this.suggestion = suggestion;
     }
@@ -41,13 +50,14 @@ class Product {
     "title": "chain mail suit",
     "body_html": "<p>Materials</p>\n<p>50% cotton</p>\n<p>50% polyester</p>",
     "vendor": "FYDP Development Store",
-    "product_type": "",
+    "product_type": "Suit",
     "status": "active",
     "published_scope": "web",
     "tags": "",
     "variants": [
         {
             "grams": 500,
+            "inventory_quantity": 18,
             ...
         }
     ],
@@ -83,11 +93,13 @@ function encode_image(path) {
 async function ShopifyJSONToProduct(json_in) {
     var id = json_in.id;
     var name = json_in.title;
+    var product_type = json_in.product_type.replace(/-/g,"").toLowerCase();
     var image = encode_image(json_in.image.src);
 
     // TODO get other variants, not just the first? (would need to split them up into many products?)
     var grams = json_in.variants[0].grams;
-    var materials = [];
+    var stock = json_in.variants[0].inventory_quantity;
+    var materials = []; // An array of type Material
     var body_html = json_in.body_html;
 
     /* Need a DOM parser since the material breakdown is provided to us wrwapped  in html */
@@ -105,18 +117,19 @@ async function ShopifyJSONToProduct(json_in) {
             // Get the percentage and the name of the material
             var innerHTML = p_tag.innerHTML;
             var split = innerHTML.split(" ");
-            var percentage = parseFloat(split[0]) / 100.0;
-            var material = split[1];
+            var ratio = parseFloat(split[0]) / 100.0;
+            var material_name = split[1];
 
-            var kg_carbon = await calculate_footprint(grams, material, percentage);
+            var kg_carbon = await calculate_footprint(grams, material_name, ratio);
             total_kg_carbon += kg_carbon;
             
             // Append to materials array
-            materials.push(innerHTML);
+            const material = new Material(material_name, ratio, kg_carbon.toFixed(2));
+            materials.push(material);
         }
     }));
     
-    var rank = calculate_rank(total_kg_carbon);
+    var rank = calculate_rank(product_type, total_kg_carbon);
     
 
     /* For now, get a random analysis */
@@ -139,7 +152,18 @@ async function ShopifyJSONToProduct(json_in) {
 	    }
     }
 
-    let product = new Product(id, name, total_kg_carbon.toFixed(2), rank, image, materials, analysis, suggestion);
+    let product = new Product(
+        id, 
+        name,
+        product_type,
+        total_kg_carbon.toFixed(2),
+        stock,
+        rank, 
+        image, 
+        materials,
+        analysis, 
+        suggestion
+        );
 
     return product
 }

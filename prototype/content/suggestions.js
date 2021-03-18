@@ -6,4 +6,4 @@ suggestions = {
     "nylon": "Newer fabrics now available include cotton technologies which can give apparel the desired qualities of nylon such as stretch and moisture-wicking, while being more sustainable, durable, and comfortable fot the wearer. "
 }
 
-module.exports = suggestions;
+module.exports = suggestions_dict;

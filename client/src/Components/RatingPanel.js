@@ -18,7 +18,7 @@ const RatingPanel = (props) => {
 			<p id="infoINFO"><span id="infoText" style={{"color":"var(--rankRed)"}}>RANK D</span>emits +25% or more than avg</p>
 			<div style={{"backgroundColor": "#F0F9FF", "margin-top": "20px"}}>
 				<p style={{"color": "#6583FE", "font-weight": "bold", "paddingBottom": "15px", "padding": "10px"}}><img src={uhoh} style={{"padding-right": "10px"}}/>About Our Calculations</p>
-				<p style={{"padding": "10px", "paddingTop": "5px"}}>Lorem ipsum dolor sit amet, consectetur adipise elit. Curabitur sed tincidunt erat. Maecenas quis dui risus. Vivamus mattis volutpat enim ac sagittis </p>
+				<p style={{"padding": "10px", "paddingTop": "5px"}}>Our carbon emission calculations uses data sourced from CarbonScope to calculate the average emissions per clothing type and the carbon emission for your item!</p>
 			</div>
 		</div>
 	)

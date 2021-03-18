@@ -5,6 +5,8 @@ import tip from '../Assets/tip.png'
 //TODO:
 //need tip thingy
 const ProductInfoPanel = (props) => {
+	console.log("INFOPANNEL")
+	console.log(props);
 	return (
 		<div className='container' style={{backgroundColor: props.background}}>
 			<div className='container-right' style={{"margin-top": "10px", "paddingTop": "0px"}}>
@@ -16,7 +18,7 @@ const ProductInfoPanel = (props) => {
 			<div class='container' style={{"padding-left": "0px", "paddingTop": "2em", "paddingBottom": "1em", "padding-right": "0px", "margin-right": "0px", }}>
 				<p style={{"color": "var(--textGrey)", "font-weight": "bold"}}>MATERIAL BREAKDOWN</p>
 				<hr style={{"color": "var(--textGrey)"}}/>
-				{props.product.materials.map(material=><p id = "productInfoText">
+				{props.product.materials.map(material=><p class="productInfoText">
 					<div class="container" style={{"padding": "0px", "fontSize": "17px"}}>
 						<div class="container-left" style={{"paddingTop": "0px", "padding-left": "0px", "paddingBottom": "0px"}}>
 							{material.ratio * 100 + "%"}
@@ -37,13 +39,14 @@ const ProductInfoPanel = (props) => {
 			<div className='container' style={{"padding-left": "0px", "paddingBottom": "2em"}}>
 				<p style={{"color": "var(--textGrey)", "font-weight": "bold"}}>ANALYSIS</p>
 				<hr style={{"color": "var(--textGrey)"}}/>
-				<p id="productInfoText">{props.product.analysis}</p>
+				{props.product.analyses.map(analysis=><p class="productInfoText">{analysis}</p>)}
 			</div>
 
 			<div className='container' style={{"padding-left": "0px"}}>
 				<p style={{"color": "var(--textGrey)", "font-weight": "bold"}}>SUGGESTIONS</p>
 				<hr style={{"color": "var(--textGrey)"}}/>
-				<p id="productInfoText">{props.product.suggestion}</p>
+				{props.product.suggestions.map(suggestion=><p class="productInfoText">
+					{suggestion}</p>)}
 			</div>
 		</div>
 	)

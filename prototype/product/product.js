@@ -1,5 +1,5 @@
-const suggestions = require('../content/suggestions');
-const analyses = require("../content/analyses");
+const suggestions_dict = require('../content/suggestions');
+const analyses_dict = require("../content/analyses");
 const calculate_footprint = require("../calculations/footprint");
 const calculate_rank = require("../calculations/rank");
 const jsdom = require("jsdom");
@@ -27,7 +27,7 @@ class Material {
     }
 }
 class Product {
-    constructor(id, name, product_type, kg_carbon, stock, rank, image, materials, analysis, suggestion) {
+    constructor(id, name, product_type, kg_carbon, stock, rank, image, materials, analyses, suggestions) {
         this.id = id;
         this.name = name;
         this.product_type = product_type;
@@ -36,8 +36,8 @@ class Product {
         this.rank = rank;
         this.image = image;
         this.materials = materials; // List of type Material
-        this.analysis = analysis;
-        this.suggestion = suggestion;
+        this.analyses = analyses;
+        this.suggestions = suggestions;
     }
     add_image(url) {
         this.image = url;
@@ -131,27 +131,12 @@ async function ShopifyJSONToProduct(json_in) {
     
     var rank = calculate_rank(product_type, total_kg_carbon);
     
-
-    /* For now, get a random analysis */
-    // var analysis = analyses[Math.floor(Math.random() * analyses.length)];
-    var analysis = "";
-    for (i in materials){
-	    material = materials[i]
-	    if (material in analyses){
-		    analysis += '\n\n' + analyses[material];
-	    }
-    }
-
-    /* For now, get a random suggestion */
-    //var suggestion = suggestions[Math.floor(Math.random() * suggestions.length)];
-    var suggestion = "";
-    for (i in materials){
-	    material = materials[i]
-	    if (material in suggestions){
-		    suggestion += '\n\n' + suggestions[material];
-	    }
-    }
-
+    var analyses = [];
+    var suggestions = [];
+    materials.forEach(function (material) {
+        analyses.push(analyses_dict[material.name]);
+        suggestions.push(suggestions_dict[material.name]);
+    });
     let product = new Product(
         id, 
         name,
@@ -161,8 +146,8 @@ async function ShopifyJSONToProduct(json_in) {
         rank, 
         image, 
         materials,
-        analysis, 
-        suggestion
+        analyses, 
+        suggestions
         );
 
     return product

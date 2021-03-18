@@ -20,16 +20,16 @@ const TestResultsPanel = (props) => {
 						<p style={{"color": "var(--textGrey)", "font-weight": "bold"}}>MATERIAL BREAKDOWN</p>
 						<hr style={{"color": "var(--textGrey)"}}/>
 						<div class="container-left" style={{"padding-left" : "0px"}}>
-							<p id="productInfoText">12% Nylon</p>
-							<p id="productInfoText">30% Viscose</p>
-							<p id="productInfoText">38% Wool</p>
-							<p id="productInfoText">20% Linen</p>
+							<p class="productInfoText">12% Nylon</p>
+							<p class="productInfoText">30% Viscose</p>
+							<p class="productInfoText">38% Wool</p>
+							<p class="productInfoText">20% Linen</p>
 						</div>
 						<div class="container-right" style={{"paddingRight":"0px", "text-align": "right"}}>
-							<p id="productInfoText">26.1 gC02</p>
-							<p id="productInfoText">85.0 gC02</p>
-							<p id="productInfoText">28.4 gC02</p>
-							<p id="productInfoText">12.3 gC02</p>
+							<p class="productInfoText">26.1 gC02</p>
+							<p class="productInfoText">85.0 gC02</p>
+							<p class="productInfoText">28.4 gC02</p>
+							<p class="productInfoText">12.3 gC02</p>
 						</div>
 					</div>
 

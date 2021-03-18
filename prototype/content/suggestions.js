@@ -10,4 +10,4 @@ suggestions_dict = {
     "fabric3": "suggestion3"
 }
 
-module.exports = suggestions;
+module.exports = suggestions_dict;

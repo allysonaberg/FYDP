@@ -451,7 +451,7 @@ input {
   text-align: left;
 }
 
-#productInfoText {
+.productInfoText {
   margin-top: 10px;
 }
 

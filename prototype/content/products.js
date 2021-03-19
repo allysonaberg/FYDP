@@ -85,14 +85,14 @@ raw_products = [
   {
     "id": 1,
     "title": 'Cozy Fleece Perfect 2" Sweatshort',
-    "body_html": "<p>Materials</p>\n<p>78% cotton</p>\n<p>22% polyester</p>",
+    "body_html": "<p>Materials</p>\n<p>98% hemp</p>\n<p>2% polyester-re</p>",
     "vendor": "FYDP Development Store",
     "product_type": "Short",
     "status": "active",
     "tags": "",
     "variants": [
       {
-        "grams": 226.796,
+        "grams": 150.796,
         "inventory_quantity": 5
       }
     ],

@@ -7,6 +7,8 @@ const item_averages = require('../content/item_averages');
 
 function calculate_rank(item_type, kg_carbon) { 
     var rank = '';
+    if (!(item_type in item_averages)) return 'NA';
+
     var avg = item_averages[item_type];
     var pcdiff = ((avg - kg_carbon)/avg)*100
 

@@ -10,7 +10,7 @@ function calculate_rank(item_type, kg_carbon) {
     if (!(item_type in item_averages)) return 'NA';
 
     var avg = item_averages[item_type];
-    var pcdiff = ((avg - kg_carbon)/avg)*100
+    var pcdiff = ((kg_carbon - avg)/avg)*100
 
     if (pcdiff <= -10.0){
         rank = 'A';

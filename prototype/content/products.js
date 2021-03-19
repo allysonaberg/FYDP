@@ -85,7 +85,7 @@ raw_products = [
   {
     "id": 1,
     "title": 'Cozy Fleece Perfect 2" Sweatshort',
-    "body_html": "<p>Materials</p>\n<p>98% hemp</p>\n<p>2% polyester-re</p>",
+    "body_html": "<p>Materials</p>\n<p>98% wool</p>\n<p>2% polyester</p>",
     "vendor": "FYDP Development Store",
     "product_type": "Short",
     "status": "active",
@@ -116,7 +116,7 @@ raw_products = [
     "tags": "",
     "variants": [
       {
-        "grams": 180,
+        "grams": 200,
         "inventory_quantity": 69
       }
     ],
@@ -132,14 +132,14 @@ raw_products = [
   {
     "id": 3,
     "title": 'Skyline Pant',
-    "body_html": "<p>Materials</p>\n<p>18% cotton</p>\n<p>82% polyester</p>",
+    "body_html": "<p>Materials</p>\n<p>18% cotton</p>\n<p>82% acrylic</p>",
     "vendor": "FYDP Development Store",
     "product_type": "Pant",
     "status": "active",
     "tags": "",
     "variants": [
       {
-        "grams": 317,
+        "grams": 600,
         "inventory_quantity": 100
       }
     ],

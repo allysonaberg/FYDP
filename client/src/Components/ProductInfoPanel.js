@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from './Button'
 import tip from '../Assets/tip.png'
+import ShowMoreText from 'react-show-more-text';
 
 //TODO:
 //need tip thingy
@@ -39,7 +40,19 @@ const ProductInfoPanel = (props) => {
 			<div className='container' style={{"padding-left": "0px", "paddingBottom": "2em"}}>
 				<p style={{"color": "var(--textGrey)", "font-weight": "bold"}}>ANALYSIS</p>
 				<hr style={{"color": "var(--textGrey)"}}/>
-				{props.product.analyses.map(analysis=><p class="productInfoText">{analysis}</p>)}
+				{props.product.analyses.map(analysis=>
+					<p class="productInfoText">
+					<ShowMoreText
+                /* Default options */
+                lines={3}
+                more='Show more'
+                less='Show less'
+                anchorClass='my-anchor-css-class'
+                expanded={false}
+                
+            >{analysis}</ShowMoreText>
+			</p>
+				)}
 			</div>
 
 			<div className='container' style={{"padding-left": "0px"}}>

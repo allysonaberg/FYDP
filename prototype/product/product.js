@@ -134,8 +134,15 @@ async function ShopifyJSONToProduct(json_in) {
     var analyses = [];
     var suggestions = [];
     materials.forEach(function (material) {
-        analyses.push(analyses_dict[material.name]);
-        suggestions.push(suggestions_dict[material.name]);
+        if (material.name in analyses_dict) {
+            analyses.push(analyses_dict[material.name]);    
+        }
+        if (material.name in suggestions_dict) {
+            suggestions.push(suggestions_dict[material.name]);
+        }
+        else {
+            suggestions.push(suggestions_dict["general"]);
+        }
     });
     let product = new Product(
         id, 

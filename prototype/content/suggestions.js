@@ -1,4 +1,4 @@
-suggestions = {
+suggestions_dict = {
     "general": "Utilizing recycled textiles on average can eliminate the use of 6000L of water, 300g of fertilizer and 200g of pesticides.",
     "cotton": "When sourcing cotton, consider cotton with an OCCGUARANTEE certification. Cotton with this certification is 100% organic with zero dyes producing approximately 46% less carbon emissions than conventional cotton.",
     "polyester": "Consider swaping polyester to a biosynthetic fiber that uses renewable raw materials or biowaste as inputs instead of petroleum.  ",

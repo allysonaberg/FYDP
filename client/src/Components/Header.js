@@ -21,7 +21,7 @@ const Header = (props) => {
 		setGettingReport(true);
 		
 		// Send request to backend
-		const promise = await axios.get("http://localhost:5000/report");
+		const promise = await axios.get("/report");
 		const status = promise.status;
 		if(status===200)
 		{

@@ -146,7 +146,7 @@ import axios from "axios";
   
   async getProducts()
   {
-    const promise = await axios.get("http://localhost:5000/product");
+    const promise = await axios.get("/product");
     const status = promise.status;
     if(status===200)
     {
@@ -159,7 +159,7 @@ import axios from "axios";
   }
 
   async getReport() {
-    const promise = await axios.get("http://localhost:500/report");
+    const promise = await axios.get("/report");
     const status = promise.status;
     if (status===200) {
       const report = promise.data;

@@ -44,6 +44,18 @@ class Product {
     }
 }
 
+class TestProduct {
+    /* Hypothetical product */
+    constructor(product_type, kg_carbon, rank, materials, analyses, suggestions) {
+        this.product_type = product_type;
+        this.kg_carbon = kg_carbon;
+        this.rank = rank;
+        this.materials = materials; // List of type Material
+        this.analyses = analyses;
+        this.suggestions = suggestions;
+    }
+}
+
 /* The JSON returned from the Shopify endpoint looks like: 
 {
     "id": 6073135694005,
@@ -90,19 +102,63 @@ function encode_image(path) {
     return fs.readFileSync(path, 'base64');
 }
 
+async function TestJSONToProduct(json_in) {
+    const grams = json_in.grams;
+    const product_type = json_in.product_type.replace(/-/g,"").toLowerCase();
+    var materials = []; // An array of type Material
+    var total_kg_carbon = 0.0;
+    
+    await Promise.all(json_in.materials.map(async (fibre_json) => {
+        const material_name = fibre_json.name;
+        const ratio = fibre_json.ratio;
+        var kg_carbon = await calculate_footprint(grams, material_name, ratio);
+        total_kg_carbon += kg_carbon;
+            
+        // Append to materials array
+        const material = new Material(material_name, ratio, kg_carbon.toFixed(2));
+        materials.push(material);
+    }));
+
+    const rank = calculate_rank(product_type, total_kg_carbon);
+    var analyses = [];
+    var suggestions = [];
+    materials.forEach(function (material) {
+        if (material.name in analyses_dict) {
+            analyses.push(analyses_dict[material.name]);    
+        }
+        if (material.name in suggestions_dict) {
+            suggestions.push(suggestions_dict[material.name]);
+        }
+        else {
+            suggestions.push(suggestions_dict["general"]);
+        }
+    });
+
+    let product = new TestProduct(
+        product_type, 
+        total_kg_carbon, 
+        rank,
+        materials, 
+        analyses, 
+        suggestions
+    );
+
+    return product
+}
+
 async function ShopifyJSONToProduct(json_in) {
     var id = json_in.id;
     var name = json_in.title;
-    var product_type = json_in.product_type.replace(/-/g,"").toLowerCase();
+    var stock = json_in.variants[0].inventory_quantity;
     var image = encode_image(json_in.image.src);
 
     // TODO get other variants, not just the first? (would need to split them up into many products?)
     var grams = json_in.variants[0].grams;
-    var stock = json_in.variants[0].inventory_quantity;
+    var product_type = json_in.product_type.replace(/-/g,"").toLowerCase();
     var materials = []; // An array of type Material
     var body_html = json_in.body_html;
 
-    /* Need a DOM parser since the material breakdown is provided to us wrwapped  in html */
+    /* Need a DOM parser since the material breakdown is provided to us wrapped in html */
 	var dom = new JSDOM(body_html);
     var p_tags = Array.from(dom.window.document.querySelectorAll('p'));
     var total_kg_carbon = 0.00;
@@ -160,4 +216,4 @@ async function ShopifyJSONToProduct(json_in) {
     return product
 }
 
-module.exports = ShopifyJSONToProduct;
+module.exports = {ShopifyJSONToProduct, TestJSONToProduct};

@@ -9,6 +9,7 @@ require('isomorphic-fetch');
 const dotenv = require('dotenv');
 const Koa = require('koa');
 const koaRouter = require("koa-router");
+const bodyParser = require('koa-bodyparser'); // For processing POST request body
 const { default: createShopifyAuth } = require('@shopify/koa-shopify-auth');
 const { verifyRequest } = require('@shopify/koa-shopify-auth');
 const session = require('koa-session');
@@ -49,9 +50,10 @@ app
   // sets up secure session data on each request
   .use(session({secure: true, sameSite: 'none'}, app))
   .use(cors())
+  .use(bodyParser());
 
 if (!debug) {
-	// sets up shopify auth
+	// sets up shopify auth if we're in production mode
 	app.use(createShopifyAuth({
 		apiKey: SHOPIFY_API_KEY,
 		secret: SHOPIFY_API_SECRET_KEY,
@@ -77,7 +79,7 @@ router.get("/", (ctx, next) => {
 
 async function prepareAnalysis(raw_products) {
 	// Returns parsed products and calculated footprints for them
-	const product_parser = require("./product/product");
+	const product_parser = require("./product/product").ShopifyJSONToProduct;
 	var parsed_products = [];
 
 	/* Parse each product's material breakdown and calculate score */
@@ -88,6 +90,25 @@ async function prepareAnalysis(raw_products) {
 	}));
 	return parsed_products;
 }
+
+router.post("/test", async(ctx, next) => {
+	/* Body structure: 
+		{
+			"product_type": "sweater",
+			"grams": 158,
+			"materials": [
+				{"name": "nylon6", "ratio": 0.3},
+				{"name": "cotton", "ratio": 0.7}
+			]
+		}
+	*/
+	const test_product_parser = require("./product/product").TestJSONToProduct;
+
+	var parsed_product = await test_product_parser(ctx.request.body);
+	
+	ctx.res.statusCode = 200;
+	ctx.body = parsed_product;
+})
 
 router.get("/product", async (ctx, next) => {
 	parsed_products = [];

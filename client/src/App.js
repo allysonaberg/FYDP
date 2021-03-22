@@ -1,9 +1,15 @@
 import Header from './Components/Header'
+import Auth from './Components/Auth'
 import Content from './Components/Content'
 import Button from './Components/Button'
 import React, {Component, useState } from 'react'
 import { Provider } from '@shopify/app-bridge-react';
 import axios from "axios";
+import { BrowserRouter, Route, Switch} from 'react-router-dom';
+import { withRouter } from "react-router-dom";
+import { render } from 'react-dom';
+
+
 
 
   export default class App extends Component {
@@ -12,9 +18,12 @@ import axios from "axios";
       this.state = {
         productList:[],
         filteredProductList:[],
-        input: ""
+        input: "",
+        token: ""
       };
+
       this.getProducts = this.getProducts.bind(this);
+      this.doAuth = this.doAuth.bind(this)
       this.updateSpotlightProduct = this.updateSpotlightProduct.bind(this);
       this.removeInfoPanel = this.removeInfoPanel.bind(this);
       this.showTest = this.showTest.bind(this);
@@ -158,6 +167,36 @@ import axios from "axios";
     return []
   }
 
+  async doAuth()
+  {
+    console.log("DOING aUTH")
+    const promise = await axios.get("http://localhost:5000/auth");
+    const status = promise.status;
+    if(status===200)
+    {
+      const token = promise.data;
+      this.setState({token: token})
+      this.props.history.push("/");
+    }
+
+        console.log(status)
+
+  }
+
+  async testProduct()
+  {
+    const promise = await axios.get("http://localhost:5000/product");
+    const status = promise.status;
+    if(status===200)
+    {
+      const productList = promise.data;
+      this.setState({productList: productList, filteredProductList: productList});
+      const firstProduct = this.state.productList[0];
+      this.setProduct(firstProduct);
+    }
+    return []
+  }
+
   async getReport() {
     const promise = await axios.get("/report");
     const status = promise.status;
@@ -165,9 +204,9 @@ import axios from "axios";
       const report = promise.data;
       return report
     }
-
     return []
   }
+
 
   render() {
     if (this.state.isLoading) {
@@ -177,10 +216,19 @@ import axios from "axios";
     }
     
     return (
-      <div className="root">
-        <Header products={this.state.productList} showPanel={this.showTest} isPanelOpen={this.state.isShowingTestPanel} showResultsPanel={this.showResults} isResultsPanelOpen={this.state.isShowingTestResultsPanel} showPublishPanel={this.showPublish} showPublishOptions={this.showPublishOptions} isPublishPanelOpen={this.state.isShowingPublishPanel} isPublishOptionsPanelOpen={this.state.isShowingPublishOptionsPanel} input={this.state.input} onChange={this.updateInput} showDownloadPanel={this.showDownloadPanel} isDownloadPanelOpen={this.state.isShowingDownloadPanel} getReport={this.getReport} />
-        <Content products={this.state.filteredProductList} product={this.state.product} showInfoPanel={this.state.showInfoPanel} removePanel={this.removeInfoPanel} onToggle={this.updateSpotlightProduct} />
-      </div>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          <div className="root">
+            <Header products={this.state.productList} showPanel={this.showTest} isPanelOpen={this.state.isShowingTestPanel} showResultsPanel={this.showResults} isResultsPanelOpen={this.state.isShowingTestResultsPanel} showPublishPanel={this.showPublish} showPublishOptions={this.showPublishOptions} isPublishPanelOpen={this.state.isShowingPublishPanel} isPublishOptionsPanelOpen={this.state.isShowingPublishOptionsPanel} input={this.state.input} onChange={this.updateInput} showDownloadPanel={this.showDownloadPanel} isDownloadPanelOpen={this.state.isShowingDownloadPanel} getReport={this.getReport} />
+            <Content products={this.state.filteredProductList} product={this.state.product} showInfoPanel={this.state.showInfoPanel} removePanel={this.removeInfoPanel} onToggle={this.updateSpotlightProduct} />
+          </div>
+        </Route>
+
+        <Route path="/auth"> 
+          <Auth function={this.doAuth} />
+        </Route>
+      </Switch>
+    </BrowserRouter>
     );
   }
-}

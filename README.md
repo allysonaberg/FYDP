@@ -42,3 +42,8 @@ To see all current materials and their statistics
 ```
 sqlite> SELECT * FROM materials;
 ```
+
+## Hosting the REACT app with ngrok
+```
+ngrok http 3000 -host-header="localhost:3000"
+```

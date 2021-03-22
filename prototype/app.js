@@ -10,9 +10,9 @@ const dotenv = require('dotenv');
 const Koa = require('koa');
 const koaRouter = require("koa-router");
 const bodyParser = require('koa-bodyparser'); // For processing POST request body
-const { default: createShopifyAuth } = require('@shopify/koa-shopify-auth');
-const { verifyRequest } = require('@shopify/koa-shopify-auth');
+//const { default: createShopifyAuth } = require('@shopify/koa-shopify-auth');
 const session = require('koa-session');
+const passport = require('koa-passport');
 
 /****************************************************************************************/
 
@@ -26,56 +26,49 @@ const SHOPIFY_API_SECRET_KEY = process.env.SHOPIFY_API_SECRET_KEY;
 const SHOPIFY_API_KEY = process.env.SHOPIFY_API_KEY;
 const debug = process.env.DEBUG == "true" ? true : false;
 const port = process.env.PORT || 5000;
-const SCOPES = ['read_orders, read_products'] // Comma-separated list of permission scopes to request to Shopify
+const SCOPES = ['read_orders', 'read_products'] // Comma-separated list of permission scopes to request to Shopify
 const ACCESS_MODE = 'per-user' // Value for Shopify token online-access mode 
 const serve = require("koa-static"); // to serve static pages
 const mount = require("koa-mount"); // to mount the front-end
 const cors = require('koa-cors');
 const { raw } = require('body-parser');
+const ACTIVE_SHOPIFY_SHOPS = {}; // cached mapping of shops and their tokens
 
 
 
 /****************************************************************************************/
-
-
 /* APP SETTUP */
 app.keys = [SHOPIFY_API_SECRET_KEY];
 
-/* Get the front-end client */
-const static_pages = new Koa();
-static_pages.use(serve(__dirname + "../client/build")); //serve the build directory
-app.use(mount("/", static_pages));
+  if (!debug) {
+	
+	app.use(passport.initialize())
+	.use(passport.session())
+	// Custom Middleware
+	.use(async (ctx, next) => {
+		console.log(ctx.path)
+		if (ctx.path == '/auth') return next() // otherwise we loop forever
+		console.log(ctx.isAuthenticated())
+		if (!ctx.isAuthenticated()) {
+			// Get auth token from Shopify
+			const shop = 'fydp-development-store';
+			const api_key = SHOPIFY_API_KEY;
+			const redirect_uri = 'https://b6e719e4882f.ngrok.io/auth' //TODO make an auth endpoint in react that calls the auth endpoint here
+			
+			const url = `https://${shop}.myshopify.com/admin/oauth/authorize?client_id=${api_key}&scope=${SCOPES}&redirect_uri=${redirect_uri}`
+			ctx.redirect(url);
+			return
+		}
+		else await next
+	})
+}
 
 app
   // sets up secure session data on each request
-  .use(session({secure: true, sameSite: 'none'}, app))
+  //.use(session({secure: true, sameSite: 'none'}, app))
   .use(cors())
   .use(bodyParser());
-
-if (!debug) {
-	// sets up shopify auth if we're in production mode
-	app.use(createShopifyAuth({
-		apiKey: SHOPIFY_API_KEY,
-		secret: SHOPIFY_API_SECRET_KEY,
-		scopes: SCOPES,
-		afterAuth(ctx) {
-		const {shop, accessToken} = ctx.session
-
-		console.log('We did it!', accessToken);
-
-		ctx.redirect(`/?shop= ${shop}`);
-		},
-	}),
-	)
-	.use(
-	verifyRequest()
-	)  
-}
-
-router.get("/", (ctx, next) => {
-	ctx.body = 'Hello World!';
-	ctx.res.statusCode = 200;
-})
+  
 
 async function prepareAnalysis(raw_products) {
 	// Returns parsed products and calculated footprints for them
@@ -110,9 +103,17 @@ router.post("/test", async(ctx, next) => {
 	ctx.body = parsed_product;
 })
 
+router.get("/auth", async (ctx, next) => {
+	console.log("IN AUTH");
+})
+
+
 router.get("/product", async (ctx, next) => {
 	parsed_products = [];
 	raw_products = [];
+
+	
+	console.log(ACTIVE_SHOPIFY_SHOPS)
 	
 	
 	if (debug) {
@@ -120,6 +121,8 @@ router.get("/product", async (ctx, next) => {
 		raw_products = require('./content/products');
 	}
 	else {
+		// Request from Shopify will come with the following query params:
+		console.log(ctx.request)
 		// Send API request to get products from shop.
 	}
 	parsed_products = await prepareAnalysis(raw_products);

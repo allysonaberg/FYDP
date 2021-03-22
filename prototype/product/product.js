@@ -119,7 +119,7 @@ async function TestJSONToProduct(json_in) {
         materials.push(material);
     }));
 
-    const rank = calculate_rank(product_type, total_kg_carbon);
+    const rank = materials.length == 0 ? 'NA' : calculate_rank(product_type, total_kg_carbon);
     var analyses = [];
     var suggestions = [];
     materials.forEach(function (material) {

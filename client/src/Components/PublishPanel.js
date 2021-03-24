@@ -27,7 +27,7 @@ class PublishPanel extends React.Component {
 					<img src={publish_2} style={{"width": "100%"}}/>
 				</div>
 				<div class="container" style={{"display": "block", "text-align": "center"}}>
-					<p style={{"color": "#6583FE", "font-weight": "bold", "paddingBottom": "15px", "padding": "10px"}}><img src={uhoh} style={{"padding-right": "10px"}}/>You can configure the design in your Shopify Editor</p>
+					<p style={{"color": "#6583FE", "fontWeight": "bold", "paddingBottom": "15px", "padding": "10px"}}><img src={uhoh} style={{"paddingRight": "10px"}}/>You can configure the design in your Shopify Editor</p>
 				</div>
 				<Button onClick = {() => this.props.showPublishOptions(true)} text="Next" color={"var(--white)"} textColor={"var(--blue)"} center={true} outline={true}/>
 

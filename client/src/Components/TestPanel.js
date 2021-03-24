@@ -22,7 +22,7 @@ class TestPanel extends React.Component {
 		  			</div>
 		  		</div>
 
-		  		<div class="container" style={{"padding-left": "20px", "paddingTop": "0px", "margin-top": "0px", "marginBottom": "0px"}}>
+		  		<div class="container" style={{"padding-left": "20px", "paddingTop": "0px", "marginTop": "0px", "marginBottom": "0px"}}>
 	  				<div class="container-left" style={{"maxWidth": "70%"}}>
 						<div class="dropdown" style={{"paddingTop": "0px"}}>
 							<input class="dropbtn" type="text" value={value.percentage} onChange={this.handleChange.bind(this, i)}/>
@@ -65,9 +65,9 @@ class TestPanel extends React.Component {
 		<Modal style={{"backgroundColor" : "black !important"}} show={this.props.isPanelOpen} close={() => this.props.showPanel(false)}>
 			<div class="container">
 				<h3>Test Product</h3>
-				<p style={{"margin-top": "10px"}}>Enter the material breakdown of the product to compute its carbon performance</p>
+				<p style={{"marginTop": "10px"}}>Enter the material breakdown of the product to compute its carbon performance</p>
 
-				<p style={{"font-weight": "bold", "margin-top": "20px"}}>Clothing Category</p>
+				<p style={{"fontWeight": "bold", "marginTop": "20px"}}>Clothing Category</p>
 				
 				<div class="dropdown">
 				 		<button class="dropbtn">Select Category</button>
@@ -79,20 +79,20 @@ class TestPanel extends React.Component {
 				</div>
 
 				<div class="container-left" style={{"width": "60%", "padding-left": "0px", "paddingRight": "0px"}}>
-					<p style={{"font-weight": "bold", "margin-top": "10px"}}>Fibre</p>
+					<p style={{"fontWeight": "bold", "marginTop": "10px"}}>Fibre</p>
 		  		</div>
 
 		  		<div class="container-right" style={{"padding-left": "20px", "paddingTop": "0px"}}>
 	  				<div class="container-left" style={{"maxWidth": "70%"}}>
-						<p style={{"font-weight": "bold", "margin-top": "10px"}}>Percentage</p>
+						<p style={{"fontWeight": "bold", "marginTop": "10px"}}>Percentage</p>
 					</div>
 				</div>
-				<form style={{"margin-top": "0px"}}>
+				<form style={{"marginTop": "0px"}}>
           			{this.createUI()}        
      			 </form>
           		<Button text=" + Add Fibre" textColor="var(--blue)" outline={false} onClick={this.addClick.bind(this)} />
 
-				<div style={{"margin-top": "100px"}}>
+				<div style={{"marginTop": "100px"}}>
 					<Button onClick={this.handleSubmit} text="Analyze Product" color="var(--blue)" textColor="var(--white)" center={true}/>
 				</div>
 

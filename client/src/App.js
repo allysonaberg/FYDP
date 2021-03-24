@@ -6,7 +6,7 @@ import React, {Component, useState } from 'react'
 import { Provider } from '@shopify/app-bridge-react';
 import axios from "axios";
 import { BrowserRouter, Route, Switch} from 'react-router-dom';
-import { withRouter } from "react-router-dom";
+import { withRouter, useParams } from "react-router-dom";
 import { render } from 'react-dom';
 
 
@@ -22,8 +22,7 @@ import { render } from 'react-dom';
         token: ""
       };
 
-      this.getProducts = this.getProducts.bind(this);
-      this.doAuth = this.doAuth.bind(this)
+      this.getProducts = this.getProducts.bind(this); 
       this.updateSpotlightProduct = this.updateSpotlightProduct.bind(this);
       this.removeInfoPanel = this.removeInfoPanel.bind(this);
       this.showTest = this.showTest.bind(this);
@@ -155,6 +154,7 @@ import { render } from 'react-dom';
   
   async getProducts()
   {
+    console.log("\n\n\n\nGETTING PRODUCTs\n\n\n\n")
     const promise = await axios.get("/product");
     const status = promise.status;
     if(status===200)
@@ -167,25 +167,9 @@ import { render } from 'react-dom';
     return []
   }
 
-  async doAuth()
-  {
-    console.log("DOING aUTH")
-    const promise = await axios.get("http://localhost:5000/auth");
-    const status = promise.status;
-    if(status===200)
-    {
-      const token = promise.data;
-      this.setState({token: token})
-      this.props.history.push("/");
-    }
-
-        console.log(status)
-
-  }
-
   async testProduct()
   {
-    const promise = await axios.get("http://localhost:5000/product");
+    const promise = await axios.get("/test");
     const status = promise.status;
     if(status===200)
     {
@@ -214,7 +198,6 @@ import { render } from 'react-dom';
         <div>Loading...</div>
       )
     }
-    
     return (
     <BrowserRouter>
       <Switch>
@@ -225,8 +208,7 @@ import { render } from 'react-dom';
           </div>
         </Route>
 
-        <Route path="/auth"> 
-          <Auth function={this.doAuth} />
+        <Route path="/auth" component={Auth}>
         </Route>
       </Switch>
     </BrowserRouter>

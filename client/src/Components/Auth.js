@@ -1,23 +1,17 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import axios from "axios";
+import { withRouter, useLocation, Redirect} from "react-router-dom";
 
-class Auth extends React.Component {
-
-	constructor(props) {
-		super(props);
-	}
-
-	componentDidMount() {
-		console.log("DOING AUTH")
-    	this.props.function()
- 	}
-
-  render() {
-    return (
-		<div>
-			<h3>STUFF</h3>
-		</div>
-    );
+function Auth() {
+	let location = useLocation();
+	useEffect(() => {
+		const sendToken = async () => {
+			await axios.get("/auth" + location.search);
+		}
+		sendToken();
+	  }, []);
+	
+	  return <Redirect to='/'/>;
   }
-}
 
-export default Auth
+export default Auth;

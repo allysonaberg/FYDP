@@ -24,15 +24,20 @@ const router = new koaRouter();
 dotenv.config();
 const SHOPIFY_API_SECRET_KEY = process.env.SHOPIFY_API_SECRET_KEY;
 const SHOPIFY_API_KEY = process.env.SHOPIFY_API_KEY;
+const NGROK_HTTPS = process.env.NGROK_HTTPS + '/auth'; 
 const debug = process.env.DEBUG == "true" ? true : false;
 const port = process.env.PORT || 5000;
-const SCOPES = ['read_orders', 'read_products'] // Comma-separated list of permission scopes to request to Shopify
+const SCOPES = ['read_products'] // Comma-separated list of permission scopes to request to Shopify
 const ACCESS_MODE = 'per-user' // Value for Shopify token online-access mode 
 const serve = require("koa-static"); // to serve static pages
 const mount = require("koa-mount"); // to mount the front-end
 const cors = require('koa-cors');
 const { raw } = require('body-parser');
 const ACTIVE_SHOPIFY_SHOPS = {}; // cached mapping of shops and their tokens
+const SHOP = 'fydp-development-store';
+const URL = `https://${SHOP}.myshopify.com/admin/oauth/authorize?client_id=${SHOPIFY_API_KEY}&scope=${SCOPES}&redirect_uri=${NGROK_HTTPS}`
+
+console.log(URL);
 
 
 
@@ -51,12 +56,9 @@ app.keys = [SHOPIFY_API_SECRET_KEY];
 		console.log(ctx.isAuthenticated())
 		if (!ctx.isAuthenticated()) {
 			// Get auth token from Shopify
-			const shop = 'fydp-development-store';
-			const api_key = SHOPIFY_API_KEY;
-			const redirect_uri = 'https://b6e719e4882f.ngrok.io/auth' //TODO make an auth endpoint in react that calls the auth endpoint here
+				
 			
-			const url = `https://${shop}.myshopify.com/admin/oauth/authorize?client_id=${api_key}&scope=${SCOPES}&redirect_uri=${redirect_uri}`
-			ctx.redirect(url);
+			ctx.redirect(URL);
 			return
 		}
 		else await next
@@ -105,6 +107,12 @@ router.post("/test", async(ctx, next) => {
 
 router.get("/auth", async (ctx, next) => {
 	console.log("IN AUTH");
+	
+	//console.log(ctx.request.query)
+
+	// Store the token in the dict
+	ACTIVE_SHOPIFY_SHOPS[ctx.request.query.shop] = ctx.request.query.code;
+	ctx.res.statusCode = 200;
 })
 
 

@@ -11,13 +11,13 @@ const TestResultsPanel = (props) => {
 
 					<div class="container" id="containerDark">
 						<p>Carbon Peformance</p>
-						<p style={{"margin-top": "10px", "marginBottom": "10px", "fontSize": "18px"}}><b>202.8 C02</b> emitted per sweater</p>
+						<p style={{"marginTop": "10px", "marginBottom": "10px", "fontSize": "18px"}}><b>202.8 C02</b> emitted per sweater</p>
 						<Button text={"A"} rankButton={true}/>
-						<p style={{"margin-top": "10px"}}>An average sweater emits 162 gC02</p>
+						<p style={{"marginTop": "10px"}}>An average sweater emits 162 gC02</p>
 					</div>
 
-					<div class="container" style={{"margin-top": "10px"}}>
-						<p style={{"color": "var(--textGrey)", "font-weight": "bold"}}>MATERIAL BREAKDOWN</p>
+					<div class="container" style={{"marginTop": "10px"}}>
+						<p style={{"color": "var(--textGrey)", "fontWeight": "bold"}}>MATERIAL BREAKDOWN</p>
 						<hr style={{"color": "var(--textGrey)"}}/>
 						<div class="container-left" style={{"padding-left" : "0px"}}>
 							<p class="productInfoText">12% Nylon</p>
@@ -33,7 +33,7 @@ const TestResultsPanel = (props) => {
 						</div>
 					</div>
 
-					<div style={{"margin-top": "100px"}}>
+					<div style={{"marginTop": "100px"}}>
 						<Button onClick={() => props.showTest(true)} text="Analyze Another Product" color="var(--white)" textColor="var(--blue)" center={true} outline={true}/>
 					</div>
 

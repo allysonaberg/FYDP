@@ -14,7 +14,7 @@ const Product = (props) => {
 	return (
 		<button onClick={() => props.onToggle(props.id)} className='container-list-item' style={{backgroundColor: props.background, "border": "none", "boxShadow": "0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 10px 0 rgba(0, 0, 0, 0.19)"}}>
 
-			<div className="fill" style={{"float": "left", "margin": "auto", "padding-right": "10px"}}>
+			<div className="fill" style={{"float": "left", "margin": "auto", "paddingRight": "10px"}}>
 				<img src={image}/>
 			</div>
  

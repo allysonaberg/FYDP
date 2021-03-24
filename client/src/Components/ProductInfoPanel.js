@@ -10,14 +10,14 @@ const ProductInfoPanel = (props) => {
 	console.log(props);
 	return (
 		<div className='container' style={{backgroundColor: props.background}}>
-			<div className='container-right' style={{"margin-top": "10px", "paddingTop": "0px"}}>
+			<div className='container-right' style={{"marginTop": "10px", "paddingTop": "0px"}}>
 				<button onClick={() => props.removePanel()} style={{"backgroundColor": "var(--white)", "border": "none", "color": "(--var(grey)"}}>X</button>
 			</div>
 
-			<h3 style={{"margin-top": "10px"}}>{props.product.name}</h3>
+			<h3 style={{"marginTop": "10px"}}>{props.product.name}</h3>
 
-			<div class='container' style={{"padding-left": "0px", "paddingTop": "2em", "paddingBottom": "1em", "padding-right": "0px", "margin-right": "0px", }}>
-				<p style={{"color": "var(--textGrey)", "font-weight": "bold"}}>MATERIAL BREAKDOWN</p>
+			<div class='container' style={{"padding-left": "0px", "paddingTop": "2em", "paddingBottom": "1em", "paddingRight": "0px", "margin-right": "0px", }}>
+				<p style={{"color": "var(--textGrey)", "fontWeight": "bold"}}>MATERIAL BREAKDOWN</p>
 				<hr style={{"color": "var(--textGrey)"}}/>
 				{props.product.materials.map(material=><p class="productInfoText">
 					<div class="container" style={{"padding": "0px", "fontSize": "17px"}}>
@@ -38,7 +38,7 @@ const ProductInfoPanel = (props) => {
 			</div>
 
 			<div className='container' style={{"padding-left": "0px", "paddingBottom": "2em"}}>
-				<p style={{"color": "var(--textGrey)", "font-weight": "bold"}}>ANALYSIS</p>
+				<p style={{"color": "var(--textGrey)", "fontWeight": "bold"}}>ANALYSIS</p>
 				<hr style={{"color": "var(--textGrey)"}}/>
 				{props.product.analyses.map(analysis=>
 					<p class="productInfoText">
@@ -56,7 +56,7 @@ const ProductInfoPanel = (props) => {
 			</div>
 
 			<div className='container' style={{"padding-left": "0px"}}>
-				<p style={{"color": "var(--textGrey)", "font-weight": "bold"}}>SUGGESTIONS</p>
+				<p style={{"color": "var(--textGrey)", "fontWeight": "bold"}}>SUGGESTIONS</p>
 				<hr style={{"color": "var(--textGrey)"}}/>
 				{props.product.suggestions.map(suggestion=><p class="productInfoText">
 					{suggestion}</p>)}

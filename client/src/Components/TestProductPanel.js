@@ -128,8 +128,8 @@ class TestProductPanel extends React.Component {
 		<Modal style={{"backgroundColor" : "black !important"}} show={this.props.isPanelOpen} close={() => this.props.showPanel(false)}>
                 <div className="content">
                     <h3>Test Product</h3>
-					<p style={{"margin-top": "10px"}}>Enter the material breakdown of the product to compute its carbon performance</p>
-					<p style={{"font-weight": "bold", "margin-top": "20px"}}>Clothing Category</p>
+					<p style={{"marginTop": "10px"}}>Enter the material breakdown of the product to compute its carbon performance</p>
+					<p style={{"fontWeight": "bold", "marginTop": "20px"}}>Clothing Category</p>
 					<div class="dropdown">
                         <select name="clothingType" onChange={this.handleClothingTypeChange} style={{"width": "100%", "height": "3em"}}>
   							<option value="Women's Sweater">Women's Sweater</option>
@@ -141,11 +141,11 @@ class TestProductPanel extends React.Component {
                     <form onChange={this.handleFibreChange}>
                         <table className="table" style={{"width": "100%"}}>
     						<div class="container-left" style={{"width": "70%", "padding-left": "0px", "paddingRight": "0px"}}>
-    							<p style={{"font-weight": "bold", "margin-top": "10px"}}>Fibre</p>
+    							<p style={{"fontWeight": "bold", "marginTop": "10px"}}>Fibre</p>
     			  			</div>
 
     			  			<div class="container" style={{"padding-left": "2em"}}>
-    							<p style={{"font-weight": "bold", "margin-top": "10px"}}>Percentage</p>
+    							<p style={{"fontWeight": "bold", "marginTop": "10px"}}>Percentage</p>
     						</div>
     	                    <tbody>
     	                       <FibreList delete={this.deleteRow} fibreList={fibreList} />
@@ -153,7 +153,7 @@ class TestProductPanel extends React.Component {
                         </table>
                     </form>
                     <Button onClick={()=>this.addNewRow()} text="+ Add Fibre" outline={false} textColor={"var(--blue)"} />
-                    <div class="container" style={{"margin-top": "1.5em"}}> 
+                    <div class="container" style={{"marginTop": "1.5em"}}> 
                         <Button onClick = {this.handleSubmit} text="Analyze" color={"var(--blue)"} textColor={"White"} center={true}/>
                     </div>
                 </div>

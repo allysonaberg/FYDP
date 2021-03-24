@@ -59,11 +59,11 @@ class PublishOptionsPanel extends React.Component {
 					<p>Items To Be Published</p>
 					<div class="container-scroll">
 						<div class="publishContainer">
-								<input type="checkbox" style ={{"margin-right": "10px", "margin-top": "2px"}}/>All Products<br />
+								<input type="checkbox" style ={{"margin-right": "10px", "marginTop": "2px"}}/>All Products<br />
 						</div>
 						{this.props.products.map((product) => (
 							<div class="publishContainer">
-								<input type="checkbox" style ={{"float": "left", "margin-right": "10px", "margin-top": "2px"}}/>{product.name}<br />
+								<input type="checkbox" style ={{"float": "left", "margin-right": "10px", "marginTop": "2px"}}/>{product.name}<br />
 								<div class="container-right" style={{"padding": "0px"}}>
 									<Button text={product.rank} rankButton={true} outline={false} size="10px"/>
 								</div>

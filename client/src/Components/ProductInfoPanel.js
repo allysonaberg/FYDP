@@ -6,9 +6,9 @@ import ShowMoreText from 'react-show-more-text';
 //TODO:
 //need tip thingy
 const ProductInfoPanel = (props) => {
-	console.log("INFOPANNEL")
-	console.log(props);
+
 	return (
+		props.product ? 
 		<div className='container' style={{backgroundColor: props.background}}>
 			<div className='container-right' style={{"marginTop": "10px", "paddingTop": "0px"}}>
 				<button onClick={() => props.removePanel()} style={{"backgroundColor": "var(--white)", "border": "none", "color": "(--var(grey)"}}>X</button>
@@ -62,6 +62,9 @@ const ProductInfoPanel = (props) => {
 					{suggestion}</p>)}
 			</div>
 		</div>
+
+		:
+		<div />
 	)
 }
 

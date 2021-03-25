@@ -25,7 +25,7 @@ const Content = (props) => {
         </div>
         <div class="container-center">
           <Products products={props.products} onToggle={props.onToggle} text={"Store products"}/>
-          <p style={{"visibility": !props.products.length ? "visible" : "hidden"}}>No products match your search query</p>
+          <p id="noProduct" style={{"visibility": !props.products.length ? "visible" : "hidden"}}>No products match your search query</p>
         </div>
       </div>
     </>

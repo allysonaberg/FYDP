@@ -11,7 +11,6 @@ import { render } from 'react-dom';
 
 
 
-
   export default class App extends Component {
     constructor(props) {
       super(props);
@@ -36,10 +35,18 @@ import { render } from 'react-dom';
     }
 
     componentWillMount() {
+
       this.setState({isLoading: true});
     }
 
-    componentDidMount() {
+    componentDidMount(props) {
+      console.log("MOUNTING")
+      console.log(this.props)
+      if (this.props.location) {
+        console.log("AAAAH DID MOuNT")
+        console.log(this.props.location.state.store_name)
+      } 
+
       this.getProducts().then(() => {
         this.setState({ isLoading: false });
         
@@ -48,8 +55,6 @@ import { render } from 'react-dom';
         console.log(error);
      });
 
-    console.log("PRODUCTS")
-    console.log()
      
     }
 
@@ -163,6 +168,7 @@ import { render } from 'react-dom';
       this.setState({productList: productList, filteredProductList: productList});
       const firstProduct = this.state.productList[0];
       this.setProduct(firstProduct);
+      console.log(productList)
     }
     return []
   }
@@ -193,24 +199,32 @@ import { render } from 'react-dom';
 
 
   render() {
+
     if (this.state.isLoading) {
       return (
-        <div>Loading...</div>
+        <div>
+          <div>Loading...</div>
+        </div>
       )
     }
+
     return (
+    <div>
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
+        <Route path="/auth" render={(props) => <Auth {...props}/>}/>
+        <Route path="/test">
+          <h3>TEST</h3>
+        </Route>
+        <Route path="/">
           <div className="root">
             <Header products={this.state.productList} showPanel={this.showTest} isPanelOpen={this.state.isShowingTestPanel} showResultsPanel={this.showResults} isResultsPanelOpen={this.state.isShowingTestResultsPanel} showPublishPanel={this.showPublish} showPublishOptions={this.showPublishOptions} isPublishPanelOpen={this.state.isShowingPublishPanel} isPublishOptionsPanelOpen={this.state.isShowingPublishOptionsPanel} input={this.state.input} onChange={this.updateInput} showDownloadPanel={this.showDownloadPanel} isDownloadPanelOpen={this.state.isShowingDownloadPanel} getReport={this.getReport} />
             <Content products={this.state.filteredProductList} product={this.state.product} showInfoPanel={this.state.showInfoPanel} removePanel={this.removeInfoPanel} onToggle={this.updateSpotlightProduct} />
           </div>
         </Route>
 
-        <Route path="/auth" component={Auth}>
-        </Route>
       </Switch>
     </BrowserRouter>
+    </div>
     );
   }}

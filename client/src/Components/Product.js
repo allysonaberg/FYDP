@@ -40,7 +40,6 @@ const Product = (props) => {
 					<Button text={props.rank} rankButton={true} outline={false} size="15px"/>
 				</div>
 			</div>
-
 		</button>
 	)
 }

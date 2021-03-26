@@ -51,8 +51,8 @@ const Header = (props) => {
 
 	      		</div>
 	      		<DownloadPanel isPanelOpen={props.isDownloadPanelOpen} showPanel={props.showDownloadPanel} getReport={props.getReport}/>
-	      		<TestProductPanel isPanelOpen={props.isPanelOpen} showPanel={props.showPanel} showResults={props.showResultsPanel} />
-	      		<TestResultsPanel isPanelOpen={props.isResultsPanelOpen} showPanel={props.showResultsPanel} showTest={props.showPanel} />
+	      		<TestProductPanel testProduct={props.testProduct} isPanelOpen={props.isPanelOpen} showPanel={props.showPanel} showResults={props.showResultsPanel} />
+	      		<TestResultsPanel isPanelOpen={props.isResultsPanelOpen} showPanel={props.showResultsPanel} showTest={props.showPanel} results={props.resultsState} />
 	      		<PublishPanel isPanelOpen={props.isPublishPanelOpen} showPanel={props.showPublishPanel} showPublishOptions={props.showPublishOptions} />
 	      		<PublishOptionsPanel isPanelOpen={props.isPublishOptionsPanelOpen} showPanel={props.showPublishOptions} products={props.products} />
 	     	 </div>

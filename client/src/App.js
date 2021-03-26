@@ -18,7 +18,8 @@ import { render } from 'react-dom';
         productList:[],
         filteredProductList:[],
         input: "",
-        token: ""
+        token: "",
+        results: []
       };
 
       this.getProducts = this.getProducts.bind(this); 
@@ -32,6 +33,7 @@ import { render } from 'react-dom';
       this.showDownloadPanel = this.showDownloadPanel.bind(this);
       this.updateInput = this.updateInput.bind(this);
       this.getReport = this.getReport.bind(this);
+      this.testProduct = this.testProduct.bind(this);
     }
 
     componentWillMount() {
@@ -40,10 +42,7 @@ import { render } from 'react-dom';
     }
 
     componentDidMount(props) {
-      console.log("MOUNTING")
-      console.log(this.props)
       if (this.props.location) {
-        console.log("AAAAH DID MOuNT")
         console.log(this.props.location.state.store_name)
       } 
 
@@ -162,6 +161,7 @@ import { render } from 'react-dom';
     console.log("\n\n\n\nGETTING PRODUCTs\n\n\n\n")
     const promise = await axios.get("/product");
     const status = promise.status;
+    console.log(status)
     if(status===200)
     {
       const productList = promise.data;
@@ -173,17 +173,19 @@ import { render } from 'react-dom';
     return []
   }
 
-  async testProduct()
+  async testProduct(data)
   {
-    const promise = await axios.get("/test");
+    const promise = await axios.post("/test", {"product_type": data.product_type, "grams": data.grams, "materials": data.materials});
     const status = promise.status;
+    console.log(status)
     if(status===200)
     {
-      const productList = promise.data;
-      this.setState({productList: productList, filteredProductList: productList});
-      const firstProduct = this.state.productList[0];
-      this.setProduct(firstProduct);
+      const result = promise.data;
+      console.log(result)
+      this.setState({testResults: result})
+      this.showResults(true)
     }
+
     return []
   }
 
@@ -218,7 +220,7 @@ import { render } from 'react-dom';
         </Route>
         <Route path="/">
           <div className="root">
-            <Header products={this.state.productList} showPanel={this.showTest} isPanelOpen={this.state.isShowingTestPanel} showResultsPanel={this.showResults} isResultsPanelOpen={this.state.isShowingTestResultsPanel} showPublishPanel={this.showPublish} showPublishOptions={this.showPublishOptions} isPublishPanelOpen={this.state.isShowingPublishPanel} isPublishOptionsPanelOpen={this.state.isShowingPublishOptionsPanel} input={this.state.input} onChange={this.updateInput} showDownloadPanel={this.showDownloadPanel} isDownloadPanelOpen={this.state.isShowingDownloadPanel} getReport={this.getReport} />
+            <Header products={this.state.productList} showPanel={this.showTest} isPanelOpen={this.state.isShowingTestPanel} showResultsPanel={this.showResults} isResultsPanelOpen={this.state.isShowingTestResultsPanel} resultsState={this.state.testResults} showPublishPanel={this.showPublish} showPublishOptions={this.showPublishOptions} isPublishPanelOpen={this.state.isShowingPublishPanel} isPublishOptionsPanelOpen={this.state.isShowingPublishOptionsPanel} input={this.state.input} onChange={this.updateInput} showDownloadPanel={this.showDownloadPanel} isDownloadPanelOpen={this.state.isShowingDownloadPanel} getReport={this.getReport} testProduct={this.testProduct} />
             <Content products={this.state.filteredProductList} product={this.state.product} showInfoPanel={this.state.showInfoPanel} removePanel={this.removeInfoPanel} onToggle={this.updateSpotlightProduct} />
           </div>
         </Route>

@@ -6,13 +6,22 @@ import Button from './Button'
 
 class TestProductPanel extends React.Component {
 	state = {
-		productType: "Women's Sweater",
-		fibreList: [{id: "0", fibreName: "Nylon", fibrePercentage: "0"}],
+		product_type: "Women's Sweater",
+        grams: 0,
+		materials: [{id: "0", name: "Nylon", ratio: 0}],
 	}
 
     handleClothingTypeChange = (e) => {
         this.setState({
-            productType: e.target.value
+            product_type: e.target.value
+        })
+
+        console.log(this.state)
+    }
+
+    handleWeightChange = (e) => {
+        this.setState({
+            grams: parseFloat(e.target.value)
         })
 
         console.log(this.state)
@@ -23,40 +32,39 @@ class TestProductPanel extends React.Component {
         if (e.target.name == "fibreName") {
             this.handleFibreNameChange(e.target.id, e.target.value)
         } else {
-            this.handleFibrePercentageChange(e.target.id, e.target.value)
+            console.log(e.target.value)
+            this.handleFibrePercentageChange(e.target.id, parseFloat(e.target.value)/100)
         }
     }
 
 	handleFibreNameChange(id, val) {
-        console.log("name change")
         console.log(val)
         var newFibre = {
             id: id,
-            fibreName: val,
-            fibrePercentage: ""
+            name: val,
+            ratio: 0
         }
 
         var containsItem = false
 
-        this.state.fibreList.map((fibreItem) => {
+        this.state.materials.map((fibreItem) => {
             if (fibreItem.id == id) {
                 containsItem = true
             }
         })
         if (containsItem) {
             this.setState(prevState => {
-                let newFibres = prevState.fibreList;
+                let newFibres = prevState.materials;
                 let fibre = newFibres.find(d => d.id == newFibre.id)
-                fibre.fibreName = val
-                return {fibreList: newFibres };
+                fibre.name = val
+                return {materials: newFibres };
             })
         } else {
             this.setState(previousState => ({
-                fibreList: [...previousState.fibreList, newFibre]
+                materials: [...previousState.materials, newFibre]
             }));
         }
 
-        console.log(this.state.fibreList)
 	}
 
     handleFibrePercentageChange = (id, val) => {
@@ -64,37 +72,36 @@ class TestProductPanel extends React.Component {
         console.log(val)
         var newFibre = {
             id: id,
-            fibreName: "Nylon",
-            fibrePercentage: val
+            name: "Nylon",
+            ratio: val
         }
 
         var containsItem = false
 
-        this.state.fibreList.map((fibreItem) => {
+        this.state.materials.map((fibreItem) => {
             if (fibreItem.id == id) {
                 containsItem = true
             }
         })
         if (containsItem) {
             this.setState(prevState => {
-                let newFibres = prevState.fibreList;
+                let newFibres = prevState.materials;
                 let fibre = newFibres.find(d => d.id == newFibre.id)
-                fibre.fibrePercentage = val
-                return {fibreList: newFibres };
+                fibre.ratio = val
+                return {materials: newFibres };
             })
         } else {
             this.setState(previousState => ({
-                fibreList: [...previousState.fibreList, newFibre]
+                materials: [...previousState.materials, newFibre]
             }));
         }
 
-        console.log(this.state.fibreList)
     }
 
 	addNewRow = () => {
-        console.log(this.state.fibreList.length)
+        console.log(this.state.materials.length)
         this.setState((prevState) => ({
-            fibreList: [...prevState.fibreList, { id: this.state.fibreList.length.toString(), fibreName: "Nylon", fibrePercentage: ""}],
+            materials: [...prevState.materials, { id: this.state.materials.length.toString(), name: "Nylon", ratio: 0}],
         }));
     }
 
@@ -111,18 +118,19 @@ class TestProductPanel extends React.Component {
         console.log(this.state)
         e.preventDefault();
 
+        this.props.testProduct(this.state)
+
         //do the work to submit the form
         //show the loading screen
 
         //ONCE FORM SUBMITTED, CLEAR FIBRES
         this.setState({
-            fibreList: []
+            materials: []
         })
-        this.props.showResults(true)
     }
 
     render() {
-        let { fibreList } = this.state
+        let { materials } = this.state
         return (
             <>
 		<Modal style={{"backgroundColor" : "black !important"}} show={this.props.isPanelOpen} close={() => this.props.showPanel(false)}>
@@ -138,6 +146,14 @@ class TestProductPanel extends React.Component {
   							<option value="Sweater">Sweater</option>
 						</select>
 					</div>
+                    <p style={{"fontWeight": "bold", "marginTop": "20px"}}>Weight (single product)</p>
+                    <div class="dropdown">
+                        <form onChange={this.handleWeightChange}>
+                            <div class="container">
+                                <input type="text"  name="weight" placeholder="grams" style={{"width": "20%", "height": "3em", "margin-left": "0px", "text-align": "right"}}/>
+                            </div>
+                        </form>
+                    </div>
                     <form onChange={this.handleFibreChange}>
                         <table className="table" style={{"width": "100%"}}>
     						<div class="container-left" style={{"width": "70%", "padding-left": "0px", "paddingRight": "0px"}}>
@@ -148,7 +164,7 @@ class TestProductPanel extends React.Component {
     							<p style={{"fontWeight": "bold", "marginTop": "10px"}}>Percentage</p>
     						</div>
     	                    <tbody>
-    	                       <FibreList delete={this.deleteRow} fibreList={fibreList} />
+    	                       <FibreList delete={this.deleteRow} fibreList={materials} />
     	                    </tbody>
                         </table>
                     </form>

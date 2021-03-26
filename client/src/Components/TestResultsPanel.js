@@ -3,7 +3,10 @@ import Button from './Button'
 import Modal from './Modal'
 
 const TestResultsPanel = (props) => {
+	console.log("RESULTS")
+	console.log(props.results)
 	return ( 
+		props.results ?
 		<div>
 			<Modal style={{"backgroundColor" : "black !important"}} show={props.isPanelOpen} close={() => props.showPanel(false)}>
 				<div class="container">
@@ -11,7 +14,7 @@ const TestResultsPanel = (props) => {
 
 					<div class="container" id="containerDark">
 						<p>Carbon Peformance</p>
-						<p style={{"marginTop": "10px", "marginBottom": "10px", "fontSize": "18px"}}><b>202.8 C02</b> emitted per sweater</p>
+						<p style={{"marginTop": "10px", "marginBottom": "10px", "fontSize": "18px"}}><b>{(props.results.kg_carbon*1000).toFixed(2)} gC02</b> emitted per sweater</p>
 						<Button text={"A"} rankButton={true}/>
 						<p style={{"marginTop": "10px"}}>An average sweater emits 162 gC02</p>
 					</div>
@@ -19,18 +22,31 @@ const TestResultsPanel = (props) => {
 					<div class="container" style={{"marginTop": "10px"}}>
 						<p style={{"color": "var(--textGrey)", "fontWeight": "bold"}}>MATERIAL BREAKDOWN</p>
 						<hr style={{"color": "var(--textGrey)"}}/>
-						<div class="container-left" style={{"padding-left" : "0px"}}>
-							<p class="productInfoText">12% Nylon</p>
-							<p class="productInfoText">30% Viscose</p>
-							<p class="productInfoText">38% Wool</p>
-							<p class="productInfoText">20% Linen</p>
-						</div>
-						<div class="container-right" style={{"paddingRight":"0px", "text-align": "right"}}>
-							<p class="productInfoText">26.1 gC02</p>
-							<p class="productInfoText">85.0 gC02</p>
-							<p class="productInfoText">28.4 gC02</p>
-							<p class="productInfoText">12.3 gC02</p>
-						</div>
+
+						{props.results.materials.map((product) => (
+							<div class="container" style={{"padding": "0px"}}>
+								<div class="container-left" style={{"padding-left" : "0px"}}>
+									<p class="productInfoText">{product.ratio*100}% {product.name}</p>
+
+								</div>
+								<div class="container-right" style={{"paddingRight":"0px", "text-align": "right"}}>
+									<p class="productInfoText">{product.kg_carbon} gC02</p>
+								</div>
+							</div>
+						))}
+						
+					</div>
+
+					<div class="container" style={{"marginTop": "10px"}}>
+						<p style={{"color": "var(--textGrey)", "fontWeight": "bold"}}>SUGGESTIONS</p>
+						<hr style={{"color": "var(--textGrey)"}}/>
+
+						{props.results.suggestions.map((suggestion) => (
+							<div class="container">
+								<p class="productInfoText">{suggestion}</p>
+							</div>
+						))}
+						
 					</div>
 
 					<div style={{"marginTop": "100px"}}>
@@ -40,11 +56,13 @@ const TestResultsPanel = (props) => {
 				</div>
 			</Modal>
 		</div>
+		:
+		<div />
 	)
 }
 
 TestResultsPanel.defaultProps = {
-	background: "var(--white)"
+	background: "var(--white)",
 }
 
 export default TestResultsPanel

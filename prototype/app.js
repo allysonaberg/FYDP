@@ -53,10 +53,9 @@ app.keys = [SHOPIFY_API_SECRET_KEY];
 	.use(async (ctx, next) => {
 		console.log(ctx.path)
 		if (ctx.path == '/auth') return next() // otherwise we loop forever
-		console.log(ctx.isAuthenticated())
-		if (!ctx.isAuthenticated()) {
-			// Get auth token from Shopify
-				
+		
+		if (!ctx.request.query.shop || !ctx.request.query.shop in ACTIVE_SHOPIFY_SHOPS) {
+			// Get auth token from Shopify by redirecting to the Shopify auth URL	
 			
 			ctx.redirect(URL);
 			return

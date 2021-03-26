@@ -1,7 +1,6 @@
 
 const productModule = require("../product/product");
 const dbModule = require('../db/db_methods');
-const sinon = require('sinon');
 
 /* Example of what to expect from Shopify JSON object representing a product */
 const goodProduct = {

@@ -47,3 +47,9 @@ sqlite> SELECT * FROM materials;
 ```
 ngrok http 3000 -host-header="localhost:3000"
 ```
+
+## Testing the Back-End
+From root dir, run:
+```
+npm test
+```

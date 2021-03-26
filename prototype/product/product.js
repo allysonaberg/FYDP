@@ -3,6 +3,7 @@ const analyses_dict = require("../content/analyses");
 const calculate_footprint = require("../calculations/footprint");
 const calculate_rank = require("../calculations/rank");
 const jsdom = require("jsdom");
+const { encode } = require('punycode');
 const { JSDOM } = jsdom;
 
 /* A parsed product looks like:
@@ -98,6 +99,7 @@ class TestProduct {
 
 // function to encode image file in base64 string
 function encode_image(path) {
+    if (!path) return '';
     var fs = require('fs');
     return fs.readFileSync(path, 'base64');
 }
@@ -216,4 +218,4 @@ async function ShopifyJSONToProduct(json_in) {
     return product
 }
 
-module.exports = {ShopifyJSONToProduct, TestJSONToProduct};
+module.exports = {ShopifyJSONToProduct, TestJSONToProduct, encode_image};

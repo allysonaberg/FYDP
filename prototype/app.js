@@ -85,6 +85,12 @@ async function prepareAnalysis(raw_products) {
 	return parsed_products;
 }
 
+router.get("/status", async(ctx, next) => {
+	// Endpoint for health checking
+	ctx.res.statusCode = 200;
+	ctx.res.body = "i'm awake :)";
+})
+
 router.post("/test", async(ctx, next) => {
 	/* Body structure: 
 		{

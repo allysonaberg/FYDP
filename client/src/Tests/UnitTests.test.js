@@ -2,10 +2,10 @@ import React from 'react'
 import Enzyme, { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
-import Button from './Button'
-import Products from './Product'
-import Content from './Content'
-import SearchBar from './SearchBar'
+import Button from '../Components/Button'
+import Products from '../Components/Product'
+import Content from '../Components/Content'
+import SearchBar from '../Components/SearchBar'
 import '@testing-library/jest-dom';
 
 

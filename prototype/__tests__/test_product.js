@@ -53,5 +53,13 @@ describe('ShopifyJSONToProduct', function() {
         expect(parsed.product_type).toBe('sweater');
       });
     });
+
+    test('should fail gracefully on bad product JSON', function() {
+      // TODO implement
+    });
+
+    test('should fail gracefully on bad test product JSON', function() {
+      // TODO implement
+    });
   });
 });

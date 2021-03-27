@@ -158,7 +158,6 @@ import { render } from 'react-dom';
   
   async getProducts()
   {
-    console.log("\n\n\n\nGETTING PRODUCTs\n\n\n\n")
     const promise = await axios.get("/product");
     const status = promise.status;
     console.log(status)

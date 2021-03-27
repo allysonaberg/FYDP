@@ -150,7 +150,7 @@ class TestProductPanel extends React.Component {
                     <div class="dropdown">
                         <form onChange={this.handleWeightChange}>
                             <div class="container">
-                                <input type="text"  name="weight" placeholder="grams" style={{"width": "20%", "height": "3em", "margin-left": "0px", "text-align": "right"}}/>
+                                <input type="text"  name="weight" placeholder="grams" style={{"width": "18%", "height": "3em", "margin-left": "0px", "text-align": "right", "padding": "10px"}}/>
                             </div>
                         </form>
                     </div>

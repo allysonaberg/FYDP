@@ -36,7 +36,8 @@ const testProduct = {
 describe('ShopifyJSONToProduct', function() {
   describe('Parse JSON response from Shopify', function() {
     const getCOPerKgMock = jest.spyOn(dbModule, "get_CO_kg_per_kg_for_material");    
-    getCOPerKgMock.mockImplementation((material) => 4.0); // Some fake value
+    // Return some fake value for the purpose of this test
+    getCOPerKgMock.mockImplementation((material) => 4.0); 
 
     test('should succeed and return a Product object', function() {
       return productModule.ShopifyJSONToProduct(goodProduct).then(parsed => {

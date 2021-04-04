@@ -14,9 +14,9 @@ const TestResultsPanel = (props) => {
 
 					<div class="container" id="containerDark">
 						<p>Carbon Peformance</p>
-						<p style={{"marginTop": "10px", "marginBottom": "10px", "fontSize": "18px"}}><b>{(props.results.kg_carbon*1000).toFixed(2)} gC02</b> emitted per sweater</p>
+						<p style={{"marginTop": "10px", "marginBottom": "10px", "fontSize": "18px"}}><b>{(props.results.kg_carbon*1000).toFixed(2)} gC02</b> emitted per item</p>
 						<Button text={"A"} rankButton={true}/>
-						<p style={{"marginTop": "10px"}}>An average sweater emits 162 gC02</p>
+						<p style={{"marginTop": "10px"}}>An average item emits 162 gC02</p>
 					</div>
 
 					<div class="container" style={{"marginTop": "10px"}}>
